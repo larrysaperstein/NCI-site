@@ -1,5 +1,6 @@
 ---
 import ExternalLink from "./ExternalLink.astro";
+import { withBase } from "../utils/path";
 
 type ResourceItem = {
   slug: string;
@@ -16,6 +17,9 @@ interface Props {
 }
 
 const { resources, activeSlug } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
 const initialSlug = activeSlug && resources.some((resource) => resource.slug === activeSlug)
   ? activeSlug
   : resources[0]?.slug;
@@ -41,7 +45,7 @@ const initialSlug = activeSlug && resources.some((resource) => resource.slug ===
           {
             resources.map((resource) => (
               <a
-                href={`/resources/${resource.slug}/`}
+                href={withBase(`/resources/${resource.slug}/`)}
                 class={`upcoming__tab${resource.slug === initialSlug ? " upcoming__tab--active" : ""}`}
                 data-resource-tab={resource.slug}
                 aria-selected={resource.slug === initialSlug ? "true" : "false"}
@@ -53,7 +57,7 @@ const initialSlug = activeSlug && resources.some((resource) => resource.slug ===
 
           <ExternalLink href="https://indivisible.org" class="upcoming__tab resources__external-tab">
             Indivisible (National)
-            <img src="/images/box-arrow-up-right.svg" alt="" aria-hidden="true" />
+            <img src={withBase("/images/box-arrow-up-right.svg")} alt="" aria-hidden="true" />
           </ExternalLink>
         </div>
 
@@ -61,7 +65,7 @@ const initialSlug = activeSlug && resources.some((resource) => resource.slug ===
           {
             resources.map((resource) => (
               <a
-                href={`/resources/${resource.slug}/`}
+                href={withBase(`/resources/${resource.slug}/`)}
                 class={`upcoming__tab resources__mobile-option${resource.slug === initialSlug ? " upcoming__tab--active" : ""}`}
                 data-resource-tab={resource.slug}
                 aria-selected={resource.slug === initialSlug ? "true" : "false"}
@@ -72,7 +76,7 @@ const initialSlug = activeSlug && resources.some((resource) => resource.slug ===
           }
           <ExternalLink href="https://indivisible.org" class="upcoming__tab resources__external-tab">
             Indivisible (National)
-            <img src="/images/box-arrow-up-right.svg" alt="" aria-hidden="true" />
+            <img src={withBase("/images/box-arrow-up-right.svg")} alt="" aria-hidden="true" />
           </ExternalLink>
         </div>
       </aside>
@@ -106,7 +110,7 @@ const initialSlug = activeSlug && resources.some((resource) => resource.slug ===
   </div>
 </section>
 
-<script define:vars={{ initialSlug }}>
+<script define:vars={{ initialSlug, baseUrl }}>
   const tabs = Array.from(document.querySelectorAll("[data-resource-tab]"));
   const panels = Array.from(document.querySelectorAll("[data-resource-panel]"));
   const mobileToggle = document.querySelector("[data-resource-mobile-toggle]");
@@ -150,7 +154,7 @@ const initialSlug = activeSlug && resources.some((resource) => resource.slug ===
       event.preventDefault();
       setActiveTab(slug);
       closeMobileMenu();
-      window.history.pushState({}, "", `/resources/${slug}/`);
+      window.history.pushState({}, "", `${baseUrl}resources/${slug}/`);
     });
   });
 

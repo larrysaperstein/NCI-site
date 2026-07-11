@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import MainLayout from "../layouts/MainLayout.astro";
+import { withBase } from "../utils/path";
 
 type PostWithMonth = {
   slug: string;
@@ -115,7 +116,7 @@ const mobileOlderMonths = monthGroups.slice(MOBILE_VISIBLE_MONTHS);
                     aria-expanded="false"
                   >
                     VIEW ARCHIVE
-                    <img src="/images/caret-down-square-fill.svg" alt="" aria-hidden="true" />
+                    <img src={withBase("/images/caret-down-square-fill.svg")} alt="" aria-hidden="true" />
                   </button>
                   <div class="ground__older-list" data-ground-more-list="desktop" hidden>
                     {
@@ -160,7 +161,7 @@ const mobileOlderMonths = monthGroups.slice(MOBILE_VISIBLE_MONTHS);
                     aria-expanded="false"
                   >
                     VIEW ARCHIVE
-                    <img src="/images/caret-down-square-fill.svg" alt="" aria-hidden="true" />
+                    <img src={withBase("/images/caret-down-square-fill.svg")} alt="" aria-hidden="true" />
                   </button>
                   <div class="ground__older-list ground__older-list--mobile" data-ground-more-list="mobile" hidden>
                     {
@@ -193,10 +194,10 @@ const mobileOlderMonths = monthGroups.slice(MOBILE_VISIBLE_MONTHS);
                 <div class="ground__cards">
                   {
                     month.posts.map((post) => (
-                      <a href={`/on-the-ground/${post.slug}/`} class="ground-card" aria-label={`Read ${post.headline}`}>
+                      <a href={withBase(`/on-the-ground/${post.slug}/`)} class="ground-card" aria-label={`Read ${post.headline}`}>
                         <img
                           class="ground-card__image"
-                          src={post.avatarImage || "/images/logo-fallback.svg"}
+                          src={withBase(post.avatarImage || "/images/logo-fallback.svg")}
                           alt={post.avatarAlt}
                           loading="lazy"
                         />

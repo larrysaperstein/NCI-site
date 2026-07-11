@@ -1,6 +1,7 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 import { getCollection, render } from "astro:content";
+import { withBase } from "../utils/path";
 
 const actionItemsCards = await Promise.all(
   (await getCollection("immediateAction")).map(async (entry) => {
@@ -55,14 +56,14 @@ inTheMeantimeCards.sort(sortByOrder);
               {
                 actionItemsCards.map((card) => (
                   <a
-                    href={`/upcoming-at-nci/immediate-${card.slug}/`}
+                    href={withBase(`/upcoming-at-nci/immediate-${card.slug}/`)}
                     class={`ground-card action-card${card.priority === "high" ? " action-card--priority" : ""}`}
                     aria-label={`Read ${card.headline}`}
                   >
                     {card.priority === "high" && <span class="action-card__badge">Top Priority</span>}
                     <img
                       class="ground-card__image"
-                      src={card.avatarImage || "/images/logo-fallback.svg"}
+                      src={withBase(card.avatarImage || "/images/logo-fallback.svg")}
                       alt={card.avatarAlt || card.headline}
                       loading="lazy"
                     />
@@ -82,13 +83,13 @@ inTheMeantimeCards.sort(sortByOrder);
               {
                 inTheMeantimeCards.map((card) => (
                   <a
-                    href={`/upcoming-at-nci/ongoing-${card.slug}/`}
+                    href={withBase(`/upcoming-at-nci/ongoing-${card.slug}/`)}
                     class="ground-card action-card"
                     aria-label={`Read ${card.headline}`}
                   >
                     <img
                       class="ground-card__image"
-                      src={card.avatarImage || "/images/logo-fallback.svg"}
+                      src={withBase(card.avatarImage || "/images/logo-fallback.svg")}
                       alt={card.avatarAlt || card.headline}
                       loading="lazy"
                     />

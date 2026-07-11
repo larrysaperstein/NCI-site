@@ -1,26 +1,27 @@
 ---
 import ExternalLink from "./ExternalLink.astro";
+import { withBase } from "../utils/path";
 
 const footerLinks = [
-  [{ label: "Home", href: "/" }],
+  [{ label: "Home", href: withBase("/") }],
   [
-    { label: "Mission Statement", href: "/about/mission-statement" },
-    { label: "Leadership", href: "/about/leadership" },
-    { label: "About Us", href: "/about" }
+    { label: "Mission Statement", href: withBase("/about/mission-statement") },
+    { label: "Leadership", href: withBase("/about/leadership") },
+    { label: "About Us", href: withBase("/about") }
   ],
   [
-    { label: "Upcoming at NCI", href: "/upcoming-at-nci" },
-    { label: "Resources", href: "/resources" }
+    { label: "Upcoming at NCI", href: withBase("/upcoming-at-nci") },
+    { label: "Resources", href: withBase("/resources") }
   ],
-  [{ label: "On The Ground", href: "/on-the-ground" }]
+  [{ label: "On The Ground", href: withBase("/on-the-ground") }]
 ];
 ---
 
 <footer class="site-footer">
   <div class="container site-footer__inner">
     <div class="site-footer__actions">
-      <a href="/donate" class="button button--yellow">Donate</a>
-      <a href="/get-involved" class="button button--blue">Join Our Mailing List</a>
+      <a href={withBase("/donate")} class="button button--yellow">Donate</a>
+      <a href={withBase("/get-involved")} class="button button--blue">Join Our Mailing List</a>
     </div>
 
     <ExternalLink
@@ -28,7 +29,7 @@ const footerLinks = [
       class="facebook-link site-footer__facebook"
       aria-label="Visit Nature Coast Indivisible on Facebook"
     >
-      <img src="/images/facebook.svg" alt="" aria-hidden="true" />
+      <img src={withBase("/images/facebook.svg")} alt="" aria-hidden="true" />
     </ExternalLink>
 
     <nav aria-label="Footer navigation">
@@ -43,8 +44,8 @@ const footerLinks = [
       </div>
     </nav>
 
-    <a href="/" class="site-footer__brand" aria-label="Nature Coast Indivisible home">
-      <img src="/images/NCI-logo.svg" alt="Nature Coast Indivisible" />
+    <a href={withBase("/")} class="site-footer__brand" aria-label="Nature Coast Indivisible home">
+      <img src={withBase("/images/NCI-logo.svg")} alt="Nature Coast Indivisible" />
     </a>
 
     <p class="site-footer__copyright">

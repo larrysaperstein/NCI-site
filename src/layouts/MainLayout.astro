@@ -1,6 +1,7 @@
 ---
 import Footer from "../components/Footer.astro";
 import Nav from "../components/Nav.astro";
+import { withBase } from "../utils/path";
 import "../styles/global.css";
 
 interface Props {
@@ -23,6 +24,15 @@ const { title = "Nature Coast Indivisible" } = Astro.props;
       rel="stylesheet"
     />
     <title>{title}</title>
+    <style is:global set:html={`
+      .home-about::before {
+        background-image: url("${withBase("/images/horizon.webp")}");
+      }
+
+      .home-section--events::before {
+        background-image: url("${withBase("/images/bluetexture.webp")}");
+      }
+    `}></style>
   </head>
   <body>
     <Nav />

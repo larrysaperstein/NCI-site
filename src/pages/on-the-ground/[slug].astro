@@ -1,6 +1,7 @@
 ---
 import { getCollection, getEntry, render } from "astro:content";
 import MainLayout from "../../layouts/MainLayout.astro";
+import { withBase } from "../../utils/path";
 
 export async function getStaticPaths() {
   const entries = await getCollection("blogPosts");
@@ -33,8 +34,8 @@ const formattedDate = `${date.toLocaleString("en-US", { month: "short" })} ${dat
 <MainLayout title={entry.data.headline}>
   <section class="upcoming ground-post">
     <div class="container">
-      <a href="/on-the-ground" class="ground-post__back-link">
-        <img src="/images/arrow-left.svg" alt="" aria-hidden="true" />
+      <a href={withBase("/on-the-ground")} class="ground-post__back-link">
+        <img src={withBase("/images/arrow-left.svg")} alt="" aria-hidden="true" />
         Back To All Posts
       </a>
 
@@ -43,7 +44,7 @@ const formattedDate = `${date.toLocaleString("en-US", { month: "short" })} ${dat
           <h1>{entry.data.headline}</h1>
           {
             entry.data.avatarImage && (
-              <img src={entry.data.avatarImage} alt={entry.data.avatarAlt || entry.data.headline} loading="lazy" />
+              <img src={withBase(entry.data.avatarImage)} alt={entry.data.avatarAlt || entry.data.headline} loading="lazy" />
             )
           }
           {entry.data.subheading && <p class="ground-post__subheading">{entry.data.subheading}</p>}

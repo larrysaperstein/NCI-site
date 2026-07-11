@@ -1,23 +1,24 @@
 ---
 import ExternalLink from "./ExternalLink.astro";
+import { withBase } from "../utils/path";
 
 const aboutLinks = [
-  { label: "Mission Statement", href: "/about/mission-statement" },
-  { label: "Leadership", href: "/about/leadership" },
-  { label: "About Us", href: "/about" }
+  { label: "Mission Statement", href: withBase("/about/mission-statement") },
+  { label: "Leadership", href: withBase("/about/leadership") },
+  { label: "About Us", href: withBase("/about") }
 ];
 
 const getInvolvedLinks = [
-  { label: "Events", href: "/events" },
-  { label: "Take Action", href: "/upcoming-at-nci" },
-  { label: "Resources", href: "/resources" }
+  { label: "Events", href: withBase("/events") },
+  { label: "Take Action", href: withBase("/upcoming-at-nci") },
+  { label: "Resources", href: withBase("/resources") }
 ];
 ---
 
 <header class="site-nav">
   <div class="container site-nav__inner">
-    <a href="/" class="site-nav__brand" aria-label="Nature Coast Indivisible home">
-      <img src="/images/NCI-logo.svg" alt="Nature Coast Indivisible" />
+    <a href={withBase("/")} class="site-nav__brand" aria-label="Nature Coast Indivisible home">
+      <img src={withBase("/images/NCI-logo.svg")} alt="Nature Coast Indivisible" />
     </a>
 
     <button
@@ -36,7 +37,7 @@ const getInvolvedLinks = [
     <nav aria-label="Main navigation" class="site-nav__links">
       <ul>
         <li class="site-nav__top-item" data-nav-simple-item>
-          <a href="/">Home</a>
+          <a href={withBase("/")}>Home</a>
         </li>
         <li class="site-nav__top-item site-nav__top-item--menu" data-menu-trigger="about">
           <button class="site-nav__toggle" type="button" data-menu-toggle="about" aria-expanded="false">
@@ -54,19 +55,19 @@ const getInvolvedLinks = [
           </button>
         </li>
         <li class="site-nav__top-item" data-nav-simple-item>
-          <a href="/on-the-ground">On The Ground</a>
+          <a href={withBase("/on-the-ground")}>On The Ground</a>
         </li>
       </ul>
     </nav>
 
     <div class="site-nav__actions">
-      <a href="/donate" class="button button--yellow">Donate</a>
+      <a href={withBase("/donate")} class="button button--yellow">Donate</a>
       <ExternalLink
         href="https://www.facebook.com"
         class="facebook-link"
         aria-label="Visit Nature Coast Indivisible on Facebook"
       >
-        <img src="/images/facebook.svg" alt="" aria-hidden="true" />
+        <img src={withBase("/images/facebook.svg")} alt="" aria-hidden="true" />
       </ExternalLink>
     </div>
   </div>
@@ -91,7 +92,7 @@ const getInvolvedLinks = [
     <div class="site-nav__mobile-content">
       <nav aria-label="Mobile main navigation">
         <ul class="site-nav__mobile-list">
-          <li><a href="/">Home</a></li>
+          <li><a href={withBase("/")}>Home</a></li>
           <li>
             <details class="site-nav__mobile-accordion">
               <summary>About</summary>
@@ -108,18 +109,18 @@ const getInvolvedLinks = [
               </ul>
             </details>
           </li>
-          <li><a href="/on-the-ground">On The Ground</a></li>
+          <li><a href={withBase("/on-the-ground")}>On The Ground</a></li>
         </ul>
       </nav>
 
       <div class="site-nav__mobile-actions">
-        <a href="/donate" class="button button--yellow">Donate</a>
+        <a href={withBase("/donate")} class="button button--yellow">Donate</a>
         <ExternalLink
           href="https://www.facebook.com"
           class="facebook-link"
           aria-label="Visit Nature Coast Indivisible on Facebook"
         >
-          <img src="/images/facebook.svg" alt="" aria-hidden="true" />
+          <img src={withBase("/images/facebook.svg")} alt="" aria-hidden="true" />
         </ExternalLink>
       </div>
     </div>

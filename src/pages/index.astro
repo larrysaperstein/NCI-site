@@ -2,6 +2,7 @@
 import { getCollection, getEntry, render } from "astro:content";
 import MainLayout from "../layouts/MainLayout.astro";
 import { placeholderEvents } from "../data/events";
+import { withBase } from "../utils/path";
 
 const homeEntry = await getEntry("homePage", "home");
 if (!homeEntry) throw new Error("Missing homepage content entry: src/content/homePage/home.md");
@@ -21,13 +22,13 @@ const actionItems = (await getCollection("immediateAction"))
 <MainLayout title="Nature Coast Indivisible">
   <section class="home-hero">
     <img
-      src={homeEntry.data.heroImage}
+      src={withBase(homeEntry.data.heroImage)}
       alt={homeEntry.data.heroImageAlt}
       class="home-hero__image"
       loading="eager"
     />
     <div class="home-hero__overlay">
-      <img src="/images/NCI-logo.svg" alt="Nature Coast Indivisible" class="home-hero__logo" />
+      <img src={withBase("/images/NCI-logo.svg")} alt="Nature Coast Indivisible" class="home-hero__logo" />
     </div>
   </section>
 
@@ -43,7 +44,7 @@ const actionItems = (await getCollection("immediateAction"))
         {
           aboutSlides.map((slide, index) => (
             <img
-              src={slide.data.image}
+              src={withBase(slide.data.image)}
               alt={slide.data.imageAlt}
               class={`home-about__slide${index === 0 ? " is-active" : ""}`}
               data-home-slide
@@ -95,14 +96,14 @@ const actionItems = (await getCollection("immediateAction"))
         {
           actionItems.map((card) => (
             <a
-              href={`/upcoming-at-nci/immediate-${card.slug}/`}
+              href={withBase(`/upcoming-at-nci/immediate-${card.slug}/`)}
               class={`ground-card action-card${card.priority === "high" ? " action-card--priority" : ""}`}
               aria-label={`Read ${card.headline}`}
             >
               {card.priority === "high" && <span class="action-card__badge">Top Priority</span>}
               <img
                 class="ground-card__image"
-                src={card.avatarImage || "/images/logo-fallback.svg"}
+                src={withBase(card.avatarImage || "/images/logo-fallback.svg")}
                 alt={card.avatarAlt || card.headline}
                 loading="lazy"
               />

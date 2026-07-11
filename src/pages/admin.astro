@@ -1,14 +1,20 @@
+---
+import { withBase } from "../utils/path";
+
+const adminPath = withBase("/admin/index.html");
+---
+
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="refresh" content="0; url=/admin/index.html" />
+    <meta http-equiv="refresh" content={`0; url=${adminPath}`} />
     <title>Redirecting to CMS</title>
-    <script>
-      window.location.replace("/admin/index.html");
+    <script define:vars={{ adminPath }}>
+      window.location.replace(adminPath);
     </script>
   </head>
   <body>
-    <p>Redirecting to <a href="/admin/index.html">/admin/index.html</a>...</p>
+    <p>Redirecting to <a href={adminPath}>{adminPath}</a>...</p>
   </body>
 </html>
