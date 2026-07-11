@@ -1,0 +1,288 @@
+---
+import { getCollection } from "astro:content";
+import MainLayout from "../layouts/MainLayout.astro";
+
+type PostWithMonth = {
+  slug: string;
+  headline: string;
+  subheading?: string;
+  publishDate: Date;
+  avatarImage?: string;
+  avatarAlt: string;
+  monthKey: string;
+  monthDate: Date;
+  monthLabel: string;
+  formattedDate: string;
+};
+
+const blogEntries = await getCollection("blogPosts");
+const monthFormatter = new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric" });
+
+const ordinalSuffix = (day: number) => {
+  if (day % 100 >= 11 && day % 100 <= 13) return "th";
+  if (day % 10 === 1) return "st";
+  if (day % 10 === 2) return "nd";
+  if (day % 10 === 3) return "rd";
+  return "th";
+};
+
+const formatPublishedDate = (date: Date) => {
+  const month = date.toLocaleString("en-US", { month: "short" });
+  const day = date.getDate();
+  return `${month} ${day}${ordinalSuffix(day)}, ${date.getFullYear()}`;
+};
+
+const posts: PostWithMonth[] = blogEntries
+  .map((entry) => {
+    const publishDate = new Date(entry.data.publishDate);
+    const monthDate = new Date(publishDate.getFullYear(), publishDate.getMonth(), 1);
+    const monthKey = `${publishDate.getFullYear()}-${String(publishDate.getMonth() + 1).padStart(2, "0")}`;
+
+    return {
+      slug: entry.slug,
+      headline: entry.data.headline,
+      subheading: entry.data.subheading,
+      publishDate,
+      avatarImage: entry.data.avatarImage,
+      avatarAlt: entry.data.avatarAlt || entry.data.headline,
+      monthKey,
+      monthDate,
+      monthLabel: monthFormatter.format(monthDate),
+      formattedDate: formatPublishedDate(publishDate)
+    };
+  })
+  .sort((a, b) => b.publishDate.getTime() - a.publishDate.getTime());
+
+const monthGroupsMap = new Map<
+  string,
+  { key: string; label: string; date: Date; posts: PostWithMonth[] }
+>();
+posts.forEach((post) => {
+  const existing = monthGroupsMap.get(post.monthKey);
+  if (existing) {
+    existing.posts.push(post);
+  } else {
+    monthGroupsMap.set(post.monthKey, {
+      key: post.monthKey,
+      label: post.monthLabel,
+      date: post.monthDate,
+      posts: [post]
+    });
+  }
+});
+
+const monthGroups = Array.from(monthGroupsMap.values()).sort((a, b) => b.date.getTime() - a.date.getTime());
+const activeMonthKey = monthGroups[0]?.key;
+
+const DESKTOP_VISIBLE_MONTHS = 6;
+const MOBILE_VISIBLE_MONTHS = 3;
+
+const desktopPrimaryMonths = monthGroups.slice(0, DESKTOP_VISIBLE_MONTHS);
+const desktopOlderMonths = monthGroups.slice(DESKTOP_VISIBLE_MONTHS);
+const mobilePrimaryMonths = monthGroups.slice(0, MOBILE_VISIBLE_MONTHS);
+const mobileOlderMonths = monthGroups.slice(MOBILE_VISIBLE_MONTHS);
+---
+
+<MainLayout title="On The Ground">
+  <section class="upcoming ground">
+    <div class="container">
+      <h1>On The Ground</h1>
+
+      <div class="upcoming__content ground__content">
+        <aside class="upcoming__tabs ground__tabs" aria-label="On The Ground post archives by month">
+          <div class="ground__desktop-tabs">
+            {
+              desktopPrimaryMonths.map((month) => (
+                <button
+                  type="button"
+                  class={`upcoming__tab${month.key === activeMonthKey ? " upcoming__tab--active" : ""}`}
+                  data-ground-tab={month.key}
+                  aria-selected={month.key === activeMonthKey ? "true" : "false"}
+                >
+                  {month.label}
+                </button>
+              ))
+            }
+
+            {
+              desktopOlderMonths.length > 0 && (
+                <>
+                  <button
+                    type="button"
+                    class="ground__more-toggle"
+                    data-ground-more-toggle="desktop"
+                    aria-expanded="false"
+                  >
+                    View More Dates
+                    <img src="/images/caret-down-square-fill.svg" alt="" aria-hidden="true" />
+                  </button>
+                  <div class="ground__older-list" data-ground-more-list="desktop" hidden>
+                    {
+                      desktopOlderMonths.map((month) => (
+                        <button
+                          type="button"
+                          class={`upcoming__tab ground__tab--past${month.key === activeMonthKey ? " upcoming__tab--active" : ""}`}
+                          data-ground-tab={month.key}
+                          aria-selected={month.key === activeMonthKey ? "true" : "false"}
+                        >
+                          {month.label}
+                        </button>
+                      ))
+                    }
+                  </div>
+                </>
+              )
+            }
+          </div>
+
+          <div class="ground__mobile-tabs">
+            {
+              mobilePrimaryMonths.map((month) => (
+                <button
+                  type="button"
+                  class={`upcoming__tab${month.key === activeMonthKey ? " upcoming__tab--active" : ""}`}
+                  data-ground-tab={month.key}
+                  aria-selected={month.key === activeMonthKey ? "true" : "false"}
+                >
+                  {month.label}
+                </button>
+              ))
+            }
+
+            {
+              mobileOlderMonths.length > 0 && (
+                <>
+                  <button
+                    type="button"
+                    class="ground__more-toggle"
+                    data-ground-more-toggle="mobile"
+                    aria-expanded="false"
+                  >
+                    View More Dates
+                    <img src="/images/caret-down-square-fill.svg" alt="" aria-hidden="true" />
+                  </button>
+                  <div class="ground__older-list ground__older-list--mobile" data-ground-more-list="mobile" hidden>
+                    {
+                      mobileOlderMonths.map((month) => (
+                        <button
+                          type="button"
+                          class={`upcoming__tab ground__tab--past${month.key === activeMonthKey ? " upcoming__tab--active" : ""}`}
+                          data-ground-tab={month.key}
+                          aria-selected={month.key === activeMonthKey ? "true" : "false"}
+                        >
+                          {month.label}
+                        </button>
+                      ))
+                    }
+                  </div>
+                </>
+              )
+            }
+          </div>
+        </aside>
+
+        <div class="ground__panels">
+          {
+            monthGroups.map((month) => (
+              <section
+                class={`ground__panel${month.key === activeMonthKey ? " is-fading" : ""}`}
+                data-ground-panel={month.key}
+                hidden={month.key === activeMonthKey ? undefined : true}
+              >
+                <div class="ground__cards">
+                  {
+                    month.posts.map((post) => (
+                      <a href={`/on-the-ground/${post.slug}/`} class="ground-card" aria-label={`Read ${post.headline}`}>
+                        <img
+                          class="ground-card__image"
+                          src={post.avatarImage || "/images/logo-fallback.svg"}
+                          alt={post.avatarAlt}
+                          loading="lazy"
+                        />
+                        <div class="ground-card__content">
+                          <h2>{post.headline}</h2>
+                          {post.subheading && <p class="ground-card__subheading">{post.subheading}</p>}
+                          <p class="ground-card__date">{post.formattedDate}</p>
+                        </div>
+                      </a>
+                    ))
+                  }
+                </div>
+              </section>
+            ))
+          }
+
+          {
+            monthGroups.length === 0 && (
+              <section class="ground__panel is-fading">
+                <p>No posts yet. Add blog entries to the On The Ground collection.</p>
+              </section>
+            )
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<script>
+  const monthButtons = Array.from(document.querySelectorAll("[data-ground-tab]"));
+  const monthPanels = Array.from(document.querySelectorAll("[data-ground-panel]"));
+  const moreToggles = Array.from(document.querySelectorAll("[data-ground-more-toggle]"));
+
+  const setMoreOpen = (type, shouldOpen) => {
+    const toggle = document.querySelector(`[data-ground-more-toggle="${type}"]`);
+    const list = document.querySelector(`[data-ground-more-list="${type}"]`);
+    if (!toggle || !list) return;
+
+    toggle.setAttribute("aria-expanded", shouldOpen ? "true" : "false");
+    list.toggleAttribute("hidden", !shouldOpen);
+  };
+
+  const setActiveMonth = (monthKey) => {
+    monthButtons.forEach((button) => {
+      const isActive = button.getAttribute("data-ground-tab") === monthKey;
+      button.classList.toggle("upcoming__tab--active", isActive);
+      button.setAttribute("aria-selected", isActive ? "true" : "false");
+    });
+
+    monthPanels.forEach((panel) => {
+      const isActive = panel.getAttribute("data-ground-panel") === monthKey;
+      if (isActive) {
+        panel.removeAttribute("hidden");
+        panel.classList.remove("is-fading");
+        requestAnimationFrame(() => panel.classList.add("is-fading"));
+      } else {
+        panel.setAttribute("hidden", "");
+        panel.classList.remove("is-fading");
+      }
+    });
+
+    const desktopPastButton = document.querySelector(
+      `[data-ground-more-list="desktop"] [data-ground-tab="${monthKey}"]`
+    );
+    if (desktopPastButton) setMoreOpen("desktop", true);
+
+    const mobilePastButton = document.querySelector(
+      `[data-ground-more-list="mobile"] [data-ground-tab="${monthKey}"]`
+    );
+    if (mobilePastButton) setMoreOpen("mobile", true);
+  };
+
+  monthButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const monthKey = button.getAttribute("data-ground-tab");
+      if (!monthKey) return;
+      setActiveMonth(monthKey);
+    });
+  });
+
+  moreToggles.forEach((toggle) => {
+    toggle.addEventListener("click", () => {
+      const type = toggle.getAttribute("data-ground-more-toggle");
+      if (!type) return;
+      const isOpen = toggle.getAttribute("aria-expanded") === "true";
+      setMoreOpen(type, !isOpen);
+    });
+  });
+</script>

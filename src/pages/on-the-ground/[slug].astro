@@ -1,0 +1,58 @@
+---
+import { getCollection, getEntry, render } from "astro:content";
+import MainLayout from "../../layouts/MainLayout.astro";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("blogPosts");
+  return entries.map((entry) => ({
+    params: { slug: entry.slug }
+  }));
+}
+
+const { slug } = Astro.params;
+if (!slug) throw new Error("Missing blog post slug");
+
+const entry = await getEntry("blogPosts", slug);
+if (!entry) throw new Error(`Post not found for slug: ${slug}`);
+
+const { Content } = await render(entry);
+
+const date = new Date(entry.data.publishDate);
+const ordinalSuffix = (day: number) => {
+  if (day % 100 >= 11 && day % 100 <= 13) return "th";
+  if (day % 10 === 1) return "st";
+  if (day % 10 === 2) return "nd";
+  if (day % 10 === 3) return "rd";
+  return "th";
+};
+const formattedDate = `${date.toLocaleString("en-US", { month: "short" })} ${date.getDate()}${ordinalSuffix(
+  date.getDate()
+)}, ${date.getFullYear()}`;
+---
+
+<MainLayout title={entry.data.headline}>
+  <section class="upcoming ground-post">
+    <div class="container">
+      <a href="/on-the-ground" class="ground-post__back-link">
+        <img src="/images/arrow-left.svg" alt="" aria-hidden="true" />
+        Back To All Posts
+      </a>
+
+      <article class="ground-post__article">
+        <header class="ground-post__header">
+          <h1>{entry.data.headline}</h1>
+          {
+            entry.data.avatarImage && (
+              <img src={entry.data.avatarImage} alt={entry.data.avatarAlt || entry.data.headline} loading="lazy" />
+            )
+          }
+          {entry.data.subheading && <p class="ground-post__subheading">{entry.data.subheading}</p>}
+          <p class="ground-post__date">{formattedDate}</p>
+        </header>
+        <div class="ground-post__content">
+          <Content />
+        </div>
+      </article>
+    </div>
+  </section>
+</MainLayout>

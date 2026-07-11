@@ -1,0 +1,195 @@
+---
+import { getCollection, getEntry, render } from "astro:content";
+import MainLayout from "../layouts/MainLayout.astro";
+
+const homeEntry = await getEntry("homePage", "home");
+if (!homeEntry) throw new Error("Missing homepage content entry: src/content/homePage/home.md");
+const { Content: HomeAboutContent } = await render(homeEntry);
+
+const aboutSlides = (await getCollection("homeAboutSlides")).sort((a, b) => a.data.order - b.data.order).slice(0, 5);
+const upcomingCardsEntries = await getCollection("upcomingCards");
+const actionItems = (
+  await Promise.all(
+    upcomingCardsEntries
+      .filter((entry) => entry.data.tab === "action-items")
+      .sort((a, b) => a.data.order - b.data.order)
+      .slice(0, 3)
+      .map(async (entry) => {
+        const { Content } = await render(entry);
+        return { ...entry.data, slug: entry.slug, Content };
+      })
+  )
+).sort((a, b) => a.order - b.order);
+
+const placeholderEvents = [
+  {
+    title: "Neighborhood Organizing Meet-Up",
+    date: "Aug 12th, 2026",
+    time: "6:30 PM",
+    location: "Ocala Community Center"
+  },
+  {
+    title: "Voter Outreach Phone Bank",
+    date: "Aug 18th, 2026",
+    time: "7:00 PM",
+    location: "Virtual Event"
+  },
+  {
+    title: "Rapid Response Volunteer Training",
+    date: "Aug 23rd, 2026",
+    time: "5:00 PM",
+    location: "Marion Public Library"
+  }
+];
+---
+
+<MainLayout title="Nature Coast Indivisible">
+  <section class="home-hero">
+    <img
+      src={homeEntry.data.heroImage}
+      alt={homeEntry.data.heroImageAlt}
+      class="home-hero__image"
+      loading="eager"
+    />
+    <div class="home-hero__overlay">
+      <img src="/images/NCI-logo.svg" alt="Nature Coast Indivisible" class="home-hero__logo" />
+    </div>
+  </section>
+
+  <section class="home-about">
+    <div class="container home-about__inner">
+      <div class="home-about__copy">
+        <h2>{homeEntry.data.aboutHeading}</h2>
+        <div class="home-about__body">
+          <HomeAboutContent />
+        </div>
+      </div>
+      <div class="home-about__slider" data-home-slider>
+        {
+          aboutSlides.map((slide, index) => (
+            <img
+              src={slide.data.image}
+              alt={slide.data.imageAlt}
+              class={`home-about__slide${index === 0 ? " is-active" : ""}`}
+              data-home-slide
+              data-slide-index={index}
+              loading="lazy"
+            />
+          ))
+        }
+        <div class="home-about__indicators" role="tablist" aria-label="About slideshow image selector">
+          {
+            aboutSlides.map((slide, index) => (
+              <button
+                type="button"
+                class={`home-about__indicator${index === 0 ? " is-active" : ""}`}
+                data-slide-indicator={index}
+                role="tab"
+                aria-selected={index === 0 ? "true" : "false"}
+                aria-label={`Show slide ${index + 1}: ${slide.data.imageAlt || "About image"}`}
+              ></button>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-section">
+    <div class="container">
+      <h2>{homeEntry.data.eventsHeading}</h2>
+      <div class="home-events-grid">
+        {
+          placeholderEvents.map((event) => (
+            <article class="home-event-card">
+              <h3>{event.title}</h3>
+              <p>{event.date}</p>
+              <p>{event.time}</p>
+              <p>{event.location}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="home-section">
+    <div class="container">
+      <h2>{homeEntry.data.actionItemsHeading}</h2>
+      <div class="upcoming__cards">
+        {
+          actionItems.map((card) => (
+            <article class="content-card" data-expandable-card data-cms-collection="upcoming-at-nci">
+              <div class="content-card__summary">
+                <img src={card.avatarImage || "/images/logo-fallback.svg"} alt={card.avatarAlt || card.headline} loading="lazy" />
+                <div>
+                  <h2>{card.headline}</h2>
+                  <p class="content-card__subheading">{card.subheading}</p>
+                </div>
+              </div>
+              <div class="content-card__body" data-card-body>
+                <card.Content />
+              </div>
+              <button type="button" class="content-card__toggle" data-card-toggle aria-expanded="false">
+                <span data-card-toggle-label>Learn More</span>
+                <img src="/images/caret-down-square-fill.svg" alt="" aria-hidden="true" />
+              </button>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<script>
+  const slides = Array.from(document.querySelectorAll("[data-home-slide]"));
+  const indicators = Array.from(document.querySelectorAll("[data-slide-indicator]"));
+  let intervalId;
+
+  const setSlide = (next) => {
+    slides.forEach((slide, index) => {
+      slide.classList.toggle("is-active", index === next);
+    });
+    indicators.forEach((indicator, index) => {
+      const isActive = index === next;
+      indicator.classList.toggle("is-active", isActive);
+      indicator.setAttribute("aria-selected", isActive ? "true" : "false");
+    });
+  };
+
+  const startAutoRotate = () => {
+    if (slides.length <= 1) return;
+    clearInterval(intervalId);
+    intervalId = setInterval(() => {
+      const currentIndex = slides.findIndex((slide) => slide.classList.contains("is-active"));
+      const nextIndex = (currentIndex + 1) % slides.length;
+      setSlide(nextIndex);
+    }, 4200);
+  };
+
+  if (slides.length > 1) {
+    indicators.forEach((indicator, index) => {
+      indicator.addEventListener("click", () => {
+        setSlide(index);
+        startAutoRotate();
+      });
+    });
+    startAutoRotate();
+  }
+
+  const expandableCards = Array.from(document.querySelectorAll("[data-expandable-card]"));
+  expandableCards.forEach((card) => {
+    const toggleButton = card.querySelector("[data-card-toggle]");
+    const toggleLabel = card.querySelector("[data-card-toggle-label]");
+    if (!toggleButton || !toggleLabel) return;
+
+    toggleButton.addEventListener("click", () => {
+      const isOpen = toggleButton.getAttribute("aria-expanded") === "true";
+      const nextOpenState = !isOpen;
+      toggleButton.setAttribute("aria-expanded", nextOpenState ? "true" : "false");
+      toggleLabel.textContent = nextOpenState ? "Close" : "Learn More";
+      card.classList.toggle("is-open", nextOpenState);
+    });
+  });
+</script>

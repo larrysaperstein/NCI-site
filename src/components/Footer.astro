@@ -1,0 +1,57 @@
+---
+import ExternalLink from "./ExternalLink.astro";
+
+const footerLinks = [
+  [{ label: "Home", href: "/" }],
+  [
+    { label: "Mission Statement", href: "/about/mission-statement" },
+    { label: "Leadership", href: "/about/leadership" },
+    { label: "About Us", href: "/about" }
+  ],
+  [
+    { label: "Upcoming at NCI", href: "/upcoming-at-nci" },
+    { label: "Resources", href: "/resources" }
+  ],
+  [{ label: "On The Ground", href: "/on-the-ground" }]
+];
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div class="site-footer__actions">
+      <a href="/donate" class="button button--yellow">Donate</a>
+      <a href="/get-involved" class="button button--blue">Join Our Mailing List</a>
+    </div>
+
+    <ExternalLink
+      href="https://www.facebook.com"
+      class="facebook-link site-footer__facebook"
+      aria-label="Visit Nature Coast Indivisible on Facebook"
+    >
+      <img src="/images/facebook.svg" alt="" aria-hidden="true" />
+    </ExternalLink>
+
+    <nav aria-label="Footer navigation">
+      <div class="site-footer__links">
+        {
+          footerLinks.map((column) => (
+            <ul class="site-footer__link-column">
+              {column.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+            </ul>
+          ))
+        }
+      </div>
+    </nav>
+
+    <a href="/" class="site-footer__brand" aria-label="Nature Coast Indivisible home">
+      <img src="/images/NCI-logo.svg" alt="Nature Coast Indivisible" />
+    </a>
+
+    <p class="site-footer__copyright">
+      &copy; 2026 - Nature Coast Indivisible, All Rights Reserved
+      <span>
+        Website by <ExternalLink href="https://sapersteindesign.com">Saperstein Creative</ExternalLink>
+      </span>
+    </p>
+  </div>
+</footer>
