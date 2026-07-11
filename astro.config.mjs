@@ -1,3 +1,6 @@
 import { defineConfig } from "astro/config";
 
-export default defineConfig({});
+export default defineConfig({
+  site: "https://larrysaperstein.github.io",
+  base: "/NCI-site"
+});
