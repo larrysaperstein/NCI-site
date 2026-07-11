@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NCI Content Manager</title>
+  </head>
+  <body>
+    <script src="https://unpkg.com/decap-cms@^3.6.0/dist/decap-cms.js"></script>
+    <script>
+      const MAX_UPLOAD_BYTES = 2 * 1024 * 1024;
+
+      // Failsafe: block file inputs larger than 2MB.
+      document.addEventListener("change", (event) => {
+        const target = event.target;
+        if (!(target instanceof HTMLInputElement)) return;
+        if (target.type !== "file" || !target.files?.length) return;
+
+        const oversized = Array.from(target.files).filter((file) => file.size > MAX_UPLOAD_BYTES);
+        if (!oversized.length) return;
+
+        alert(
+          "One or more files exceed the 2MB limit. Please compress the image and try again."
+        );
+        target.value = "";
+      });
+
+      const registerComponents = (cms) => {
+        cms.registerEditorComponent({
+          id: "button",
+          label: "Button",
+          fields: [
+            { name: "text", label: "Button Text", widget: "string" },
+            { name: "href", label: "Link", widget: "string" },
+            {
+              name: "style",
+              label: "Button Style",
+              widget: "select",
+              options: [
+                { label: "Yellow", value: "button--yellow" },
+                { label: "Blue", value: "button--blue" }
+              ],
+              default: "button--yellow"
+            },
+            {
+              name: "newTab",
+              label: "Open in new tab",
+              widget: "boolean",
+              default: false,
+              required: false
+            }
+          ],
+          pattern:
+            /<a class="button (button--yellow|button--blue)" href="([^"]+)"(?: target="_blank" rel="noopener noreferrer")?>([^<]+)<\/a>/,
+          fromBlock: (match) => ({
+            style: match[1],
+            href: match[2],
+            text: match[3],
+            newTab: match[0].includes('target="_blank"')
+          }),
+          toBlock: ({ text, href, style, newTab }) => {
+            const target = newTab ? ' target="_blank" rel="noopener noreferrer"' : "";
+            return `<a class="button ${style}" href="${href}"${target}>${text}</a>`;
+          },
+          toPreview: ({ text, href, style }) =>
+            `<a class="button ${style}" href="${href}">${text}</a>`
+        });
+
+        cms.registerEditorComponent({
+          id: "youtube",
+          label: "YouTube",
+          fields: [
+            { name: "url", label: "YouTube Link", widget: "string" },
+            { name: "title", label: "Embed Title (accessibility)", widget: "string", required: false }
+          ],
+          pattern: /<iframe[^>]*src="https:\/\/www\.youtube\.com\/embed\/([^"?]+)[^"]*"[^>]*title="([^"]*)"[^>]*><\/iframe>/,
+          fromBlock: (match) => ({
+            url: `https://www.youtube.com/watch?v=${match[1]}`,
+            title: match[2] || "YouTube video"
+          }),
+          toBlock: ({ url, title }) => {
+            const getVideoId = (value) => {
+              try {
+                const parsed = new URL(value);
+                if (parsed.hostname.includes("youtu.be")) return parsed.pathname.replace("/", "");
+                if (parsed.searchParams.get("v")) return parsed.searchParams.get("v");
+                const match = parsed.pathname.match(/\/embed\/([^/]+)/);
+                return match ? match[1] : "";
+              } catch {
+                const fallback = value.match(/(?:v=|youtu\.be\/)([A-Za-z0-9_-]{6,})/);
+                return fallback ? fallback[1] : "";
+              }
+            };
+            const id = getVideoId(url);
+            const safeTitle = title || "YouTube video";
+            return `<iframe width="560" height="315" src="https://www.youtube.com/embed/${id}" title="${safeTitle}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+          },
+          toPreview: ({ url }) => {
+            const safe = url || "";
+            return `<p>YouTube Embed: ${safe}</p>`;
+          }
+        });
+      };
+
+      const ensureCmsReady = () => {
+        if (window.CMS) {
+          registerComponents(window.CMS);
+          return;
+        }
+        setTimeout(ensureCmsReady, 100);
+      };
+
+      ensureCmsReady();
+    </script>
+  </body>
+</html>

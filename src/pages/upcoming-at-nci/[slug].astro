@@ -1,0 +1,58 @@
+---
+import { getCollection, getEntry, render } from "astro:content";
+import MainLayout from "../../layouts/MainLayout.astro";
+
+export async function getStaticPaths() {
+  const immediateEntries = await getCollection("immediateAction");
+  const ongoingEntries = await getCollection("ongoingAction");
+
+  return [
+    ...immediateEntries.map((entry) => ({
+      params: { slug: `immediate-${entry.slug}` }
+    })),
+    ...ongoingEntries.map((entry) => ({
+      params: { slug: `ongoing-${entry.slug}` }
+    }))
+  ];
+}
+
+const { slug } = Astro.params;
+if (!slug) throw new Error("Missing action item slug");
+
+const isImmediate = slug.startsWith("immediate-");
+const isOngoing = slug.startsWith("ongoing-");
+if (!isImmediate && !isOngoing) {
+  throw new Error(`Invalid action item path: ${slug}`);
+}
+
+const rawSlug = slug.replace(/^(immediate|ongoing)-/, "");
+const entry = await getEntry(isImmediate ? "immediateAction" : "ongoingAction", rawSlug);
+if (!entry) {
+  throw new Error(`Action item not found for slug: ${slug}`);
+}
+
+const { Content } = await render(entry);
+---
+
+<MainLayout title={entry.data.headline}>
+  <section class="upcoming ground-post action-post">
+    <div class="container">
+      <a href="/upcoming-at-nci" class="ground-post__back-link">
+        <img src="/images/arrow-left.svg" alt="" aria-hidden="true" />
+        Back To All Action Items
+      </a>
+
+      <article class="ground-post__article">
+        <header class="ground-post__header">
+          {"priority" in entry.data && entry.data.priority === "high" && <p class="action-post__badge">Top Priority</p>}
+          <h1>{entry.data.headline}</h1>
+          <img src={entry.data.avatarImage || "/images/logo-fallback.svg"} alt={entry.data.avatarAlt || entry.data.headline} loading="lazy" />
+          {entry.data.subheading && <p class="ground-post__subheading">{entry.data.subheading}</p>}
+        </header>
+        <div class="ground-post__content">
+          <Content />
+        </div>
+      </article>
+    </div>
+  </section>
+</MainLayout>

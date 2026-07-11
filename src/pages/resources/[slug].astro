@@ -1,0 +1,38 @@
+---
+import { getCollection, getEntry, render } from "astro:content";
+import ResourcesSection from "../../components/ResourcesSection.astro";
+import MainLayout from "../../layouts/MainLayout.astro";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("resourcesTabs");
+  return entries.map((entry) => ({
+    params: { slug: entry.slug }
+  }));
+}
+
+const { slug } = Astro.params;
+if (!slug) throw new Error("Missing resource slug");
+
+const entry = await getEntry("resourcesTabs", slug);
+if (!entry) throw new Error(`Resource not found for slug: ${slug}`);
+
+const resourceEntries = await getCollection("resourcesTabs");
+const resources = await Promise.all(
+  resourceEntries.map(async (resourceEntry) => {
+    const { Content } = await render(resourceEntry);
+    return {
+      slug: resourceEntry.slug,
+      ...resourceEntry.data,
+      Content
+    };
+  })
+);
+
+resources.sort((a, b) => a.order - b.order);
+
+const pageTitle = entry.data.heading || entry.data.tabLabel;
+---
+
+<MainLayout title={pageTitle}>
+  <ResourcesSection resources={resources} activeSlug={slug} />
+</MainLayout>

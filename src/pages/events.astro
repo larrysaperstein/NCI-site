@@ -1,0 +1,26 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import { placeholderEvents } from "../data/events";
+---
+
+<MainLayout title="Events">
+  <section class="upcoming events-page">
+    <div class="container">
+      <h1>Events</h1>
+      <p class="events-page__subtitle">Upcoming community gatherings, trainings, and organizing opportunities.</p>
+
+      <div class="home-events-grid events-page__grid">
+        {
+          placeholderEvents.map((event) => (
+            <article class="home-event-card">
+              <h2>{event.title}</h2>
+              <p>{event.date}</p>
+              <p>{event.time}</p>
+              <p>{event.location}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</MainLayout>

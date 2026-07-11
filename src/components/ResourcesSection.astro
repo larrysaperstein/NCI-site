@@ -1,0 +1,172 @@
+---
+import ExternalLink from "./ExternalLink.astro";
+
+type ResourceItem = {
+  slug: string;
+  tabLabel: string;
+  heading?: string;
+  subheading?: string;
+  order: number;
+  Content: import("astro").MarkdownInstance<Record<string, never>>["Content"];
+};
+
+interface Props {
+  resources: ResourceItem[];
+  activeSlug?: string;
+}
+
+const { resources, activeSlug } = Astro.props;
+const initialSlug = activeSlug && resources.some((resource) => resource.slug === activeSlug)
+  ? activeSlug
+  : resources[0]?.slug;
+---
+
+<section class="upcoming">
+  <div class="container">
+    <div class="resources__heading-wrap">
+      <h1 class="resources__heading-title">Resources</h1>
+      <button
+        type="button"
+        class="resources__heading-mobile-trigger"
+        data-resource-mobile-toggle
+        aria-expanded="false"
+      >
+        Resources
+      </button>
+    </div>
+
+    <div class="upcoming__content resources">
+      <aside class="upcoming__tabs resources__tabs" aria-label="Resource sections">
+        <div class="resources__desktop-tabs">
+          {
+            resources.map((resource) => (
+              <a
+                href={`/resources/${resource.slug}/`}
+                class={`upcoming__tab${resource.slug === initialSlug ? " upcoming__tab--active" : ""}`}
+                data-resource-tab={resource.slug}
+                aria-selected={resource.slug === initialSlug ? "true" : "false"}
+              >
+                {resource.tabLabel}
+              </a>
+            ))
+          }
+
+          <ExternalLink href="https://indivisible.org" class="upcoming__tab resources__external-tab">
+            Indivisible (National)
+            <img src="/images/box-arrow-up-right.svg" alt="" aria-hidden="true" />
+          </ExternalLink>
+        </div>
+
+        <div class="resources__mobile-menu" data-resource-mobile-menu hidden>
+          {
+            resources.map((resource) => (
+              <a
+                href={`/resources/${resource.slug}/`}
+                class={`upcoming__tab resources__mobile-option${resource.slug === initialSlug ? " upcoming__tab--active" : ""}`}
+                data-resource-tab={resource.slug}
+                aria-selected={resource.slug === initialSlug ? "true" : "false"}
+              >
+                {resource.tabLabel}
+              </a>
+            ))
+          }
+          <ExternalLink href="https://indivisible.org" class="upcoming__tab resources__external-tab">
+            Indivisible (National)
+            <img src="/images/box-arrow-up-right.svg" alt="" aria-hidden="true" />
+          </ExternalLink>
+        </div>
+      </aside>
+
+      <div class="resources__panels">
+        {
+          resources.map((resource) => (
+            <article
+              class={`resources__panel${resource.slug === initialSlug ? " is-active is-fading" : ""}`}
+              data-resource-panel={resource.slug}
+              hidden={resource.slug === initialSlug ? undefined : true}
+            >
+              {resource.heading && <h2>{resource.heading}</h2>}
+              {resource.subheading && <p class="resources__subheading">{resource.subheading}</p>}
+              <div class="resources__content">
+                <resource.Content />
+              </div>
+            </article>
+          ))
+        }
+        {
+          resources.length === 0 && (
+            <article class="resources__panel is-active is-fading">
+              <h2>No Resources Yet</h2>
+              <p>Add entries to the resources collection to populate this section.</p>
+            </article>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ initialSlug }}>
+  const tabs = Array.from(document.querySelectorAll("[data-resource-tab]"));
+  const panels = Array.from(document.querySelectorAll("[data-resource-panel]"));
+  const mobileToggle = document.querySelector("[data-resource-mobile-toggle]");
+  const mobileMenu = document.querySelector("[data-resource-mobile-menu]");
+
+  const closeMobileMenu = () => {
+    if (!mobileToggle || !mobileMenu) return;
+    mobileToggle.setAttribute("aria-expanded", "false");
+    mobileMenu.setAttribute("hidden", "");
+  };
+
+  const setActiveTab = (slug) => {
+    tabs.forEach((tab) => {
+      const isActive = tab.getAttribute("data-resource-tab") === slug;
+      tab.classList.toggle("upcoming__tab--active", isActive);
+      tab.setAttribute("aria-selected", isActive ? "true" : "false");
+    });
+
+    panels.forEach((panel) => {
+      const isActive = panel.getAttribute("data-resource-panel") === slug;
+      if (isActive) {
+        panel.removeAttribute("hidden");
+        panel.classList.remove("is-fading");
+        requestAnimationFrame(() => panel.classList.add("is-fading"));
+      } else {
+        panel.setAttribute("hidden", "");
+        panel.classList.remove("is-fading");
+      }
+    });
+  };
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", (event) => {
+      const slug = tab.getAttribute("data-resource-tab");
+      if (!slug) return;
+
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) {
+        return;
+      }
+
+      event.preventDefault();
+      setActiveTab(slug);
+      closeMobileMenu();
+      window.history.pushState({}, "", `/resources/${slug}/`);
+    });
+  });
+
+  mobileToggle?.addEventListener("click", () => {
+    if (!mobileMenu) return;
+    const isOpen = mobileToggle.getAttribute("aria-expanded") === "true";
+    mobileToggle.setAttribute("aria-expanded", isOpen ? "false" : "true");
+    mobileMenu.toggleAttribute("hidden", isOpen);
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!(event.target instanceof Element)) return;
+    if (event.target.closest(".resources__mobile-picker")) return;
+    if (event.target.closest(".resources__mobile-menu")) return;
+    closeMobileMenu();
+  });
+
+  if (initialSlug) setActiveTab(initialSlug);
+</script>

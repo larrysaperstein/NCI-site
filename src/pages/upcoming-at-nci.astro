@@ -2,10 +2,19 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import { getCollection, render } from "astro:content";
 
-const upcomingEntries = await getCollection("upcomingCards");
+const actionItemsCards = await Promise.all(
+  (await getCollection("immediateAction")).map(async (entry) => {
+    const { Content } = await render(entry);
+    return {
+      ...entry.data,
+      slug: entry.slug,
+      Content
+    };
+  })
+);
 
-const upcomingCards = await Promise.all(
-  upcomingEntries.map(async (entry) => {
+const inTheMeantimeCards = await Promise.all(
+  (await getCollection("ongoingAction")).map(async (entry) => {
     const { Content } = await render(entry);
     return {
       ...entry.data,
@@ -16,99 +25,79 @@ const upcomingCards = await Promise.all(
 );
 
 const sortByOrder = (a: { order: number }, b: { order: number }) => a.order - b.order;
-const actionItemsCards = upcomingCards.filter((card) => card.tab === "action-items").sort(sortByOrder);
-const inTheMeantimeCards = upcomingCards
-  .filter((card) => card.tab === "in-the-meantime")
-  .sort(sortByOrder);
+actionItemsCards.sort(sortByOrder);
+inTheMeantimeCards.sort(sortByOrder);
 ---
 
-<MainLayout title="Upcoming at NCI">
-  <section class="upcoming">
+<MainLayout title="Take Action">
+  <section class="upcoming upcoming--actions">
     <div class="container">
-      <h1>Upcoming Action Items</h1>
+      <h1>Action Items</h1>
 
-      <div class="upcoming__content">
+      <div class="upcoming__content ground__content upcoming--actions__content">
         <aside class="upcoming__tabs" aria-label="Upcoming sections">
-          <button type="button" class="upcoming__tab" data-upcoming-tab="events" aria-selected="false">
-            Events
-          </button>
           <button
             type="button"
             class="upcoming__tab upcoming__tab--active"
             data-upcoming-tab="action-items"
             aria-selected="true"
           >
-            Action Items
+            Immediate Action
           </button>
           <button type="button" class="upcoming__tab" data-upcoming-tab="in-the-meantime" aria-selected="false">
-            In The Meantime
+            Ongoing Action
           </button>
         </aside>
 
-        <div class="upcoming__panels">
-          <div class="upcoming__panel" data-upcoming-panel="events" hidden>
-            <article class="events-panel">
-              <h2>Events</h2>
-              <p>
-                Events on this tab will be managed via Google Calendar and Google Apps Script in a later integration
-                step.
-              </p>
-            </article>
-          </div>
-
-          <div class="upcoming__panel is-active" data-upcoming-panel="action-items">
-            <div class="upcoming__cards">
+        <div class="ground__panels upcoming__panels">
+          <div class="upcoming__panel ground__panel is-active" data-upcoming-panel="action-items">
+            <div class="ground__cards">
               {
                 actionItemsCards.map((card) => (
-                  <article class="content-card" data-expandable-card data-cms-collection="upcoming-at-nci">
-                    <div class="content-card__summary">
-                      <img
-                        src={card.avatarImage || "/images/logo-fallback.svg"}
-                        alt={card.avatarAlt || card.headline}
-                        loading="lazy"
-                      />
-                      <div>
-                        <h2>{card.headline}</h2>
-                        <p class="content-card__subheading">{card.subheading}</p>
-                      </div>
+                  <a
+                    href={`/upcoming-at-nci/immediate-${card.slug}/`}
+                    class={`ground-card action-card${card.priority === "high" ? " action-card--priority" : ""}`}
+                    aria-label={`Read ${card.headline}`}
+                  >
+                    {card.priority === "high" && <span class="action-card__badge">Top Priority</span>}
+                    <img
+                      class="ground-card__image"
+                      src={card.avatarImage || "/images/logo-fallback.svg"}
+                      alt={card.avatarAlt || card.headline}
+                      loading="lazy"
+                    />
+                    <div class="ground-card__content">
+                      <h2>{card.headline}</h2>
+                      {card.subheading && <p class="ground-card__subheading">{card.subheading}</p>}
+                      <p class="action-card__cta">View Action Details</p>
                     </div>
-                    <div class="content-card__body" data-card-body>
-                      <card.Content />
-                    </div>
-                    <button type="button" class="content-card__toggle" data-card-toggle aria-expanded="false">
-                      <span data-card-toggle-label>Learn More</span>
-                      <img src="/images/caret-down-square-fill.svg" alt="" aria-hidden="true" />
-                    </button>
-                  </article>
+                  </a>
                 ))
               }
             </div>
           </div>
 
-          <div class="upcoming__panel" data-upcoming-panel="in-the-meantime" hidden>
-            <div class="upcoming__cards">
+          <div class="upcoming__panel ground__panel" data-upcoming-panel="in-the-meantime" hidden>
+            <div class="ground__cards">
               {
                 inTheMeantimeCards.map((card) => (
-                  <article class="content-card" data-expandable-card data-cms-collection="upcoming-at-nci">
-                    <div class="content-card__summary">
-                      <img
-                        src={card.avatarImage || "/images/logo-fallback.svg"}
-                        alt={card.avatarAlt || card.headline}
-                        loading="lazy"
-                      />
-                      <div>
-                        <h2>{card.headline}</h2>
-                        <p class="content-card__subheading">{card.subheading}</p>
-                      </div>
+                  <a
+                    href={`/upcoming-at-nci/ongoing-${card.slug}/`}
+                    class="ground-card action-card"
+                    aria-label={`Read ${card.headline}`}
+                  >
+                    <img
+                      class="ground-card__image"
+                      src={card.avatarImage || "/images/logo-fallback.svg"}
+                      alt={card.avatarAlt || card.headline}
+                      loading="lazy"
+                    />
+                    <div class="ground-card__content">
+                      <h2>{card.headline}</h2>
+                      {card.subheading && <p class="ground-card__subheading">{card.subheading}</p>}
+                      <p class="action-card__cta">View Action Details</p>
                     </div>
-                    <div class="content-card__body" data-card-body>
-                      <card.Content />
-                    </div>
-                    <button type="button" class="content-card__toggle" data-card-toggle aria-expanded="false">
-                      <span data-card-toggle-label>Learn More</span>
-                      <img src="/images/caret-down-square-fill.svg" alt="" aria-hidden="true" />
-                    </button>
-                  </article>
+                  </a>
                 ))
               }
             </div>
@@ -151,21 +140,4 @@ const inTheMeantimeCards = upcomingCards
     });
   });
 
-  const expandableCards = Array.from(document.querySelectorAll("[data-expandable-card]"));
-  expandableCards.forEach((card) => {
-    const toggleButton = card.querySelector("[data-card-toggle]");
-    const toggleLabel = card.querySelector("[data-card-toggle-label]");
-    const body = card.querySelector("[data-card-body]");
-
-    if (!toggleButton || !toggleLabel || !body) return;
-
-    toggleButton.addEventListener("click", () => {
-      const isOpen = toggleButton.getAttribute("aria-expanded") === "true";
-      const nextOpenState = !isOpen;
-
-      toggleButton.setAttribute("aria-expanded", nextOpenState ? "true" : "false");
-      toggleLabel.textContent = nextOpenState ? "Close" : "Learn More";
-      card.classList.toggle("is-open", nextOpenState);
-    });
-  });
 </script>

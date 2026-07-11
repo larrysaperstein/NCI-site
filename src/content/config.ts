@@ -1,9 +1,20 @@
 import { defineCollection, z } from "astro:content";
 
-const upcomingCards = defineCollection({
+const immediateAction = defineCollection({
   type: "content",
   schema: z.object({
-    tab: z.enum(["action-items", "in-the-meantime"]),
+    priority: z.enum(["regular", "high"]).default("regular"),
+    order: z.number().int().nonnegative().default(0),
+    headline: z.string(),
+    subheading: z.string(),
+    avatarImage: z.string().optional(),
+    avatarAlt: z.string().default("")
+  })
+});
+
+const ongoingAction = defineCollection({
+  type: "content",
+  schema: z.object({
     order: z.number().int().nonnegative().default(0),
     headline: z.string(),
     subheading: z.string(),
@@ -54,7 +65,8 @@ const homeAboutSlides = defineCollection({
 });
 
 export const collections = {
-  upcomingCards,
+  immediateAction,
+  ongoingAction,
   resourcesTabs,
   blogPosts,
   homePage,

@@ -1,9 +1,8 @@
 ---
-tab: in-the-meantime
 order: 2
 headline: Rapid Response Toolkit
 subheading: Keep Materials Ready
-avatarImage: https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=600&q=80
+avatarImage: ""
 avatarAlt: Writing materials and planning documents on a desk.
 ---
 Prepare your rapid response toolkit so your team can mobilize quickly when urgent actions arise.

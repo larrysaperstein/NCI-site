@@ -8,7 +8,8 @@ const aboutLinks = [
 ];
 
 const getInvolvedLinks = [
-  { label: "Upcoming at NCI", href: "/upcoming-at-nci" },
+  { label: "Events", href: "/events" },
+  { label: "Take Action", href: "/upcoming-at-nci" },
   { label: "Resources", href: "/resources" }
 ];
 ---
@@ -34,13 +35,15 @@ const getInvolvedLinks = [
 
     <nav aria-label="Main navigation" class="site-nav__links">
       <ul>
-        <li><a href="/">Home</a></li>
-        <li>
+        <li class="site-nav__top-item" data-nav-simple-item>
+          <a href="/">Home</a>
+        </li>
+        <li class="site-nav__top-item site-nav__top-item--menu" data-menu-trigger="about">
           <button class="site-nav__toggle" type="button" data-menu-toggle="about" aria-expanded="false">
             About
           </button>
         </li>
-        <li>
+        <li class="site-nav__top-item site-nav__top-item--menu" data-menu-trigger="get-involved">
           <button
             class="site-nav__toggle"
             type="button"
@@ -50,7 +53,9 @@ const getInvolvedLinks = [
             Get Involved
           </button>
         </li>
-        <li><a href="/on-the-ground">On The Ground</a></li>
+        <li class="site-nav__top-item" data-nav-simple-item>
+          <a href="/on-the-ground">On The Ground</a>
+        </li>
       </ul>
     </nav>
 
@@ -66,7 +71,7 @@ const getInvolvedLinks = [
     </div>
   </div>
 
-  <div class="site-nav__submenu-bar" data-menu-panel="about" hidden>
+  <div class="site-nav__submenu-bar" data-menu-panel="about">
     <div class="container">
       <ul class="site-nav__submenu-list">
         {aboutLinks.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
@@ -74,7 +79,7 @@ const getInvolvedLinks = [
     </div>
   </div>
 
-  <div class="site-nav__submenu-bar" data-menu-panel="get-involved" hidden>
+  <div class="site-nav__submenu-bar" data-menu-panel="get-involved">
     <div class="container">
       <ul class="site-nav__submenu-list">
         {getInvolvedLinks.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
@@ -122,32 +127,118 @@ const getInvolvedLinks = [
 </header>
 
 <script>
+  const navRoot = document.querySelector(".site-nav");
+  const menuTriggers = Array.from(document.querySelectorAll("[data-menu-trigger]"));
+  const simpleItems = Array.from(document.querySelectorAll("[data-nav-simple-item]"));
   const toggles = Array.from(document.querySelectorAll("[data-menu-toggle]"));
   const panels = Array.from(document.querySelectorAll("[data-menu-panel]"));
+  const desktopMedia = window.matchMedia("(min-width: 901px)");
+  let closeTimer;
 
   const closeAllMenus = () => {
+    window.clearTimeout(closeTimer);
     toggles.forEach((toggle) => {
       toggle.setAttribute("aria-expanded", "false");
       toggle.classList.remove("is-open");
     });
     panels.forEach((panel) => {
-      panel.setAttribute("hidden", "");
+      panel.classList.remove("is-open");
     });
   };
 
-  toggles.forEach((toggle) => {
-    toggle.addEventListener("click", () => {
-      const menuName = toggle.getAttribute("data-menu-toggle");
-      const panel = document.querySelector(`[data-menu-panel="${menuName}"]`);
-      const isOpen = toggle.getAttribute("aria-expanded") === "true";
-
+  const scheduleClose = (delay = 140) => {
+    window.clearTimeout(closeTimer);
+    closeTimer = window.setTimeout(() => {
       closeAllMenus();
-      if (!isOpen && panel) {
-        toggle.setAttribute("aria-expanded", "true");
-        toggle.classList.add("is-open");
-        panel.removeAttribute("hidden");
-      }
+    }, delay);
+  };
+
+  const openMenu = (menuName) => {
+    if (!menuName) return;
+    const panel = document.querySelector(`[data-menu-panel="${menuName}"]`);
+    if (!panel) return;
+    window.clearTimeout(closeTimer);
+    closeAllMenus();
+    const toggle = toggles.find((item) => item.getAttribute("data-menu-toggle") === menuName);
+    toggle?.setAttribute("aria-expanded", "true");
+    toggle?.classList.add("is-open");
+    panel.classList.add("is-open");
+  };
+
+  toggles.forEach((toggle) => {
+    toggle.addEventListener("mouseenter", () => {
+      if (!desktopMedia.matches) return;
+      const menuName = toggle.getAttribute("data-menu-toggle");
+      openMenu(menuName);
     });
+
+    toggle.addEventListener("focus", () => {
+      if (!desktopMedia.matches) return;
+      const menuName = toggle.getAttribute("data-menu-toggle");
+      openMenu(menuName);
+    });
+
+    toggle.addEventListener("click", () => {
+      if (!desktopMedia.matches) return;
+      const menuName = toggle.getAttribute("data-menu-toggle");
+      const isOpen = toggle.getAttribute("aria-expanded") === "true";
+      if (isOpen) {
+        closeAllMenus();
+        return;
+      }
+      openMenu(menuName);
+    });
+  });
+
+  menuTriggers.forEach((trigger) => {
+    trigger.addEventListener("mouseenter", () => {
+      if (!desktopMedia.matches) return;
+      window.clearTimeout(closeTimer);
+    });
+
+    trigger.addEventListener("mouseleave", (event) => {
+      if (!desktopMedia.matches) return;
+      const menuName = trigger.getAttribute("data-menu-trigger");
+      if (!menuName) return;
+      const related = event.relatedTarget;
+      if (related instanceof Element && related.closest(`[data-menu-panel="${menuName}"]`)) return;
+      scheduleClose();
+    });
+  });
+
+  panels.forEach((panel) => {
+    panel.addEventListener("mouseenter", () => {
+      if (!desktopMedia.matches) return;
+      window.clearTimeout(closeTimer);
+    });
+
+    panel.addEventListener("mouseleave", (event) => {
+      if (!desktopMedia.matches) return;
+      const menuName = panel.getAttribute("data-menu-panel");
+      if (!menuName) return;
+      const related = event.relatedTarget;
+      if (related instanceof Element && related.closest(`[data-menu-trigger="${menuName}"]`)) return;
+      scheduleClose();
+    });
+  });
+
+  simpleItems.forEach((item) => {
+    item.addEventListener("mouseenter", () => {
+      if (!desktopMedia.matches) return;
+      closeAllMenus();
+    });
+  });
+
+  navRoot?.addEventListener("mouseleave", () => {
+    if (!desktopMedia.matches) return;
+    scheduleClose(90);
+  });
+
+  navRoot?.addEventListener("focusout", (event) => {
+    if (!desktopMedia.matches) return;
+    if (!(event.relatedTarget instanceof Element) || !event.relatedTarget.closest(".site-nav")) {
+      closeAllMenus();
+    }
   });
 
   document.addEventListener("click", (event) => {
@@ -186,6 +277,9 @@ const getInvolvedLinks = [
   });
 
   window.addEventListener("resize", () => {
-    if (window.innerWidth > 900) closeMobileMenu();
+    if (window.innerWidth > 900) {
+      closeMobileMenu();
+      closeAllMenus();
+    }
   });
 </script>

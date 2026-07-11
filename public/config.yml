@@ -1,0 +1,96 @@
+backend:
+  name: github
+  repo: larrysaperstein/NCI-site
+  branch: main
+
+local_backend: true
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+logo:
+  src: /images/ncilogo.jpg
+
+collections:
+  - name: "homepage"
+    label: "Homepage"
+    files:
+      - name: "home"
+        label: "Homepage Content"
+        file: "src/content/homePage/home.md"
+        fields:
+          - { label: "Hero Image", name: "heroImage", widget: "string", hint: "URL or /uploads path" }
+          - { label: "Hero Image Alt", name: "heroImageAlt", widget: "string", required: false }
+          - { label: "About Heading", name: "aboutHeading", widget: "string" }
+          - { label: "Events Heading", name: "eventsHeading", widget: "string", required: false }
+          - { label: "Action Items Heading", name: "actionItemsHeading", widget: "string", required: false }
+          - { label: "About Body", name: "body", widget: "markdown", hint: "Use Add Component for Button or YouTube." }
+
+  - name: "homeAboutSlides"
+    label: "Homepage About Slides"
+    folder: "src/content/homeAboutSlides"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Order", name: "order", widget: "number", value_type: "int", min: 0 }
+      - { label: "Image", name: "image", widget: "string", hint: "URL or /uploads path" }
+      - { label: "Image Alt", name: "imageAlt", widget: "string", required: false }
+
+  - name: "immediateAction"
+    label: "Immediate Action"
+    folder: "src/content/immediateAction"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - label: "Priority"
+        name: "priority"
+        widget: "select"
+        default: "regular"
+        options:
+          - { label: "Regular Priority", value: "regular" }
+          - { label: "High Priority", value: "high" }
+      - { label: "Order", name: "order", widget: "number", value_type: "int", min: 0 }
+      - { label: "Headline", name: "headline", widget: "string" }
+      - { label: "Subheading", name: "subheading", widget: "string" }
+      - { label: "Display Image", name: "avatarImage", widget: "string", required: false, hint: "Optional. URL or /uploads path." }
+      - { label: "Display Image Description", name: "avatarAlt", widget: "string", required: false, hint: "Optional alt text for accessibility." }
+      - { label: "Body", name: "body", widget: "markdown", hint: "Use Add Component for Button or YouTube." }
+
+  - name: "ongoingAction"
+    label: "Ongoing Action"
+    folder: "src/content/ongoingAction"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Order", name: "order", widget: "number", value_type: "int", min: 0 }
+      - { label: "Headline", name: "headline", widget: "string" }
+      - { label: "Subheading", name: "subheading", widget: "string" }
+      - { label: "Display Image", name: "avatarImage", widget: "string", required: false, hint: "Optional. URL or /uploads path." }
+      - { label: "Display Image Description", name: "avatarAlt", widget: "string", required: false, hint: "Optional alt text for accessibility." }
+      - { label: "Body", name: "body", widget: "markdown", hint: "Use Add Component for Button or YouTube." }
+
+  - name: "resourcesTabs"
+    label: "Resources Tabs"
+    folder: "src/content/resourcesTabs"
+    create: true
+    identifier_field: tabLabel
+    slug: "{{slug}}"
+    fields:
+      - { label: "Tab Label", name: "tabLabel", widget: "string", hint: "Controls the resource URL, e.g. /resources/my-resource-name/" }
+      - { label: "Order", name: "order", widget: "number", value_type: "int", min: 0 }
+      - { label: "Heading", name: "heading", widget: "string", required: false }
+      - { label: "Subheading", name: "subheading", widget: "string", required: false }
+      - { label: "Body", name: "body", widget: "markdown", hint: "Use Add Component for Button or YouTube." }
+
+  - name: "blogPosts"
+    label: "Blog Posts"
+    folder: "src/content/blogPosts"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Headline", name: "headline", widget: "string" }
+      - { label: "Subheading", name: "subheading", widget: "string", required: false }
+      - { label: "Publish Date", name: "publishDate", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { label: "Display Image", name: "avatarImage", widget: "string", required: false, hint: "Optional. URL or /uploads path." }
+      - { label: "Display Image Description", name: "avatarAlt", widget: "string", required: false, hint: "Optional alt text for accessibility." }
+      - { label: "Body", name: "body", widget: "markdown", hint: "Use Add Component for Button or YouTube." }
