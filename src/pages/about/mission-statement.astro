@@ -1,12 +1,20 @@
 ---
+import { getEntry, render } from "astro:content";
 import MainLayout from "../../layouts/MainLayout.astro";
+
+const entry = await getEntry("missionStatement", "mission-statement");
+if (!entry) throw new Error("Missing Mission Statement content entry: src/content/missionStatement/mission-statement.md");
+
+const { Content } = await render(entry);
 ---
 
 <MainLayout title="Mission Statement">
-  <section class="upcoming">
+  <section class="upcoming about-page">
     <div class="container">
       <h1>Mission Statement</h1>
-      <p>Content placeholder for the mission statement.</p>
+      <div class="ground-post__content about-page__content">
+        <Content />
+      </div>
     </div>
   </section>
 </MainLayout>

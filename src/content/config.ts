@@ -4,7 +4,7 @@ const immediateAction = defineCollection({
   type: "content",
   schema: z.object({
     priority: z.enum(["regular", "high"]).default("regular"),
-    order: z.number().int().nonnegative().default(0),
+    order: z.number().int().min(1).default(1),
     headline: z.string(),
     subheading: z.string(),
     avatarImage: z.string().optional(),
@@ -15,7 +15,7 @@ const immediateAction = defineCollection({
 const ongoingAction = defineCollection({
   type: "content",
   schema: z.object({
-    order: z.number().int().nonnegative().default(0),
+    order: z.number().int().min(1).default(1),
     headline: z.string(),
     subheading: z.string(),
     avatarImage: z.string().optional(),
@@ -26,7 +26,7 @@ const ongoingAction = defineCollection({
 const resourcesTabs = defineCollection({
   type: "content",
   schema: z.object({
-    order: z.number().int().nonnegative().default(0),
+    order: z.number().int().min(1).default(1),
     tabLabel: z.string(),
     heading: z.string().optional(),
     subheading: z.string().optional()
@@ -64,11 +64,34 @@ const homeAboutSlides = defineCollection({
   })
 });
 
+const aboutPage = defineCollection({
+  type: "content",
+  schema: z.object({})
+});
+
+const missionStatement = defineCollection({
+  type: "content",
+  schema: z.object({})
+});
+
+const leadership = defineCollection({
+  type: "content",
+  schema: z.object({
+    order: z.number().int().min(1).default(1),
+    name: z.string(),
+    role: z.string(),
+    email: z.union([z.string().email(), z.literal("")]).optional()
+  })
+});
+
 export const collections = {
   immediateAction,
   ongoingAction,
   resourcesTabs,
   blogPosts,
   homePage,
-  homeAboutSlides
+  homeAboutSlides,
+  aboutPage,
+  missionStatement,
+  leadership
 };

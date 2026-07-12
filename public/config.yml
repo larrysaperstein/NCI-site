@@ -9,7 +9,7 @@ media_folder: "public/uploads"
 public_folder: "/uploads"
 
 logo:
-  src: /images/ncilogo.jpg
+  src: /images/NCI-logo-dark.svg
 
 collections:
   - name: "homepage"
@@ -36,11 +36,42 @@ collections:
       - { label: "Image", name: "image", widget: "string", hint: "URL or /uploads path" }
       - { label: "Image Alt", name: "imageAlt", widget: "string", required: false }
 
+  - name: "aboutPage"
+    label: "About Us"
+    files:
+      - name: "about"
+        label: "About Us Page"
+        file: "src/content/aboutPage/about.md"
+        fields:
+          - { label: "Body", name: "body", widget: "markdown", hint: "Use Add Component for Button or YouTube." }
+
+  - name: "missionStatement"
+    label: "Mission Statement"
+    files:
+      - name: "mission-statement"
+        label: "Mission Statement Page"
+        file: "src/content/missionStatement/mission-statement.md"
+        fields:
+          - { label: "Body", name: "body", widget: "markdown", hint: "Use Add Component for Button or YouTube." }
+
+  - name: "leadership"
+    label: "Leadership"
+    folder: "src/content/leadership"
+    create: true
+    identifier_field: name
+    slug: "{{slug}}"
+    fields:
+      - { label: "Order", name: "order", widget: "number", value_type: "int", min: 1, default: 1, required: false, hint: "Optional. Defaults to 1 (first). Use 2, 3, etc. to sort later items." }
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Role", name: "role", widget: "string" }
+      - { label: "Email", name: "email", widget: "string", required: false, hint: "Optional. Shows an Email button when provided." }
+
   - name: "immediateAction"
     label: "Immediate Action"
     folder: "src/content/immediateAction"
     create: true
-    slug: "{{slug}}"
+    identifier_field: headline
+    slug: "action-items-{{slug}}"
     fields:
       - label: "Priority"
         name: "priority"
@@ -49,8 +80,8 @@ collections:
         options:
           - { label: "Regular Priority", value: "regular" }
           - { label: "High Priority", value: "high" }
-      - { label: "Order", name: "order", widget: "number", value_type: "int", min: 0 }
-      - { label: "Headline", name: "headline", widget: "string" }
+      - { label: "Order", name: "order", widget: "number", value_type: "int", min: 1, default: 1, required: false, hint: "Optional. Defaults to 1 (first). Use 2, 3, etc. to sort later items." }
+      - { label: "Headline", name: "headline", widget: "string", hint: "Controls the URL, e.g. /action-items/my-headline/" }
       - { label: "Subheading", name: "subheading", widget: "string" }
       - { label: "Display Image", name: "avatarImage", widget: "string", required: false, hint: "Optional. URL or /uploads path." }
       - { label: "Display Image Description", name: "avatarAlt", widget: "string", required: false, hint: "Optional alt text for accessibility." }
@@ -60,10 +91,11 @@ collections:
     label: "Ongoing Action"
     folder: "src/content/ongoingAction"
     create: true
-    slug: "{{slug}}"
+    identifier_field: headline
+    slug: "in-the-meantime-{{slug}}"
     fields:
-      - { label: "Order", name: "order", widget: "number", value_type: "int", min: 0 }
-      - { label: "Headline", name: "headline", widget: "string" }
+      - { label: "Order", name: "order", widget: "number", value_type: "int", min: 1, default: 1, required: false, hint: "Optional. Defaults to 1 (first). Use 2, 3, etc. to sort later items." }
+      - { label: "Headline", name: "headline", widget: "string", hint: "Controls the URL, e.g. /action-items/my-headline/" }
       - { label: "Subheading", name: "subheading", widget: "string" }
       - { label: "Display Image", name: "avatarImage", widget: "string", required: false, hint: "Optional. URL or /uploads path." }
       - { label: "Display Image Description", name: "avatarAlt", widget: "string", required: false, hint: "Optional alt text for accessibility." }
@@ -77,7 +109,7 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: "Tab Label", name: "tabLabel", widget: "string", hint: "Controls the resource URL, e.g. /resources/my-resource-name/" }
-      - { label: "Order", name: "order", widget: "number", value_type: "int", min: 0 }
+      - { label: "Order", name: "order", widget: "number", value_type: "int", min: 1, default: 1, required: false, hint: "Optional. Defaults to 1 (first). Use 2, 3, etc. to sort later items." }
       - { label: "Heading", name: "heading", widget: "string", required: false }
       - { label: "Subheading", name: "subheading", widget: "string", required: false }
       - { label: "Body", name: "body", widget: "markdown", hint: "Use Add Component for Button or YouTube." }

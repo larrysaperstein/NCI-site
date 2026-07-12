@@ -38,7 +38,8 @@
               widget: "select",
               options: [
                 { label: "Yellow", value: "button--yellow" },
-                { label: "Blue", value: "button--blue" }
+                { label: "Light Blue", value: "button--blue" },
+                { label: "Dark Blue", value: "button--dark-blue" }
               ],
               default: "button--yellow"
             },
@@ -51,7 +52,7 @@
             }
           ],
           pattern:
-            /<a class="button (button--yellow|button--blue)" href="([^"]+)"(?: target="_blank" rel="noopener noreferrer")?>([^<]+)<\/a>/,
+            /<a class="button (button--yellow|button--blue|button--dark-blue)" href="([^"]+)"(?: target="_blank" rel="noopener noreferrer")?>([^<]+)<\/a>/,
           fromBlock: (match) => ({
             style: match[1],
             href: match[2],

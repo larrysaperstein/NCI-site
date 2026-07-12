@@ -1,6 +1,7 @@
 ---
 import { getCollection, getEntry, render } from "astro:content";
 import MainLayout from "../../layouts/MainLayout.astro";
+import { getActionItemPublicSlug, type ActionCollection } from "../../utils/actionItems";
 import { withBase } from "../../utils/path";
 
 export async function getStaticPaths() {
@@ -9,25 +10,22 @@ export async function getStaticPaths() {
 
   return [
     ...immediateEntries.map((entry) => ({
-      params: { slug: `immediate-${entry.slug}` }
+      params: { slug: getActionItemPublicSlug(entry.slug, "immediateAction") },
+      props: { collection: "immediateAction" as ActionCollection, fileSlug: entry.slug }
     })),
     ...ongoingEntries.map((entry) => ({
-      params: { slug: `ongoing-${entry.slug}` }
+      params: { slug: getActionItemPublicSlug(entry.slug, "ongoingAction") },
+      props: { collection: "ongoingAction" as ActionCollection, fileSlug: entry.slug }
     }))
   ];
 }
 
 const { slug } = Astro.params;
+const { collection, fileSlug } = Astro.props;
+
 if (!slug) throw new Error("Missing action item slug");
 
-const isImmediate = slug.startsWith("immediate-");
-const isOngoing = slug.startsWith("ongoing-");
-if (!isImmediate && !isOngoing) {
-  throw new Error(`Invalid action item path: ${slug}`);
-}
-
-const rawSlug = slug.replace(/^(immediate|ongoing)-/, "");
-const entry = await getEntry(isImmediate ? "immediateAction" : "ongoingAction", rawSlug);
+const entry = await getEntry(collection, fileSlug);
 if (!entry) {
   throw new Error(`Action item not found for slug: ${slug}`);
 }
@@ -38,7 +36,7 @@ const { Content } = await render(entry);
 <MainLayout title={entry.data.headline}>
   <section class="upcoming ground-post action-post">
     <div class="container">
-      <a href={withBase("/upcoming-at-nci")} class="ground-post__back-link">
+      <a href={withBase("/action-items")} class="ground-post__back-link">
         <img src={withBase("/images/arrow-left.svg")} alt="" aria-hidden="true" />
         Back To All Action Items
       </a>

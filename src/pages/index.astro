@@ -2,6 +2,7 @@
 import { getCollection, getEntry, render } from "astro:content";
 import MainLayout from "../layouts/MainLayout.astro";
 import { placeholderEvents } from "../data/events";
+import { getActionItemPublicSlug } from "../utils/actionItems";
 import { withBase } from "../utils/path";
 
 const homeEntry = await getEntry("homePage", "home");
@@ -14,7 +15,7 @@ const actionItems = (await getCollection("immediateAction"))
   .slice(0, 3)
   .map((entry) => ({
     ...entry.data,
-    slug: entry.slug
+    slug: getActionItemPublicSlug(entry.slug, "immediateAction")
   }));
 
 ---
@@ -96,7 +97,7 @@ const actionItems = (await getCollection("immediateAction"))
         {
           actionItems.map((card) => (
             <a
-              href={withBase(`/upcoming-at-nci/immediate-${card.slug}/`)}
+              href={withBase(`/action-items/${card.slug}/`)}
               class={`ground-card action-card${card.priority === "high" ? " action-card--priority" : ""}`}
               aria-label={`Read ${card.headline}`}
             >

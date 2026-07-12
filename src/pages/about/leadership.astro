@@ -1,12 +1,44 @@
 ---
+import { getCollection } from "astro:content";
 import MainLayout from "../../layouts/MainLayout.astro";
+
+const leaders = (await getCollection("leadership")).sort((a, b) => a.data.order - b.data.order);
 ---
 
 <MainLayout title="Leadership">
-  <section class="upcoming">
+  <section class="upcoming leadership-page">
     <div class="container">
       <h1>Leadership</h1>
-      <p>Content placeholder for the leadership section.</p>
+
+      {
+        leaders.length > 0 ? (
+          <div class="leadership__cards">
+            {
+              leaders.map((leader) => (
+                <article class="leadership-card">
+                  <div class="leadership-card__content">
+                    <div class="leadership-card__details">
+                      <h2 class="leadership-card__name">{leader.data.name}</h2>
+                      <p class="leadership-card__role">{leader.data.role}</p>
+                    </div>
+                    <div class="leadership-card__actions">
+                      {
+                        leader.data.email && leader.data.email !== "" && (
+                          <a class="button button--blue" href={`mailto:${leader.data.email}`}>
+                            Email
+                          </a>
+                        )
+                      }
+                    </div>
+                  </div>
+                </article>
+              ))
+            }
+          </div>
+        ) : (
+          <p class="leadership-page__empty">Leadership profiles will appear here once they are added in the CMS.</p>
+        )
+      }
     </div>
   </section>
 </MainLayout>

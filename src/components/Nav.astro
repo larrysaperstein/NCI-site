@@ -10,7 +10,7 @@ const aboutLinks = [
 
 const getInvolvedLinks = [
   { label: "Events", href: withBase("/events") },
-  { label: "Take Action", href: withBase("/upcoming-at-nci") },
+  { label: "Take Action", href: withBase("/action-items") },
   { label: "Resources", href: withBase("/resources") }
 ];
 ---
@@ -88,7 +88,7 @@ const getInvolvedLinks = [
     </div>
   </div>
 
-  <div class="site-nav__mobile-panel" id="mobile-nav-panel" data-mobile-nav-panel hidden>
+  <div class="site-nav__mobile-panel" id="mobile-nav-panel" data-mobile-nav-panel aria-hidden="true">
     <div class="site-nav__mobile-content">
       <nav aria-label="Mobile main navigation">
         <ul class="site-nav__mobile-list">
@@ -147,7 +147,7 @@ const getInvolvedLinks = [
     });
   };
 
-  const scheduleClose = (delay = 140) => {
+  const scheduleClose = (delay = 400) => {
     window.clearTimeout(closeTimer);
     closeTimer = window.setTimeout(() => {
       closeAllMenus();
@@ -179,8 +179,10 @@ const getInvolvedLinks = [
       openMenu(menuName);
     });
 
-    toggle.addEventListener("click", () => {
+    toggle.addEventListener("click", (event) => {
       if (!desktopMedia.matches) return;
+      event.preventDefault();
+      event.stopPropagation();
       const menuName = toggle.getAttribute("data-menu-toggle");
       const isOpen = toggle.getAttribute("aria-expanded") === "true";
       if (isOpen) {
@@ -194,7 +196,8 @@ const getInvolvedLinks = [
   menuTriggers.forEach((trigger) => {
     trigger.addEventListener("mouseenter", () => {
       if (!desktopMedia.matches) return;
-      window.clearTimeout(closeTimer);
+      const menuName = trigger.getAttribute("data-menu-trigger");
+      openMenu(menuName);
     });
 
     trigger.addEventListener("mouseleave", (event) => {
@@ -232,7 +235,7 @@ const getInvolvedLinks = [
 
   navRoot?.addEventListener("mouseleave", () => {
     if (!desktopMedia.matches) return;
-    scheduleClose(90);
+    scheduleClose(320);
   });
 
   navRoot?.addEventListener("focusout", (event) => {
@@ -256,8 +259,10 @@ const getInvolvedLinks = [
   const closeMobileMenu = () => {
     if (!mobileToggle || !mobilePanel) return;
     mobileToggle.setAttribute("aria-expanded", "false");
+    mobileToggle.setAttribute("aria-label", "Open navigation menu");
     mobileToggle.classList.remove("is-open");
-    mobilePanel.setAttribute("hidden", "");
+    mobilePanel.classList.remove("is-open");
+    mobilePanel.setAttribute("aria-hidden", "true");
     document.body.classList.remove("mobile-menu-open");
     mobileAccordions.forEach((accordion) => accordion.removeAttribute("open"));
   };
@@ -266,8 +271,10 @@ const getInvolvedLinks = [
     if (!mobilePanel) return;
     const isOpen = mobileToggle.getAttribute("aria-expanded") === "true";
     mobileToggle.setAttribute("aria-expanded", isOpen ? "false" : "true");
+    mobileToggle.setAttribute("aria-label", isOpen ? "Open navigation menu" : "Close navigation menu");
     mobileToggle.classList.toggle("is-open", !isOpen);
-    mobilePanel.toggleAttribute("hidden", isOpen);
+    mobilePanel.classList.toggle("is-open", !isOpen);
+    mobilePanel.setAttribute("aria-hidden", isOpen ? "true" : "false");
     document.body.classList.toggle("mobile-menu-open", !isOpen);
   });
 
