@@ -7,14 +7,31 @@
     <link href="/admin/config.yml" type="application/yaml" rel="cms-config-url" />
   </head>
   <body>
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    <script src="https://unpkg.com/decap-cms@^3.6.0/dist/decap-cms.js"></script>
     <script>
       const NETLIFY_IDENTITY_API_URL =
         "https://kaleidoscopic-travesseiro-5199a3.netlify.app/.netlify/identity";
+      const NETLIFY_SITE_URL = "https://kaleidoscopic-travesseiro-5199a3.netlify.app";
 
-      if (window.netlifyIdentity) {
+      try {
+        localStorage.setItem("netlifySiteURL", NETLIFY_SITE_URL);
+      } catch (error) {
+        /* ignore storage errors */
+      }
+
+      const loadScript = (src) =>
+        new Promise((resolve, reject) => {
+          const script = document.createElement("script");
+          script.src = src;
+          script.onload = resolve;
+          script.onerror = reject;
+          document.body.appendChild(script);
+        });
+
+      const setupIdentity = () => {
+        if (!window.netlifyIdentity) return;
+
         window.netlifyIdentity.setAPIUrl(NETLIFY_IDENTITY_API_URL);
+        window.netlifyIdentity.init({ APIUrl: NETLIFY_IDENTITY_API_URL });
 
         window.netlifyIdentity.on("init", (user) => {
           if (!user) {
@@ -23,11 +40,23 @@
             });
 
             if (/invite_token|confirmation_token|recovery_token|email_change_token/.test(window.location.hash)) {
-              window.netlifyIdentity.open("login");
+              window.netlifyIdentity.open(/invite_token/.test(window.location.hash) ? "signup" : "login");
             }
           }
         });
-      }
+      };
+
+      loadScript("https://identity.netlify.com/v1/netlify-identity-widget.js")
+        .then(() => {
+          setupIdentity();
+          return loadScript("https://unpkg.com/decap-cms@^3.6.0/dist/decap-cms.js");
+        })
+        .then(() => {
+          ensureCmsReady();
+        })
+        .catch((error) => {
+          console.error("Failed to load CMS scripts:", error);
+        });
 
       const MAX_UPLOAD_BYTES = 2 * 1024 * 1024;
 
@@ -131,8 +160,6 @@
         }
         setTimeout(ensureCmsReady, 100);
       };
-
-      ensureCmsReady();
     </script>
   </body>
 </html>
