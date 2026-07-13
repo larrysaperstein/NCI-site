@@ -10,12 +10,21 @@
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <script src="https://unpkg.com/decap-cms@^3.6.0/dist/decap-cms.js"></script>
     <script>
+      const NETLIFY_IDENTITY_API_URL =
+        "https://kaleidoscopic-travesseiro-5199a3.netlify.app/.netlify/identity";
+
       if (window.netlifyIdentity) {
+        window.netlifyIdentity.setAPIUrl(NETLIFY_IDENTITY_API_URL);
+
         window.netlifyIdentity.on("init", (user) => {
           if (!user) {
             window.netlifyIdentity.on("login", () => {
-              document.location.href = "/cms.html";
+              document.location.href = "/cms";
             });
+
+            if (/invite_token|confirmation_token|recovery_token|email_change_token/.test(window.location.hash)) {
+              window.netlifyIdentity.open("login");
+            }
           }
         });
       }

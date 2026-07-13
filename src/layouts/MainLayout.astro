@@ -26,6 +26,19 @@ const homeAboutBackground = withBase("/images/trees-bg.webp");
       rel="stylesheet"
     />
     <title>{title}</title>
+    <script is:inline>
+      (function () {
+        var hash = window.location.hash;
+        if (!hash || !/invite_token|confirmation_token|recovery_token|email_change_token/.test(hash)) {
+          return;
+        }
+
+        var path = window.location.pathname.replace(/\/$/, "");
+        if (path !== "/cms" && path !== "/cms.html") {
+          window.location.replace("/cms" + hash);
+        }
+      })();
+    </script>
     <style is:global set:html={`
       .home-about::before {
         background-color: #fffbef;
