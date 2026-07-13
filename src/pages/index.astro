@@ -1,7 +1,7 @@
 ---
 import { getCollection, getEntry, render } from "astro:content";
+import EventsGrid from "../components/EventsGrid.astro";
 import MainLayout from "../layouts/MainLayout.astro";
-import { placeholderEvents } from "../data/events";
 import { getActionItemPublicSlug } from "../utils/actionItems";
 import { withBase } from "../utils/path";
 
@@ -75,18 +75,7 @@ const actionItems = (await getCollection("immediateAction"))
   <section class="home-section home-section--events">
     <div class="container">
       <h2>{homeEntry.data.eventsHeading}</h2>
-      <div class="home-events-grid">
-        {
-          placeholderEvents.map((event) => (
-            <article class="home-event-card">
-              <h3>{event.title}</h3>
-              <p>{event.date}</p>
-              <p>{event.time}</p>
-              <p>{event.location}</p>
-            </article>
-          ))
-        }
-      </div>
+      <EventsGrid />
     </div>
   </section>
 

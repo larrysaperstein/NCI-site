@@ -1,6 +1,6 @@
 ---
+import EventsGrid from "../components/EventsGrid.astro";
 import MainLayout from "../layouts/MainLayout.astro";
-import { placeholderEvents } from "../data/events";
 ---
 
 <MainLayout title="Events">
@@ -9,18 +9,7 @@ import { placeholderEvents } from "../data/events";
       <h1>Events</h1>
       <p class="events-page__subtitle">Upcoming community gatherings, trainings, and organizing opportunities.</p>
 
-      <div class="home-events-grid events-page__grid">
-        {
-          placeholderEvents.map((event) => (
-            <article class="home-event-card">
-              <h2>{event.title}</h2>
-              <p>{event.date}</p>
-              <p>{event.time}</p>
-              <p>{event.location}</p>
-            </article>
-          ))
-        }
-      </div>
+      <EventsGrid class="events-page__grid" headingTag="h2" showAll />
     </div>
   </section>
 </MainLayout>

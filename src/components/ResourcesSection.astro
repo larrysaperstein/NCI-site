@@ -23,20 +23,14 @@ const baseUrl = import.meta.env.BASE_URL.endsWith("/")
 const initialSlug = activeSlug && resources.some((resource) => resource.slug === activeSlug)
   ? activeSlug
   : resources[0]?.slug;
+const initialResource = resources.find((resource) => resource.slug === initialSlug);
+const initialTabLabel = initialResource?.tabLabel ?? "Resources";
 ---
 
 <section class="upcoming">
   <div class="container">
     <div class="resources__heading-wrap">
       <h1 class="resources__heading-title">Resources</h1>
-      <button
-        type="button"
-        class="resources__heading-mobile-trigger"
-        data-resource-mobile-toggle
-        aria-expanded="false"
-      >
-        Resources
-      </button>
     </div>
 
     <div class="upcoming__content resources">
@@ -61,23 +55,47 @@ const initialSlug = activeSlug && resources.some((resource) => resource.slug ===
           </ExternalLink>
         </div>
 
-        <div class="resources__mobile-menu" data-resource-mobile-menu hidden>
-          {
-            resources.map((resource) => (
-              <a
-                href={withBase(`/resources/${resource.slug}/`)}
-                class={`upcoming__tab resources__mobile-option${resource.slug === initialSlug ? " upcoming__tab--active" : ""}`}
-                data-resource-tab={resource.slug}
-                aria-selected={resource.slug === initialSlug ? "true" : "false"}
-              >
-                {resource.tabLabel}
-              </a>
-            ))
-          }
-          <ExternalLink href="https://indivisible.org" class="upcoming__tab resources__external-tab">
-            Indivisible (National)
-            <img src={withBase("/images/box-arrow-up-right.svg")} alt="" aria-hidden="true" />
-          </ExternalLink>
+        <div class="resources__mobile-tabs">
+          <button
+            type="button"
+            class="resources__mobile-accordion-trigger upcoming__tab upcoming__tab--active"
+            data-resource-mobile-toggle
+            aria-expanded="false"
+            aria-controls="resources-mobile-menu"
+          >
+            <span data-resource-mobile-label>{initialTabLabel}</span>
+            <img
+              src={withBase("/images/caret-down-square-fill.svg")}
+              alt=""
+              aria-hidden="true"
+              class="resources__mobile-accordion-icon"
+            />
+          </button>
+
+          <div
+            id="resources-mobile-menu"
+            class="resources__mobile-menu"
+            data-resource-mobile-menu
+            hidden
+          >
+            {
+              resources.map((resource) => (
+                <a
+                  href={withBase(`/resources/${resource.slug}/`)}
+                  class={`upcoming__tab resources__mobile-option${resource.slug === initialSlug ? " upcoming__tab--active" : ""}`}
+                  data-resource-tab={resource.slug}
+                  aria-selected={resource.slug === initialSlug ? "true" : "false"}
+                >
+                  {resource.tabLabel}
+                </a>
+              ))
+            }
+
+            <ExternalLink href="https://indivisible.org" class="upcoming__tab resources__external-tab">
+              Indivisible (National)
+              <img src={withBase("/images/box-arrow-up-right.svg")} alt="" aria-hidden="true" />
+            </ExternalLink>
+          </div>
         </div>
       </aside>
 
@@ -110,16 +128,24 @@ const initialSlug = activeSlug && resources.some((resource) => resource.slug ===
   </div>
 </section>
 
-<script define:vars={{ initialSlug, baseUrl }}>
+<script define:vars={{ initialSlug, baseUrl, initialTabLabel }}>
   const tabs = Array.from(document.querySelectorAll("[data-resource-tab]"));
   const panels = Array.from(document.querySelectorAll("[data-resource-panel]"));
   const mobileToggle = document.querySelector("[data-resource-mobile-toggle]");
   const mobileMenu = document.querySelector("[data-resource-mobile-menu]");
+  const mobileLabel = document.querySelector("[data-resource-mobile-label]");
 
   const closeMobileMenu = () => {
     if (!mobileToggle || !mobileMenu) return;
     mobileToggle.setAttribute("aria-expanded", "false");
     mobileMenu.setAttribute("hidden", "");
+  };
+
+  const updateMobileLabel = (slug) => {
+    if (!mobileLabel) return;
+    const activeTab = tabs.find((tab) => tab.getAttribute("data-resource-tab") === slug);
+    if (!activeTab) return;
+    mobileLabel.textContent = activeTab.textContent?.trim() || initialTabLabel;
   };
 
   const setActiveTab = (slug) => {
@@ -140,6 +166,8 @@ const initialSlug = activeSlug && resources.some((resource) => resource.slug ===
         panel.classList.remove("is-fading");
       }
     });
+
+    updateMobileLabel(slug);
   };
 
   tabs.forEach((tab) => {
@@ -167,8 +195,8 @@ const initialSlug = activeSlug && resources.some((resource) => resource.slug ===
 
   document.addEventListener("click", (event) => {
     if (!(event.target instanceof Element)) return;
-    if (event.target.closest(".resources__mobile-picker")) return;
-    if (event.target.closest(".resources__mobile-menu")) return;
+    if (event.target.closest("[data-resource-mobile-toggle]")) return;
+    if (event.target.closest("[data-resource-mobile-menu]")) return;
     closeMobileMenu();
   });
 
