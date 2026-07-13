@@ -2,7 +2,7 @@
 headline: Hey Mom!
 subheading: My Mom is awesome!
 publishDate: 2026-07-10
-avatarImage: public/uploads/phone-bank.jpg
+avatarImage: /uploads/phone-bank.jpg
 avatarAlt: Phone banking
 ---
 My mom is so cool for looking at all of this with me.

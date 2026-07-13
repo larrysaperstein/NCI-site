@@ -3,14 +3,19 @@ export function withBase(path: string): string {
     return path;
   }
 
+  let assetPath = path;
+  if (assetPath.startsWith("public/")) {
+    assetPath = `/${assetPath.slice("public".length)}`;
+  }
+
   const base = import.meta.env.BASE_URL.endsWith("/")
     ? import.meta.env.BASE_URL
     : `${import.meta.env.BASE_URL}/`;
 
-  if (path === "/") {
+  if (assetPath === "/") {
     return base;
   }
 
-  const normalized = path.startsWith("/") ? path.slice(1) : path;
+  const normalized = assetPath.startsWith("/") ? assetPath.slice(1) : assetPath;
   return `${base}${normalized}`;
 }
