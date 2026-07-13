@@ -17,22 +17,10 @@
       } catch (error) {
         /* ignore storage errors */
       }
-
-      const loadScript = (src) =>
-        new Promise((resolve, reject) => {
-          const script = document.createElement("script");
-          script.src = src;
-          script.onload = resolve;
-          script.onerror = reject;
-          document.body.appendChild(script);
-        });
-
-      const setupIdentity = () => {
-        if (!window.netlifyIdentity) return;
-
-        window.netlifyIdentity.setAPIUrl(NETLIFY_IDENTITY_API_URL);
-        window.netlifyIdentity.init({ APIUrl: NETLIFY_IDENTITY_API_URL });
-
+    </script>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script>
+      if (window.netlifyIdentity) {
         window.netlifyIdentity.on("init", (user) => {
           if (!user) {
             window.netlifyIdentity.on("login", () => {
@@ -44,20 +32,12 @@
             }
           }
         });
-      };
 
-      loadScript("https://identity.netlify.com/v1/netlify-identity-widget.js")
-        .then(() => {
-          setupIdentity();
-          return loadScript("https://unpkg.com/decap-cms@^3.6.0/dist/decap-cms.js");
-        })
-        .then(() => {
-          ensureCmsReady();
-        })
-        .catch((error) => {
-          console.error("Failed to load CMS scripts:", error);
-        });
-
+        window.netlifyIdentity.init({ APIUrl: NETLIFY_IDENTITY_API_URL });
+      }
+    </script>
+    <script src="https://unpkg.com/decap-cms@^3.6.0/dist/decap-cms.js"></script>
+    <script>
       const MAX_UPLOAD_BYTES = 2 * 1024 * 1024;
 
       // Failsafe: block file inputs larger than 2MB.
@@ -160,6 +140,8 @@
         }
         setTimeout(ensureCmsReady, 100);
       };
+
+      ensureCmsReady();
     </script>
   </body>
 </html>
