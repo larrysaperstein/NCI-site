@@ -1,0 +1,7 @@
+# Netlify is used for Identity + Git Gateway only.
+# The public site is deployed on Cloudflare Pages at naturecoastindivisible.org.
+
+[build]
+  publish = "public"
+  command = "echo 'CMS auth only'"
+  ignore = "exit 0"

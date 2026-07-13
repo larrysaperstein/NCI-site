@@ -2,10 +2,10 @@ import { defineConfig } from "astro/config";
 import rehypeRaw from "rehype-raw";
 import { rehypeInternalLinks } from "./src/integrations/rehypeInternalLinks.ts";
 
-const base = "/NCI-site";
+const base = "/";
 
 export default defineConfig({
-  site: "https://larrysaperstein.github.io",
+  site: "https://naturecoastindivisible.org",
   base,
   markdown: {
     remarkRehype: { allowDangerousHtml: true },

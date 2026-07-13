@@ -1,9 +1,14 @@
 backend:
-  name: github
-  repo: larrysaperstein/NCI-site
+  name: git-gateway
   branch: main
+  identity_url: https://kaleidoscopic-travesseiro-5199a3.netlify.app/.netlify/identity
+  gateway_url: https://kaleidoscopic-travesseiro-5199a3.netlify.app/.netlify/git
 
+# Used by `npm run cms` for local editing without Netlify login.
 local_backend: true
+
+site_url: https://naturecoastindivisible.org
+display_url: https://naturecoastindivisible.org
 
 media_folder: "public/uploads"
 public_folder: "/uploads"
