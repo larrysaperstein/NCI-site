@@ -20,23 +20,49 @@
     </script>
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <script>
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", (user) => {
-          if (!user) {
-            window.netlifyIdentity.on("login", () => {
-              document.location.href = "/cms";
-            });
+      (function () {
+        const identity = window.netlifyIdentity;
+        if (!identity) return;
 
-            if (/invite_token|confirmation_token|recovery_token|email_change_token/.test(window.location.hash)) {
-              window.netlifyIdentity.open(/invite_token/.test(window.location.hash) ? "signup" : "login");
-            }
+        const realInit = identity.init.bind(identity);
+        let configured = false;
+
+        // The widget also calls init() on DOMContentLoaded without APIUrl, which
+        // resets auth and closes the invite modal. Ignore that second call.
+        identity.init = function (opts) {
+          const hasOptions = opts && Object.keys(opts).length > 0;
+          if (configured && !hasOptions) return;
+          configured = true;
+          return realInit({
+            ...(opts || {}),
+            APIUrl: (opts && opts.APIUrl) || NETLIFY_IDENTITY_API_URL
+          });
+        };
+
+        identity.on("init", (user) => {
+          loadDecapCms();
+
+          if (!user) {
+            identity.on("login", () => {
+              if (window.location.pathname.replace(/\/$/, "") !== "/cms") {
+                document.location.href = "/cms";
+              }
+            });
           }
         });
 
-        window.netlifyIdentity.init({ APIUrl: NETLIFY_IDENTITY_API_URL });
+        identity.init({ APIUrl: NETLIFY_IDENTITY_API_URL });
+      })();
+
+      function loadDecapCms() {
+        if (window.CMS || document.getElementById("decap-cms-script")) return;
+
+        const script = document.createElement("script");
+        script.id = "decap-cms-script";
+        script.src = "https://unpkg.com/decap-cms@^3.6.0/dist/decap-cms.js";
+        document.body.appendChild(script);
       }
     </script>
-    <script src="https://unpkg.com/decap-cms@^3.6.0/dist/decap-cms.js"></script>
     <script>
       const MAX_UPLOAD_BYTES = 2 * 1024 * 1024;
 
