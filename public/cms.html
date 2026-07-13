@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NCI Content Manager</title>
+    <link href="/admin/config.yml" type="application/yaml" rel="cms-config-url" />
   </head>
   <body>
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
@@ -13,7 +14,7 @@
         window.netlifyIdentity.on("init", (user) => {
           if (!user) {
             window.netlifyIdentity.on("login", () => {
-              document.location.href = "/admin/";
+              document.location.href = "/cms.html";
             });
           }
         });
