@@ -1,6 +1,6 @@
 ---
 order: 2
-name: Larry Saperstein
-role: Treasurer
+name: Elissa Reichstein-Saperstein
+role: Member
 email: ""
 ---
