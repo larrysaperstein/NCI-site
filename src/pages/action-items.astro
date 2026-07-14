@@ -1,7 +1,6 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 import { getCollection, render } from "astro:content";
-import { getActionItemPublicSlug } from "../utils/actionItems";
 import { withBase } from "../utils/path";
 
 const actionItemsCards = await Promise.all(
@@ -9,7 +8,7 @@ const actionItemsCards = await Promise.all(
     const { Content } = await render(entry);
     return {
       ...entry.data,
-      slug: getActionItemPublicSlug(entry.slug, "immediateAction"),
+      slug: entry.slug,
       Content
     };
   })
@@ -20,7 +19,7 @@ const inTheMeantimeCards = await Promise.all(
     const { Content } = await render(entry);
     return {
       ...entry.data,
-      slug: getActionItemPublicSlug(entry.slug, "ongoingAction"),
+      slug: entry.slug,
       Content
     };
   })

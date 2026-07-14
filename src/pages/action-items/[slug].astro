@@ -1,8 +1,9 @@
 ---
 import { getCollection, getEntry, render } from "astro:content";
 import MainLayout from "../../layouts/MainLayout.astro";
-import { getActionItemPublicSlug, type ActionCollection } from "../../utils/actionItems";
 import { withBase } from "../../utils/path";
+
+type ActionCollection = "immediateAction" | "ongoingAction";
 
 export async function getStaticPaths() {
   const immediateEntries = await getCollection("immediateAction");
@@ -10,22 +11,22 @@ export async function getStaticPaths() {
 
   return [
     ...immediateEntries.map((entry) => ({
-      params: { slug: getActionItemPublicSlug(entry.slug, "immediateAction") },
-      props: { collection: "immediateAction" as ActionCollection, fileSlug: entry.slug }
+      params: { slug: entry.slug },
+      props: { collection: "immediateAction" as ActionCollection }
     })),
     ...ongoingEntries.map((entry) => ({
-      params: { slug: getActionItemPublicSlug(entry.slug, "ongoingAction") },
-      props: { collection: "ongoingAction" as ActionCollection, fileSlug: entry.slug }
+      params: { slug: entry.slug },
+      props: { collection: "ongoingAction" as ActionCollection }
     }))
   ];
 }
 
 const { slug } = Astro.params;
-const { collection, fileSlug } = Astro.props;
+const { collection } = Astro.props;
 
 if (!slug) throw new Error("Missing action item slug");
 
-const entry = await getEntry(collection, fileSlug);
+const entry = await getEntry(collection, slug);
 if (!entry) {
   throw new Error(`Action item not found for slug: ${slug}`);
 }

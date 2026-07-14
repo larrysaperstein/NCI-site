@@ -2,7 +2,6 @@
 import { getCollection, getEntry, render } from "astro:content";
 import EventsGrid from "../components/EventsGrid.astro";
 import MainLayout from "../layouts/MainLayout.astro";
-import { getActionItemPublicSlug } from "../utils/actionItems";
 import { withBase } from "../utils/path";
 
 const homeEntry = await getEntry("homePage", "home");
@@ -15,7 +14,7 @@ const actionItems = (await getCollection("immediateAction"))
   .slice(0, 3)
   .map((entry) => ({
     ...entry.data,
-    slug: getActionItemPublicSlug(entry.slug, "immediateAction")
+    slug: entry.slug
   }));
 
 ---
