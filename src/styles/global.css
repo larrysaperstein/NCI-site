@@ -911,8 +911,7 @@ a {
 .leadership-page__email-link {
   color: var(--color-teal);
   font-weight: 600;
-  text-decoration: underline;
-  text-decoration-color: var(--color-yellow);
+  text-decoration: none;
   text-decoration-thickness: 2px;
   text-underline-offset: 0.18em;
   transition: color 0.3s ease, text-decoration-color 0.3s ease;
@@ -921,7 +920,6 @@ a {
 .leadership-page__email-link:hover,
 .leadership-page__email-link:focus-visible {
   color: var(--color-blue);
-  text-decoration-color: var(--color-teal);
 }
 
 .leadership__cards {
