@@ -901,6 +901,29 @@ a {
   text-align: center;
 }
 
+.leadership-page__subtitle {
+  text-align: center;
+  margin: -1.35rem auto 1.8rem;
+  max-width: 42rem;
+  line-height: 1.55;
+}
+
+.leadership-page__email-link {
+  color: var(--color-teal);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--color-yellow);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.18em;
+  transition: color 0.3s ease, text-decoration-color 0.3s ease;
+}
+
+.leadership-page__email-link:hover,
+.leadership-page__email-link:focus-visible {
+  color: var(--color-blue);
+  text-decoration-color: var(--color-teal);
+}
+
 .leadership__cards {
   display: flex;
   flex-wrap: wrap;
@@ -1112,6 +1135,23 @@ a {
   display: grid;
   justify-items: center;
   gap: 0.75rem;
+}
+
+.site-footer__social {
+  display: grid;
+  justify-items: center;
+  gap: 0.55rem;
+}
+
+.site-footer__email {
+  color: var(--color-yellow);
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.site-footer__email:hover,
+.site-footer__email:focus-visible {
+  color: var(--color-cream);
 }
 
 .site-footer__links {

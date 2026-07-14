@@ -24,13 +24,16 @@ const footerLinks = [
       <a href={withBase("/get-involved")} class="button button--blue">Join Our Mailing List</a>
     </div>
 
-    <ExternalLink
-      href="https://www.facebook.com"
-      class="facebook-link site-footer__facebook"
-      aria-label="Visit Nature Coast Indivisible on Facebook"
-    >
-      <img src={withBase("/images/facebook.svg")} alt="" aria-hidden="true" />
-    </ExternalLink>
+    <div class="site-footer__social">
+      <ExternalLink
+        href="https://www.facebook.com"
+        class="facebook-link site-footer__facebook"
+        aria-label="Visit Nature Coast Indivisible on Facebook"
+      >
+        <img src={withBase("/images/facebook.svg")} alt="" aria-hidden="true" />
+      </ExternalLink>
+      <a href="mailto:naturecoastindivisible@gmail.com" class="site-footer__email">naturecoastindivisible@gmail.com</a>
+    </div>
 
     <nav aria-label="Footer navigation">
       <div class="site-footer__links">

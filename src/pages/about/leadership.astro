@@ -9,6 +9,9 @@ const leaders = (await getCollection("leadership")).sort((a, b) => a.data.order 
   <section class="upcoming leadership-page">
     <div class="container">
       <h1>Leadership</h1>
+      <p class="leadership-page__subtitle">
+        Have a question? Email us at <a href="mailto:naturecoastindivisible@gmail.com" class="leadership-page__email-link">naturecoastindivisible@gmail.com</a> and a member of our leadership will get back to you!
+      </p>
 
       {
         leaders.length > 0 ? (
