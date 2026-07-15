@@ -1,6 +1,7 @@
 ---
 import Footer from "../components/Footer.astro";
 import Nav from "../components/Nav.astro";
+import StagingGate from "../components/StagingGate.astro";
 import { withBase } from "../utils/path";
 import "../styles/global.css";
 
@@ -55,6 +56,7 @@ const homeAboutBackground = withBase("/images/trees-bg.webp");
     `}></style>
   </head>
   <body>
+    <StagingGate />
     <Nav />
     <main>
       <slot />

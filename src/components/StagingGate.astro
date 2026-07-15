@@ -1,0 +1,94 @@
+---
+import { STAGING_GATE_ENABLED, STAGING_PASSWORD, STAGING_STORAGE_KEY } from "../config/staging";
+import { withBase } from "../utils/path";
+---
+
+{
+  STAGING_GATE_ENABLED && (
+    <div
+      class="staging-gate"
+      data-staging-gate
+      data-password={STAGING_PASSWORD}
+      data-storage-key={STAGING_STORAGE_KEY}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="staging-gate-title"
+    >
+      <div class="staging-gate__panel">
+        <img
+          class="staging-gate__logo"
+          src={withBase("/images/NCI-logo-dark.svg")}
+          alt="Nature Coast Indivisible"
+        />
+        <h1 id="staging-gate-title" class="staging-gate__title">Preview Access</h1>
+        <p class="staging-gate__text">This site is in development. Enter the preview password to continue.</p>
+        <form class="staging-gate__form" data-staging-form>
+          <label class="staging-gate__label" for="staging-gate-password">Password</label>
+          <input
+            id="staging-gate-password"
+            class="staging-gate__input"
+            type="password"
+            name="password"
+            autocomplete="current-password"
+            required
+          />
+          <p class="staging-gate__error" data-staging-error hidden>Incorrect password. Please try again.</p>
+          <button type="submit" class="button button--yellow staging-gate__submit">Enter Site</button>
+        </form>
+      </div>
+    </div>
+  )
+}
+
+<script>
+  const gate = document.querySelector<HTMLElement>("[data-staging-gate]");
+  if (!gate) {
+    /* gate disabled */
+  } else {
+    const storageKey = gate.dataset.storageKey || "nci-staging-unlock";
+    const expectedPassword = gate.dataset.password || "";
+    const form = gate.querySelector<HTMLFormElement>("[data-staging-form]");
+    const input = gate.querySelector<HTMLInputElement>("#staging-gate-password");
+    const error = gate.querySelector<HTMLElement>("[data-staging-error]");
+
+    const unlock = () => {
+      gate.setAttribute("hidden", "");
+      document.body.classList.remove("staging-gate-open");
+    };
+
+    const showError = () => {
+      if (!error) return;
+      error.hidden = false;
+    };
+
+    const hideError = () => {
+      if (!error) return;
+      error.hidden = true;
+    };
+
+    if (sessionStorage.getItem(storageKey) === "1") {
+      unlock();
+    } else {
+      document.body.classList.add("staging-gate-open");
+      input?.focus();
+    }
+
+    form?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      hideError();
+
+      const value = input?.value.trim() || "";
+      if (value === expectedPassword) {
+        sessionStorage.setItem(storageKey, "1");
+        unlock();
+        return;
+      }
+
+      showError();
+      if (input) {
+        input.value = "";
+        input.focus();
+      }
+    });
+  }
+</script>

@@ -75,6 +75,9 @@ const actionItems = (await getCollection("immediateAction"))
     <div class="container">
       <h2>{homeEntry.data.eventsHeading}</h2>
       <EventsGrid />
+      <div class="home-section--events__more">
+        <a href={withBase("/events")} class="button button--yellow">View More Events</a>
+      </div>
     </div>
   </section>
 
