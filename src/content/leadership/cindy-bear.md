@@ -1,6 +1,6 @@
 ---
 order: 1
 name: Cindy Bear
-role: President
+role: Co-Leader
 email: ""
 ---
