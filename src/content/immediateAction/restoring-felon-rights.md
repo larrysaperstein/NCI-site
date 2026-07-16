@@ -1,7 +1,7 @@
 ---
 priority: regular
 order: 1
-headline: Restoring Felon Rights
+headline: Mix & Sip
 subheading: Learn, Sip and Mingle
 avatarImage: public/uploads/image-1-.png
 ---
