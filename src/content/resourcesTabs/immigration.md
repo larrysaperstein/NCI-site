@@ -10,7 +10,7 @@ subheading: Support, Concerns, How to Volunteer
 
 **Know Your Rights**
 
-*If you are not at risk, these summaries will help you provide accurate information to someone who might be. This information can be accessed on the FLIC website, <https://floridaimmigrant.org/>. (Source: Florida Immigrant Coalition website).*
+*If you are not at risk, these summaries will help you provide accurate information to someone who might be. This information can be accessed on the Florida Immigrant Coalition (FLIC) website, <https://floridaimmigrant.org/>. (Source: Florida Immigrant Coalition website).*
 
 ### **If ICE Comes To Your Door:**
 
@@ -29,8 +29,6 @@ subheading: Support, Concerns, How to Volunteer
 • Do not answer any questions, and ask to speak with an attorney.
 
 • Under the Fifth Amendment of the U.S. Constitution, you have the right to remain silent and not incriminate yourself.
-
-
 
 ### If you are stopped while driving
 
