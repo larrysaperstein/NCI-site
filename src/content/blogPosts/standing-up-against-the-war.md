@@ -8,4 +8,4 @@ Kat Cammack’s Veterans TownHall, Friday, July 8
 
 We went with our big ass banners joined by members of Gainesville Veterans for Peace, Citrus Solidarity and Ocala Blue Dots.
 
-![](/uploads/nci-hero-5.webp)
+![](/uploads/nci-hero-7.webp)
