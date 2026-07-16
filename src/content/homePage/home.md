@@ -1,5 +1,5 @@
 ---
-heroImage: https://drive.google.com/file/d/1s4HSwXQVC9OotZELG_WUJJq2VYxHEa-_/view?usp=sharing
+heroImage: public/uploads/for-homepage-1.jpg
 heroImageAlt: Volunteers Protesting
 aboutHeading: Welcome to Nature Coast Indivisible!
 eventsHeading: Upcoming Events
