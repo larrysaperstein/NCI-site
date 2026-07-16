@@ -1,5 +1,5 @@
 ---
-heroImage: public/uploads/protesting-nci.webp
+heroImage: public/uploads/for-homepage-1.jpg
 heroImageAlt: Volunteers Protesting
 aboutHeading: Welcome to Nature Coast Indivisible!
 eventsHeading: Upcoming Events
