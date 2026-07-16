@@ -1,5 +1,5 @@
 ---
-heroImage: https://cmg-cmg-tv-10070-prod.cdn.arcpublishing.com/resizer/v2/TIDMWB6IVZD7BBGSWICRWGAP5A.jpg?smart=true&auth=01fa7d0afc4b88003c666eb4434e6f46324dd6c1d307788cd3bc47854a6161cf&width=1024&height=576
+heroImage: https://drive.google.com/file/d/1s4HSwXQVC9OotZELG_WUJJq2VYxHEa-_/view?usp=sharing
 heroImageAlt: Volunteers Protesting
 aboutHeading: Welcome to Nature Coast Indivisible!
 eventsHeading: Upcoming Events
