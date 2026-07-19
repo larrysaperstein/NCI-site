@@ -879,6 +879,8 @@ a {
 
 .ground-post__header img {
   width: min(100%, 24rem);
+  max-width: 100%;
+  max-height: 18rem;
   aspect-ratio: 1.35;
   object-fit: cover;
   border-radius: 0.25rem;
@@ -917,7 +919,6 @@ a {
 }
 
 @media (min-width: 769px) {
-  .ground-post__header img,
   .ground-post__content img,
   .resources__content img {
     max-height: 62.5rem;
@@ -1698,7 +1699,8 @@ body.staging-gate-open {
   }
 
   .ground-post__header img {
-    width: 100%;
+    width: min(100%, 24rem);
+    max-width: 100%;
   }
 
   .home-hero,

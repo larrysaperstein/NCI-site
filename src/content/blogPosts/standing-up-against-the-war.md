@@ -2,8 +2,8 @@
 headline: Standing Up Against The War
 subheading: Supporting Veteran Healthcare at Rep. Cammack's Veterans Townhall
 publishDate: 2026-07-16
-avatarImage: https://docs.google.com/document/d/12sPP66kOBB9me0UX1aS-_xuH7uXgcQAhOLWFQkQQgJ8/edit?tab=t.0
-avatarAlt: public/uploads/protest1.webp
+avatarImage: /uploads/protest1.webp
+avatarAlt: Protest at Rep. Cammack's veterans town hall
 ---
 Kat Cammack’s Veterans TownHall, Friday, July 8
 

@@ -1,6 +1,7 @@
 ---
 import { getCollection, getEntry, render } from "astro:content";
 import MainLayout from "../../layouts/MainLayout.astro";
+import { resolveDisplayAlt, resolvePostHeaderDisplayImage } from "../../utils/contentImages";
 import { withBase } from "../../utils/path";
 
 export async function getStaticPaths() {
@@ -17,6 +18,9 @@ const entry = await getEntry("blogPosts", slug);
 if (!entry) throw new Error(`Post not found for slug: ${slug}`);
 
 const { Content } = await render(entry);
+
+const headerImage = resolvePostHeaderDisplayImage(entry.data.avatarImage);
+const headerImageAlt = resolveDisplayAlt(entry.data.avatarAlt, entry.body, entry.data.headline, false);
 
 const date = new Date(entry.data.publishDate);
 const ordinalSuffix = (day: number) => {
@@ -43,8 +47,8 @@ const formattedDate = `${date.toLocaleString("en-US", { month: "short" })} ${dat
         <header class="ground-post__header">
           <h1>{entry.data.headline}</h1>
           {
-            entry.data.avatarImage && (
-              <img src={withBase(entry.data.avatarImage)} alt={entry.data.avatarAlt || entry.data.headline} loading="lazy" />
+            headerImage && (
+              <img src={withBase(headerImage)} alt={headerImageAlt} loading="lazy" />
             )
           }
           {entry.data.subheading && <p class="ground-post__subheading">{entry.data.subheading}</p>}

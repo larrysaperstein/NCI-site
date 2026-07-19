@@ -2,6 +2,7 @@
 import { getCollection, getEntry, render } from "astro:content";
 import EventsGrid from "../components/EventsGrid.astro";
 import MainLayout from "../layouts/MainLayout.astro";
+import { resolveCardDisplayImage, resolveDisplayAlt } from "../utils/contentImages";
 import { withBase } from "../utils/path";
 
 const homeEntry = await getEntry("homePage", "home");
@@ -14,7 +15,14 @@ const actionItems = (await getCollection("immediateAction"))
   .slice(0, 3)
   .map((entry) => ({
     ...entry.data,
-    slug: entry.slug
+    slug: entry.slug,
+    displayImage: resolveCardDisplayImage(entry.data.avatarImage, entry.body),
+    displayImageAlt: resolveDisplayAlt(
+      entry.data.avatarAlt,
+      entry.body,
+      entry.data.headline,
+      !entry.data.avatarImage?.trim()
+    )
   }));
 
 ---
@@ -95,8 +103,8 @@ const actionItems = (await getCollection("immediateAction"))
               {card.priority === "high" && <span class="action-card__badge">Top Priority</span>}
               <img
                 class="ground-card__image"
-                src={withBase(card.avatarImage || "/images/logo-fallback.svg")}
-                alt={card.avatarAlt || card.headline}
+                src={withBase(card.displayImage)}
+                alt={card.displayImageAlt}
                 loading="lazy"
               />
               <div class="ground-card__content">

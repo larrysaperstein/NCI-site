@@ -24,7 +24,11 @@ collections:
         label: "Homepage Content"
         file: "src/content/homePage/home.md"
         fields:
-          - { label: "Hero Image", name: "heroImage", widget: "string", hint: "Use /uploads/your-image.jpg (not public/uploads)." }
+          - label: "Hero Image"
+            name: "heroImage"
+            widget: "image"
+            choose_url: true
+            hint: "Upload directly, pick from the media library, or paste an external image URL."
           - { label: "Hero Image Alt", name: "heroImageAlt", widget: "string", required: false }
           - { label: "About Heading", name: "aboutHeading", widget: "string" }
           - { label: "Events Heading", name: "eventsHeading", widget: "string", required: false }
@@ -38,7 +42,11 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: "Order", name: "order", widget: "number", value_type: "int", min: 0 }
-      - { label: "Image", name: "image", widget: "string", hint: "URL or /uploads path" }
+      - label: "Image"
+        name: "image"
+        widget: "image"
+        choose_url: true
+        hint: "Upload directly, pick from the media library, or paste an external image URL."
       - { label: "Image Alt", name: "imageAlt", widget: "string", required: false }
 
   - name: "aboutPage"
@@ -87,8 +95,13 @@ collections:
       - { label: "Order", name: "order", widget: "number", value_type: "int", min: 1, default: 1, required: false, hint: "Optional. Defaults to 1 (first). Use 2, 3, etc. to sort later items." }
       - { label: "Headline", name: "headline", widget: "string", hint: "Controls the URL, e.g. /action-items/my-headline/. Changing this headline updates the page URL." }
       - { label: "Subheading", name: "subheading", widget: "string" }
-      - { label: "Display Image", name: "avatarImage", widget: "string", required: false, hint: "Optional. URL or /uploads path." }
-      - { label: "Display Image Description", name: "avatarAlt", widget: "string", required: false, hint: "Optional alt text for accessibility." }
+      - label: "Display Image"
+        name: "avatarImage"
+        widget: "image"
+        required: false
+        choose_url: true
+        hint: "Upload directly, pick from the media library, or paste an external image URL."
+      - { label: "Display Image Description", name: "avatarAlt", widget: "string", required: false, hint: "Short accessibility description of the cover image (not the file path)." }
       - { label: "Body", name: "body", widget: "markdown", hint: "Use Add Component for Button or YouTube." }
 
   - name: "ongoingAction"
@@ -101,8 +114,13 @@ collections:
       - { label: "Order", name: "order", widget: "number", value_type: "int", min: 1, default: 1, required: false, hint: "Optional. Defaults to 1 (first). Use 2, 3, etc. to sort later items." }
       - { label: "Headline", name: "headline", widget: "string", hint: "Controls the URL, e.g. /action-items/my-headline/. Changing this headline updates the page URL." }
       - { label: "Subheading", name: "subheading", widget: "string" }
-      - { label: "Display Image", name: "avatarImage", widget: "string", required: false, hint: "Optional. URL or /uploads path." }
-      - { label: "Display Image Description", name: "avatarAlt", widget: "string", required: false, hint: "Optional alt text for accessibility." }
+      - label: "Display Image"
+        name: "avatarImage"
+        widget: "image"
+        required: false
+        choose_url: true
+        hint: "Upload directly, pick from the media library, or paste an external image URL."
+      - { label: "Display Image Description", name: "avatarAlt", widget: "string", required: false, hint: "Short accessibility description of the cover image (not the file path)." }
       - { label: "Body", name: "body", widget: "markdown", hint: "Use Add Component for Button or YouTube." }
 
   - name: "resourcesTabs"
@@ -128,6 +146,11 @@ collections:
       - { label: "Headline", name: "headline", widget: "string", hint: "Controls the URL, e.g. /on-the-ground/my-article-title/. Changing this headline updates the page URL." }
       - { label: "Subheading", name: "subheading", widget: "string", required: false }
       - { label: "Publish Date", name: "publishDate", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
-      - { label: "Display Image", name: "avatarImage", widget: "string", required: false, hint: "Optional. URL or /uploads path." }
-      - { label: "Display Image Description", name: "avatarAlt", widget: "string", required: false, hint: "Optional alt text for accessibility." }
+      - label: "Display Image"
+        name: "avatarImage"
+        widget: "image"
+        required: false
+        choose_url: true
+        hint: "Upload directly, pick from the media library, or paste an external image URL."
+      - { label: "Display Image Description", name: "avatarAlt", widget: "string", required: false, hint: "Short accessibility description of the cover image (not the file path)." }
       - { label: "Body", name: "body", widget: "markdown", hint: "Use Add Component for Button or YouTube." }
