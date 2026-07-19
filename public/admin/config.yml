@@ -24,7 +24,7 @@ collections:
         label: "Homepage Content"
         file: "src/content/homePage/home.md"
         fields:
-          - { label: "Hero Image", name: "heroImage", widget: "string", hint: "URL or /uploads path" }
+          - { label: "Hero Image", name: "heroImage", widget: "string", hint: "Use /uploads/your-image.jpg (not public/uploads)." }
           - { label: "Hero Image Alt", name: "heroImageAlt", widget: "string", required: false }
           - { label: "About Heading", name: "aboutHeading", widget: "string" }
           - { label: "Events Heading", name: "eventsHeading", widget: "string", required: false }
@@ -69,7 +69,6 @@ collections:
       - { label: "Order", name: "order", widget: "number", value_type: "int", min: 1, default: 1, required: false, hint: "Optional. Defaults to 1 (first). Use 2, 3, etc. to sort later items." }
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Role", name: "role", widget: "string" }
-      - { label: "Email", name: "email", widget: "string", required: false, hint: "Optional. Shows an Email button when provided." }
 
   - name: "immediateAction"
     label: "Immediate Action"

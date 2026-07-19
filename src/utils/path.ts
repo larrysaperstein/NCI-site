@@ -5,7 +5,7 @@ export function withBase(path: string): string {
 
   let assetPath = path;
   if (assetPath.startsWith("public/")) {
-    assetPath = `/${assetPath.slice("public".length)}`;
+    assetPath = `/${assetPath.slice("public/".length)}`;
   }
 
   const base = import.meta.env.BASE_URL.endsWith("/")

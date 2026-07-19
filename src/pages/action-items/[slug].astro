@@ -46,7 +46,6 @@ const { Content } = await render(entry);
         <header class="ground-post__header">
           {"priority" in entry.data && entry.data.priority === "high" && <p class="action-post__badge">Top Priority</p>}
           <h1>{entry.data.headline}</h1>
-          <img src={withBase(entry.data.avatarImage || "/images/logo-fallback.svg")} alt={entry.data.avatarAlt || entry.data.headline} loading="lazy" />
           {entry.data.subheading && <p class="ground-post__subheading">{entry.data.subheading}</p>}
         </header>
         <div class="ground-post__content">

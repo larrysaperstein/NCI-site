@@ -6,10 +6,11 @@ export type CalendarEvent = {
   time: string;
   locationName: string;
   locationAddress: string;
+  description?: string;
   startDate: string;
 };
 
-const CACHE_KEY = "nci-calendar-events-v2";
+const CACHE_KEY = "nci-calendar-events-v3";
 const CACHE_TTL_MS = 10 * 60 * 1000;
 
 function escapeHtml(str: string): string {
@@ -55,6 +56,7 @@ function fetchEvents(calendarApiUrl: string): Promise<CalendarEvent[]> {
           ...event,
           locationName: event.locationName ?? (event as CalendarEvent & { location?: string }).location ?? "",
           locationAddress: event.locationAddress ?? "",
+          description: event.description?.trim() ?? "",
         }))
         .filter((event) => new Date(event.startDate) >= now)
         .sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
@@ -115,6 +117,14 @@ function renderLocation(event: CalendarEvent): string {
   return `<div class="home-event-card__location">${nameMarkup}${addressMarkup}</div>`;
 }
 
+function renderDescription(event: CalendarEvent): string {
+  if (!event.description) {
+    return "";
+  }
+
+  return `<p class="home-event-card__description">${escapeHtml(event.description)}</p>`;
+}
+
 function renderEventCard(event: CalendarEvent, headingTag: "h2" | "h3"): string {
   return (
     `<article class="home-event-card">` +
@@ -122,6 +132,7 @@ function renderEventCard(event: CalendarEvent, headingTag: "h2" | "h3"): string 
     `<p class="home-event-card__date">${escapeHtml(event.date)}</p>` +
     `<p class="home-event-card__time">${escapeHtml(event.time)}</p>` +
     renderLocation(event) +
+    renderDescription(event) +
     `</article>`
   );
 }

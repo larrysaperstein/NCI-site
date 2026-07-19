@@ -10,6 +10,7 @@
  * Event fields:
  * - Title → event card title
  * - Location → first line or text before comma = name; remainder = italic address
+ * - Description → shown below location on event cards
  * - End time → shown as a range when present (e.g. 1:00pm - 2:00pm)
  * - Timezone on each event → used for date/time display
  */
@@ -86,6 +87,7 @@ function formatApiEvent(item) {
     title: item.summary || '',
     locationName: locationFields.locationName,
     locationAddress: locationFields.locationAddress,
+    description: formatDescription(item.description),
     startDate: start.toISOString(),
     timeZone: timeZone,
   };
@@ -187,6 +189,34 @@ function formatLocationFields(item) {
   }
 
   return { locationName: location, locationAddress: '' };
+}
+
+// ---------------------------------------------------------------------------
+// Description — plain text for event cards
+// ---------------------------------------------------------------------------
+
+function formatDescription(rawDescription) {
+  if (!rawDescription) {
+    return '';
+  }
+
+  return stripHtml(String(rawDescription)).trim();
+}
+
+function stripHtml(value) {
+  return value
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<\/p>/gi, '\n')
+    .replace(/<\/div>/gi, '\n')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/&amp;/gi, '&')
+    .replace(/&lt;/gi, '<')
+    .replace(/&gt;/gi, '>')
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;/gi, "'")
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
 }
 
 // ---------------------------------------------------------------------------

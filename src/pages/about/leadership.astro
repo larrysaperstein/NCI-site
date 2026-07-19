@@ -20,19 +20,8 @@ const leaders = (await getCollection("leadership")).sort((a, b) => a.data.order 
               leaders.map((leader) => (
                 <article class="leadership-card">
                   <div class="leadership-card__content">
-                    <div class="leadership-card__details">
-                      <h2 class="leadership-card__name">{leader.data.name}</h2>
-                      <p class="leadership-card__role">{leader.data.role}</p>
-                    </div>
-                    <div class="leadership-card__actions">
-                      {
-                        leader.data.email && leader.data.email !== "" && (
-                          <a class="button button--blue" href={`mailto:${leader.data.email}`}>
-                            Email
-                          </a>
-                        )
-                      }
-                    </div>
+                    <h2 class="leadership-card__name">{leader.data.name}</h2>
+                    <p class="leadership-card__role">{leader.data.role}</p>
                   </div>
                 </article>
               ))
