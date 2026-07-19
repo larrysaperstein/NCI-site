@@ -1,3 +1,5 @@
+/cms /cms.html 302
+/cms/ /cms.html 302
 /admin /cms.html 302
 /admin/ /cms.html 302
 
