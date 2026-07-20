@@ -38,8 +38,8 @@ const homeAboutBackground = withBase("/images/trees-bg.webp");
         }
 
         var path = window.location.pathname.replace(/\/$/, "");
-        if (path !== "/cms" && path !== "/cms.html") {
-          window.location.replace("/cms/" + hash);
+        if (path !== "/admin" && path !== "/cms" && path !== "/cms.html") {
+          window.location.replace("/admin/" + hash);
         }
       })();
     </script>

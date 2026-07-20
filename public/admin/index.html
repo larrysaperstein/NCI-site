@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NCI Content Manager - Nature Coast Indivisible</title>
     <link rel="icon" href="/images/logo-fallback.svg" type="image/svg+xml" />
-    <link href="/admin/config.yml" type="application/yaml" rel="cms-config-url" />
+    <link href="config.yml" type="text/yaml" rel="cms-config-url" />
     <style>
       .nci-range-widget {
         display: flex;
@@ -65,8 +65,8 @@
 
           if (!user) {
             identity.on("login", () => {
-              if (window.location.pathname.replace(/\/$/, "") !== "/cms") {
-                document.location.href = "/cms/";
+              if (window.location.pathname.replace(/\/$/, "") !== "/admin") {
+                document.location.href = "/admin/";
               }
             });
           }
