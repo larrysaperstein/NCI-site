@@ -1,6 +1,7 @@
 ---
 heroImage: public/uploads/for-homepage-1.jpg
 heroImageAlt: Volunteers Protesting
+heroBrightness: 55
 aboutHeading: Welcome to Nature Coast Indivisible!
 eventsHeading: Upcoming Events
 actionItemsHeading: Top Action Items

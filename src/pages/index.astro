@@ -8,6 +8,7 @@ import { withBase } from "../utils/path";
 const homeEntry = await getEntry("homePage", "home");
 if (!homeEntry) throw new Error("Missing homepage content entry: src/content/homePage/home.md");
 const { Content: HomeAboutContent } = await render(homeEntry);
+const heroBrightness = homeEntry.data.heroBrightness / 100;
 
 const aboutSlides = (await getCollection("homeAboutSlides")).sort((a, b) => a.data.order - b.data.order).slice(0, 5);
 const actionItems = (await getCollection("immediateAction"))
@@ -28,7 +29,7 @@ const actionItems = (await getCollection("immediateAction"))
 ---
 
 <MainLayout title="Nature Coast Indivisible">
-  <section class="home-hero">
+  <section class="home-hero" style={`--hero-brightness: ${heroBrightness}`}>
     <img
       src={withBase(homeEntry.data.heroImage)}
       alt={homeEntry.data.heroImageAlt}

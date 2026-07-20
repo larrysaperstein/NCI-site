@@ -49,6 +49,7 @@ const homePage = defineCollection({
   schema: z.object({
     heroImage: z.string(),
     heroImageAlt: z.string().default(""),
+    heroBrightness: z.number().int().min(10).max(100).default(44),
     aboutHeading: z.string(),
     eventsHeading: z.string().default("Events"),
     actionItemsHeading: z.string().default("Action Items")

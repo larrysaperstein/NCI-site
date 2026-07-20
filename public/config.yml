@@ -30,6 +30,14 @@ collections:
             choose_url: true
             hint: "Upload directly, pick from the media library, or paste an external image URL."
           - { label: "Hero Image Alt", name: "heroImageAlt", widget: "string", required: false }
+          - label: "Hero Image Brightness"
+            name: "heroBrightness"
+            widget: "range"
+            min: 10
+            max: 100
+            step: 1
+            default: 44
+            hint: "Drag left for a darker hero, right for a brighter hero. 44 is the current site default."
           - { label: "About Heading", name: "aboutHeading", widget: "string" }
           - { label: "Events Heading", name: "eventsHeading", widget: "string", required: false }
           - { label: "Action Items Heading", name: "actionItemsHeading", widget: "string", required: false }

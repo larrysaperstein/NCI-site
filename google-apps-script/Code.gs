@@ -10,9 +10,16 @@
  * Event fields:
  * - Title → event card title
  * - Location → first line or text before comma = name; remainder = italic address
- * - Description → shown below location on event cards
+ * - Description → shown below location on event cards (plain text)
+ * - Optional button → add a line starting with "Button:" in the description (see below)
  * - End time → shown as a range when present (e.g. 1:00pm - 2:00pm)
  * - Timezone on each event → used for date/time display
+ *
+ * Optional button in description (the Button line is hidden from the card text):
+ *   Button: Register Now: https://example.com/signup
+ *   Button: Register Now: example.com/signup
+ *   Button: https://example.com/signup          → label defaults to "Learn More"
+ *   Button: Register Now|https://example.com/signup
  */
 
 // ---------------------------------------------------------------------------

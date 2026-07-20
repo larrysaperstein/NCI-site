@@ -7,16 +7,103 @@ export type CalendarEvent = {
   locationName: string;
   locationAddress: string;
   description?: string;
+  button?: {
+    text: string;
+    url: string;
+  };
   startDate: string;
 };
 
-const CACHE_KEY = "nci-calendar-events-v3";
+const CACHE_KEY = "nci-calendar-events-v4";
 const CACHE_TTL_MS = 10 * 60 * 1000;
+const DEFAULT_BUTTON_TEXT = "Learn More";
+const BUTTON_LINE_PATTERN = /^button:\s*(.+)$/i;
 
 function escapeHtml(str: string): string {
   const div = document.createElement("div");
   div.textContent = str;
   return div.innerHTML;
+}
+
+function looksLikeUrl(value: string): boolean {
+  return (
+    /^https?:\/\//i.test(value) ||
+    /^[a-z0-9][-a-z0-9.]*\.[a-z]{2,}(?:[/:?#].*)?$/i.test(value)
+  );
+}
+
+function normalizeEventUrl(url: string): string | null {
+  const trimmed = url.trim();
+  if (!trimmed) return null;
+
+  try {
+    const withProtocol = /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
+    const parsed = new URL(withProtocol);
+    if (parsed.protocol !== "http:" && parsed.protocol !== "https:") return null;
+    return parsed.toString();
+  } catch {
+    return null;
+  }
+}
+
+function parseButtonLine(line: string): { text: string; url: string } | null {
+  const match = line.trim().match(BUTTON_LINE_PATTERN);
+  if (!match) return null;
+
+  const payload = match[1].trim();
+  const pipeIndex = payload.indexOf("|");
+
+  if (pipeIndex !== -1) {
+    const text = payload.slice(0, pipeIndex).trim();
+    const url = normalizeEventUrl(payload.slice(pipeIndex + 1).trim());
+    if (!url) return null;
+    return { text: text || DEFAULT_BUTTON_TEXT, url };
+  }
+
+  const colonMatch = payload.match(/^(.+?):\s*(.+)$/);
+  if (colonMatch) {
+    const label = colonMatch[1].trim();
+    const urlPart = colonMatch[2].trim();
+    if (looksLikeUrl(urlPart)) {
+      const url = normalizeEventUrl(urlPart);
+      if (url && label) return { text: label, url };
+    }
+  }
+
+  if (looksLikeUrl(payload)) {
+    const url = normalizeEventUrl(payload);
+    if (url) return { text: DEFAULT_BUTTON_TEXT, url };
+  }
+
+  return null;
+}
+
+export function parseCalendarDescription(raw: string): {
+  description: string;
+  button?: { text: string; url: string };
+} {
+  if (!raw.trim()) {
+    return { description: "" };
+  }
+
+  const lines = raw.split(/\r?\n/);
+  let button: { text: string; url: string } | undefined;
+  const descriptionLines: string[] = [];
+
+  for (const line of lines) {
+    const parsedButton = parseButtonLine(line);
+    if (parsedButton && !button) {
+      button = parsedButton;
+      continue;
+    }
+
+    descriptionLines.push(line);
+  }
+
+  return {
+    description: descriptionLines.join("\n").trim(),
+    button,
+  };
 }
 
 function fetchEvents(calendarApiUrl: string): Promise<CalendarEvent[]> {
@@ -52,12 +139,17 @@ function fetchEvents(calendarApiUrl: string): Promise<CalendarEvent[]> {
       const now = new Date();
 
       return data
-        .map((event) => ({
-          ...event,
-          locationName: event.locationName ?? (event as CalendarEvent & { location?: string }).location ?? "",
-          locationAddress: event.locationAddress ?? "",
-          description: event.description?.trim() ?? "",
-        }))
+        .map((event) => {
+          const parsedDescription = parseCalendarDescription(event.description?.trim() ?? "");
+
+          return {
+            ...event,
+            locationName: event.locationName ?? (event as CalendarEvent & { location?: string }).location ?? "",
+            locationAddress: event.locationAddress ?? "",
+            description: parsedDescription.description,
+            button: parsedDescription.button,
+          };
+        })
         .filter((event) => new Date(event.startDate) >= now)
         .sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
     });
@@ -125,6 +217,19 @@ function renderDescription(event: CalendarEvent): string {
   return `<p class="home-event-card__description">${escapeHtml(event.description)}</p>`;
 }
 
+function renderButton(event: CalendarEvent): string {
+  if (!event.button) {
+    return "";
+  }
+
+  return (
+    `<p class="home-event-card__button">` +
+    `<a class="button button--blue" href="${escapeHtml(event.button.url)}" target="_blank" rel="noopener noreferrer">` +
+    `${escapeHtml(event.button.text)}</a>` +
+    `</p>`
+  );
+}
+
 function renderEventCard(event: CalendarEvent, headingTag: "h2" | "h3"): string {
   return (
     `<article class="home-event-card">` +
@@ -133,6 +238,7 @@ function renderEventCard(event: CalendarEvent, headingTag: "h2" | "h3"): string 
     `<p class="home-event-card__time">${escapeHtml(event.time)}</p>` +
     renderLocation(event) +
     renderDescription(event) +
+    renderButton(event) +
     `</article>`
   );
 }

@@ -6,6 +6,26 @@
     <title>NCI Content Manager - Nature Coast Indivisible</title>
     <link rel="icon" href="/images/logo-fallback.svg" type="image/svg+xml" />
     <link href="/admin/config.yml" type="application/yaml" rel="cms-config-url" />
+    <style>
+      .nci-range-widget {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        width: 100%;
+      }
+
+      .nci-range-widget input[type="range"] {
+        flex: 1;
+        accent-color: #1f4b99;
+        cursor: pointer;
+      }
+
+      .nci-range-widget__value {
+        min-width: 3rem;
+        font-variant-numeric: tabular-nums;
+        font-weight: 600;
+      }
+    </style>
   </head>
   <body>
     <script>
@@ -61,6 +81,9 @@
         const script = document.createElement("script");
         script.id = "decap-cms-script";
         script.src = "https://unpkg.com/decap-cms@^3.6.0/dist/decap-cms.js";
+        script.onload = () => {
+          if (window.CMS) registerRangeWidget(window.CMS);
+        };
         document.body.appendChild(script);
       }
     </script>
@@ -82,7 +105,47 @@
         target.value = "";
       });
 
+      const registerRangeWidget = (cms) => {
+        if (cms.__nciRangeWidgetRegistered) return;
+
+        const h = window.h;
+        const createClass = window.createClass;
+        if (!h || !createClass) return;
+
+        const RangeControl = createClass({
+          handleChange(event) {
+            this.props.onChange(Number(event.target.value));
+          },
+
+          render() {
+            const { value, forID, field } = this.props;
+            const min = field.get("min", 10);
+            const max = field.get("max", 100);
+            const step = field.get("step", 1);
+            const defaultValue = field.get("default", 44);
+            const currentValue = value ?? defaultValue;
+
+            return h("div", { className: "nci-range-widget" }, [
+              h("input", {
+                id: forID,
+                type: "range",
+                min: String(min),
+                max: String(max),
+                step: String(step),
+                value: String(currentValue),
+                onChange: this.handleChange
+              }),
+              h("span", { className: "nci-range-widget__value" }, `${currentValue}%`)
+            ]);
+          }
+        });
+
+        cms.registerWidget("range", RangeControl);
+        cms.__nciRangeWidgetRegistered = true;
+      };
+
       const registerComponents = (cms) => {
+        registerRangeWidget(cms);
         cms.registerEditorComponent({
           id: "button",
           label: "Button",

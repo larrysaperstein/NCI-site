@@ -426,7 +426,7 @@ a {
   height: 23rem;
   object-fit: cover;
   display: block;
-  filter: brightness(0.44);
+  filter: brightness(var(--hero-brightness, 0.44));
 }
 
 .home-hero__overlay {
@@ -631,6 +631,16 @@ a {
   line-height: 1.45;
   text-align: center;
   white-space: pre-line;
+}
+
+.home-event-card__button {
+  margin: 1.45rem 0 0;
+}
+
+.home-event-card__button .button {
+  min-width: 11rem;
+  font-size: 0.78rem;
+  padding: 0.45rem 0.85rem;
 }
 
 .home-section--events .home-event-card__description {
