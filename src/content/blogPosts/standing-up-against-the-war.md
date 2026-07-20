@@ -7,6 +7,6 @@ avatarAlt: Protest at Rep. Cammack's veterans town hall
 ---
 Kat Cammack’s Veterans TownHall, Friday, July 8
 
-We went with our big ass banners joined by members of Gainesville Veterans for Peace, Citrus Solidarity and Ocala Blue Dots.
+We went with our big ass banners and were joined by members of Gainesville Veterans for Peace, Citrus Solidarity and Ocala Blue Dots.
 
 ![](/uploads/nci-hero-5.webp)
