@@ -2,6 +2,6 @@
 priority: high
 order: 1
 headline: Major Florida Vote
-subheading: This is the Major Florida Vote
+subheading: Florida Primary Elections Early Voting Starts August 8
 ---
-Major florida vote
+Contact the Supervior of Elections for your Florida county to check your registration status and get information about voting deadlines.
