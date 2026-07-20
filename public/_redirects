@@ -1,7 +1,6 @@
-/cms /cms.html 302
-/cms/ /cms.html 302
-/admin /cms.html 302
-/admin/ /cms.html 302
+/cms.html /cms/ 302
+/admin /cms/ 302
+/admin/ /cms/ 302
 
 # Legacy CMS-generated slugs
 /on-the-ground/map-headline-hey-mom-subheading-my-mom-is-awesome-publishdate-2026-07-10-avatarimage-public-uploads-phone-bank-jpg-avataralt-phone-banking-body-my-mom-is-so-cool-for-looking-at-all-of-this-with-me-n-n-a-class-butto /on-the-ground/hey-mom 301

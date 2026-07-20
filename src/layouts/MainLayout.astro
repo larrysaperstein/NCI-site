@@ -39,7 +39,7 @@ const homeAboutBackground = withBase("/images/trees-bg.webp");
 
         var path = window.location.pathname.replace(/\/$/, "");
         if (path !== "/cms" && path !== "/cms.html") {
-          window.location.replace("/cms" + hash);
+          window.location.replace("/cms/" + hash);
         }
       })();
     </script>
