@@ -3,7 +3,7 @@ priority: regular
 order: 1
 headline: Mix & Sip
 subheading: Restoration of Civil Rights
-avatarImage: public/uploads/mixnsip2.webp
+avatarImage: /uploads/mixnsip2.webp
 ---
 Join League of Women Voters at this event. It will be great.
 

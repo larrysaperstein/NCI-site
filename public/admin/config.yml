@@ -41,7 +41,7 @@ collections:
           - { label: "About Heading", name: "aboutHeading", widget: "string" }
           - { label: "Events Heading", name: "eventsHeading", widget: "string", required: false }
           - { label: "Action Items Heading", name: "actionItemsHeading", widget: "string", required: false }
-          - { label: "About Body", name: "body", widget: "markdown", hint: "Use Add Component for Button or YouTube." }
+          - { label: "About Body", name: "body", widget: "markdown", hint: "Use Add Component for Button or YouTube. For images, add a real file or delete the image block — blank images are ignored and should not be left empty." }
 
   - name: "homeAboutSlides"
     label: "Homepage About Slides"
@@ -64,7 +64,7 @@ collections:
         label: "About Us Page"
         file: "src/content/aboutPage/about.md"
         fields:
-          - { label: "Body", name: "body", widget: "markdown", hint: "Use Add Component for Button or YouTube." }
+          - { label: "Body", name: "body", widget: "markdown", hint: "Use Add Component for Button or YouTube. For images, add a real file or delete the image block — blank images are ignored and should not be left empty." }
 
   - name: "missionStatement"
     label: "Mission Statement"
@@ -73,7 +73,7 @@ collections:
         label: "Mission Statement Page"
         file: "src/content/missionStatement/mission-statement.md"
         fields:
-          - { label: "Body", name: "body", widget: "markdown", hint: "Use Add Component for Button or YouTube." }
+          - { label: "Body", name: "body", widget: "markdown", hint: "Use Add Component for Button or YouTube. For images, add a real file or delete the image block — blank images are ignored and should not be left empty." }
 
   - name: "leadership"
     label: "Leadership"
@@ -110,7 +110,7 @@ collections:
         choose_url: true
         hint: "Upload directly, pick from the media library, or paste an external image URL."
       - { label: "Display Image Description", name: "avatarAlt", widget: "string", required: false, hint: "Short accessibility description of the cover image (not the file path)." }
-      - { label: "Body", name: "body", widget: "markdown", hint: "Use Add Component for Button or YouTube." }
+      - { label: "Body", name: "body", widget: "markdown", hint: "Use Add Component for Button or YouTube. For images, add a real file or delete the image block — blank images are ignored and should not be left empty." }
 
   - name: "ongoingAction"
     label: "Ongoing Action"
@@ -129,7 +129,7 @@ collections:
         choose_url: true
         hint: "Upload directly, pick from the media library, or paste an external image URL."
       - { label: "Display Image Description", name: "avatarAlt", widget: "string", required: false, hint: "Short accessibility description of the cover image (not the file path)." }
-      - { label: "Body", name: "body", widget: "markdown", hint: "Use Add Component for Button or YouTube." }
+      - { label: "Body", name: "body", widget: "markdown", hint: "Use Add Component for Button or YouTube. For images, add a real file or delete the image block — blank images are ignored and should not be left empty." }
 
   - name: "resourcesTabs"
     label: "Resources Tabs"
@@ -142,7 +142,7 @@ collections:
       - { label: "Order", name: "order", widget: "number", value_type: "int", min: 1, default: 1, required: false, hint: "Optional. Defaults to 1 (first). Use 2, 3, etc. to sort later items." }
       - { label: "Heading", name: "heading", widget: "string", required: false }
       - { label: "Subheading", name: "subheading", widget: "string", required: false }
-      - { label: "Body", name: "body", widget: "markdown", hint: "Use Add Component for Button or YouTube." }
+      - { label: "Body", name: "body", widget: "markdown", hint: "Use Add Component for Button or YouTube. For images, add a real file or delete the image block — blank images are ignored and should not be left empty." }
 
   - name: "blogPosts"
     label: "Blog Posts"
@@ -161,4 +161,4 @@ collections:
         choose_url: true
         hint: "Upload directly, pick from the media library, or paste an external image URL."
       - { label: "Display Image Description", name: "avatarAlt", widget: "string", required: false, hint: "Short accessibility description of the cover image (not the file path)." }
-      - { label: "Body", name: "body", widget: "markdown", hint: "Use Add Component for Button or YouTube." }
+      - { label: "Body", name: "body", widget: "markdown", hint: "Use Add Component for Button or YouTube. For images, add a real file or delete the image block — blank images are ignored and should not be left empty." }
