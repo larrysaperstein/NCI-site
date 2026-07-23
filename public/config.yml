@@ -13,8 +13,7 @@ display_url: https://naturecoastindivisible.org
 media_folder: "public/uploads"
 public_folder: "/uploads"
 
-logo:
-  src: /images/NCI-logo-dark.svg
+logo_url: https://naturecoastindivisible.org/images/NCI-logo-dark.svg
 
 collections:
   - name: "homepage"
