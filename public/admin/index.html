@@ -29,6 +29,8 @@
   </head>
   <body>
     <script>
+      window.CMS_MANUAL_INIT = true;
+
       const NETLIFY_IDENTITY_API_URL =
         "https://kaleidoscopic-travesseiro-5199a3.netlify.app/.netlify/identity";
       const NETLIFY_SITE_URL = "https://kaleidoscopic-travesseiro-5199a3.netlify.app";
@@ -48,8 +50,6 @@
         const realInit = identity.init.bind(identity);
         let configured = false;
 
-        // The widget also calls init() on DOMContentLoaded without APIUrl, which
-        // resets auth and closes the invite modal. Ignore that second call.
         identity.init = function (opts) {
           const hasOptions = opts && Object.keys(opts).length > 0;
           if (configured && !hasOptions) return;
@@ -60,92 +60,57 @@
           });
         };
 
-        identity.on("init", (user) => {
+        identity.on("init", () => {
           loadDecapCms();
 
-          if (!user) {
-            identity.on("login", () => {
-              if (window.location.pathname.replace(/\/$/, "") !== "/admin") {
-                document.location.href = "/admin/";
-              }
-            });
-          }
+          identity.on("login", () => {
+            if (window.location.pathname.replace(/\/$/, "") !== "/admin") {
+              document.location.href = "/admin/";
+            }
+          });
         });
 
         identity.init({ APIUrl: NETLIFY_IDENTITY_API_URL });
       })();
 
-      function loadDecapCms() {
-        if (window.CMS || document.getElementById("decap-cms-script")) return;
-
-        const script = document.createElement("script");
-        script.id = "decap-cms-script";
-        script.src = "https://unpkg.com/decap-cms@^3.6.0/dist/decap-cms.js";
-        script.onload = () => {
-          if (window.CMS) registerRangeWidget(window.CMS);
-        };
-        document.body.appendChild(script);
-      }
-    </script>
-    <script>
-      const MAX_UPLOAD_BYTES = 2 * 1024 * 1024;
-
-      // Failsafe: block file inputs larger than 2MB.
-      document.addEventListener("change", (event) => {
-        const target = event.target;
-        if (!(target instanceof HTMLInputElement)) return;
-        if (target.type !== "file" || !target.files?.length) return;
-
-        const oversized = Array.from(target.files).filter((file) => file.size > MAX_UPLOAD_BYTES);
-        if (!oversized.length) return;
-
-        alert(
-          "One or more files exceed the 2MB limit. Please compress the image and try again."
-        );
-        target.value = "";
-      });
-
-      const registerRangeWidget = (cms) => {
-        if (cms.__nciRangeWidgetRegistered) return;
+      function registerCmsExtensions(cms) {
+        if (cms.__nciExtensionsRegistered) return;
 
         const h = window.h;
         const createClass = window.createClass;
-        if (!h || !createClass) return;
 
-        const RangeControl = createClass({
-          handleChange(event) {
-            this.props.onChange(Number(event.target.value));
-          },
+        if (h && createClass) {
+          const RangeControl = createClass({
+            handleChange(event) {
+              this.props.onChange(Number(event.target.value));
+            },
 
-          render() {
-            const { value, forID, field } = this.props;
-            const min = field.get("min", 10);
-            const max = field.get("max", 100);
-            const step = field.get("step", 1);
-            const defaultValue = field.get("default", 44);
-            const currentValue = value ?? defaultValue;
+            render() {
+              const { value, forID, field } = this.props;
+              const min = field.get("min", 10);
+              const max = field.get("max", 100);
+              const step = field.get("step", 1);
+              const defaultValue = field.get("default", 44);
+              const currentValue = value ?? defaultValue;
 
-            return h("div", { className: "nci-range-widget" }, [
-              h("input", {
-                id: forID,
-                type: "range",
-                min: String(min),
-                max: String(max),
-                step: String(step),
-                value: String(currentValue),
-                onChange: this.handleChange
-              }),
-              h("span", { className: "nci-range-widget__value" }, `${currentValue}%`)
-            ]);
-          }
-        });
+              return h("div", { className: "nci-range-widget" }, [
+                h("input", {
+                  id: forID,
+                  type: "range",
+                  min: String(min),
+                  max: String(max),
+                  step: String(step),
+                  value: String(currentValue),
+                  onChange: this.handleChange
+                }),
+                h("span", { className: "nci-range-widget__value" }, `${currentValue}%`)
+              ]);
+            }
+          });
 
-        cms.registerWidget("range", RangeControl);
-        cms.__nciRangeWidgetRegistered = true;
-      };
+          cms.registerWidget("range", RangeControl);
+        }
 
-      const registerComponents = (cms) => {
-        registerRangeWidget(cms);
         cms.registerEditorComponent({
           id: "button",
           label: "Button",
@@ -221,17 +186,50 @@
             return `<p>YouTube Embed: ${safe}</p>`;
           }
         });
-      };
 
-      const ensureCmsReady = () => {
+        cms.__nciExtensionsRegistered = true;
+      }
+
+      function initDecapCms() {
+        const cms = window.CMS;
+        if (!cms || cms.__nciInitialized) return;
+
+        registerCmsExtensions(cms);
+        cms.init();
+        cms.__nciInitialized = true;
+      }
+
+      function loadDecapCms() {
         if (window.CMS) {
-          registerComponents(window.CMS);
+          initDecapCms();
           return;
         }
-        setTimeout(ensureCmsReady, 100);
-      };
 
-      ensureCmsReady();
+        if (document.getElementById("decap-cms-script")) return;
+
+        const script = document.createElement("script");
+        script.id = "decap-cms-script";
+        script.src = "https://unpkg.com/decap-cms@3.6.0/dist/decap-cms.js";
+        script.onload = initDecapCms;
+        document.body.appendChild(script);
+      }
+    </script>
+    <script>
+      const MAX_UPLOAD_BYTES = 2 * 1024 * 1024;
+
+      document.addEventListener("change", (event) => {
+        const target = event.target;
+        if (!(target instanceof HTMLInputElement)) return;
+        if (target.type !== "file" || !target.files?.length) return;
+
+        const oversized = Array.from(target.files).filter((file) => file.size > MAX_UPLOAD_BYTES);
+        if (!oversized.length) return;
+
+        alert(
+          "One or more files exceed the 2MB limit. Please compress the image and try again."
+        );
+        target.value = "";
+      });
     </script>
   </body>
 </html>
