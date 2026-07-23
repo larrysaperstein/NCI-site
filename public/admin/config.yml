@@ -14,8 +14,7 @@ media_folder: "public/uploads"
 public_folder: "/uploads"
 
 logo:
-  src: https://naturecoastindivisible.org/images/NCI-logo-dark.svg
-  show_in_header: true
+  src: /images/NCI-logo-dark.svg
 
 collections:
   - name: "homepage"

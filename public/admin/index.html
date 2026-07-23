@@ -25,28 +25,9 @@
         font-variant-numeric: tabular-nums;
         font-weight: 600;
       }
-
-      #nci-admin-brand {
-        display: flex;
-        justify-content: center;
-        padding: 2.75rem 1rem 0.5rem;
-      }
-
-      #nci-admin-brand img {
-        width: min(100%, 18rem);
-        height: auto;
-      }
-
-      /* Hide the fallback once Decap renders its own login/header logo. */
-      body.nci-admin-logo-ready #nci-admin-brand {
-        display: none;
-      }
     </style>
   </head>
   <body>
-    <div id="nci-admin-brand" aria-hidden="true">
-      <img src="/images/NCI-logo-dark.svg" alt="" />
-    </div>
     <script>
       window.CMS_MANUAL_INIT = true;
 
@@ -216,28 +197,6 @@
         registerCmsExtensions(cms);
         cms.init();
         cms.__nciInitialized = true;
-        watchForDecapLogo();
-      }
-
-      function watchForDecapLogo() {
-        const hideFallbackBrand = () => {
-          const decapLogo = document.querySelector(
-            '[class*="LoginPage"] img, [class*="AppHeader"] img, .nc-loginLogo img, img[alt="Logo"]'
-          );
-          if (decapLogo) {
-            document.body.classList.add("nci-admin-logo-ready");
-            return true;
-          }
-          return false;
-        };
-
-        if (hideFallbackBrand()) return;
-
-        const observer = new MutationObserver(() => {
-          if (hideFallbackBrand()) observer.disconnect();
-        });
-
-        observer.observe(document.body, { childList: true, subtree: true });
       }
 
       function loadDecapCms() {
