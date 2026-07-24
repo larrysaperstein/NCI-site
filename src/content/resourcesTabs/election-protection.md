@@ -5,6 +5,8 @@ heading: Election Protection
 subheading: What you can do to fight back against the attempts to restrict our
   right to free and fair elections.
 ---
+* **State and Local Election Protection**
+
 **Local Poll Worker**
 
 Consider becoming part of the election process in your community by applying with your Supervisor of Elections office to be a poll workers. Poll workers are hired on as needed basis, are required to complete training and to work long hours during elections. Positions are not always available.
@@ -13,9 +15,11 @@ Consider becoming part of the election process in your community by applying wit
 
 Or, consider becoming a poll watcher on the days of early voting, on primary election day, or election day. Poll watchers are trained volunteers of the political parties with candidates on the ballot or of the candidates. They receive training in spotting irregularities or voting challenges, for instance long lines at polls, and are given tools to report those issues. To volunteer, contact the office of the political party of your choice in your community (for instance, the Marion County Democratic Party or the Marion County Republican Party).
 
-**National Election Protection Resources**
+* **National Election Protection**
 
-**VoteRiders**
+The organizations listed below offer meaningful volunteer actions you can take from home.  
+
+***VoteRiders***
 
 <https://voteriders.org/>
 
@@ -27,7 +31,7 @@ Or, consider becoming a poll watcher on the days of early voting, on primary ele
 
  *If you or someone you know needs help in any state, they will help you find the state's rules and will help with requests for personal assistance.*
 
-**Protect Democracy**
+***Protect Democracy***
 
 <https://protectdemocracy.org/>
 
