@@ -37,4 +37,4 @@ The organizations listed below offer meaningful volunteer actions you can take f
 
 <https://protectdemocracy.org/how-you-can-protect-democracy/#actions>
 
-*Frequently updated calls to action that vary in time commitment required to several minutes to deep dives required more time.*
+*Frequently updated calls to action that vary in time commitment required to several minutes to deep dives that take more time.*
