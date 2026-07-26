@@ -21,11 +21,17 @@ The organizations listed below offer meaningful volunteer actions you can take f
 
 ***VoteRiders***
 
+<a class="button button--yellow" href="https://voteriders.org/">Learn More</a>
+
 <https://voteriders.org/>
 
 **Helpline:** Call or Text 866-432-8683 
 
-**Volunteer Opportunities**: <https://voteriders.org/volunteer/>
+**Volunteer Opportunities**: 
+
+<a class="button button--yellow" href="https://voteriders.org/volunteer/">Volunteer</a>
+
+<https://voteriders.org/volunteer/>
 
 *A nonpartisan, non-profit organization that helps eligible U.S. citizens obtain the proper identification required to vote. They help eliminate barriers to voting by covering associated document fees (such as birth certificates) and providing free transportation to ID-issuing offices.*
 
