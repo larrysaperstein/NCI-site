@@ -10,7 +10,6 @@ This is people-powered politics in real time. Questions can be submitted via the
 
 Real talk. Real people. Real action. That’s the plan.
 
-To register: https://indivisible.org/events/whats-the-plan-with-leah-and-ezra/
-
-
 ![]()
+
+<a class="button button--yellow" href="https://indivisible.org/events/whats-the-plan-with-leah-and-ezra/">Register</a>
