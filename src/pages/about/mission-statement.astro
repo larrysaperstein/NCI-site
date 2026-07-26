@@ -1,6 +1,7 @@
 ---
 import { getEntry, render } from "astro:content";
 import MainLayout from "../../layouts/MainLayout.astro";
+import { PAGE_DESCRIPTIONS } from "../../utils/seo";
 
 const entry = await getEntry("missionStatement", "mission-statement");
 if (!entry) throw new Error("Missing Mission Statement content entry: src/content/missionStatement/mission-statement.md");
@@ -8,7 +9,7 @@ if (!entry) throw new Error("Missing Mission Statement content entry: src/conten
 const { Content } = await render(entry);
 ---
 
-<MainLayout title="Mission Statement">
+<MainLayout title="Mission Statement" description={PAGE_DESCRIPTIONS.missionStatement}>
   <section class="upcoming about-page">
     <div class="container">
       <h1>Mission Statement</h1>

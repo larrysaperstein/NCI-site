@@ -1,8 +1,9 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
+import { PAGE_DESCRIPTIONS } from "../utils/seo";
 ---
 
-<MainLayout title="Get Involved">
+<MainLayout title="Get Involved" description={PAGE_DESCRIPTIONS.getInvolved}>
   <section class="upcoming">
     <div class="container">
       <h1>Get Involved</h1>

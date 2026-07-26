@@ -1,6 +1,7 @@
 ---
 import { getCollection, getEntry, render } from "astro:content";
 import MainLayout from "../../layouts/MainLayout.astro";
+import { PAGE_DESCRIPTIONS } from "../../utils/seo";
 import { withBase } from "../../utils/path";
 
 type ActionCollection = "immediateAction" | "ongoingAction";
@@ -34,7 +35,7 @@ if (!entry) {
 const { Content } = await render(entry);
 ---
 
-<MainLayout title={entry.data.headline}>
+<MainLayout title={entry.data.headline} description={entry.data.subheading}>
   <section class="upcoming ground-post action-post">
     <div class="container">
       <a href={withBase("/action-items")} class="ground-post__back-link">

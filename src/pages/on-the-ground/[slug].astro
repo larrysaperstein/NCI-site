@@ -1,6 +1,7 @@
 ---
 import { getCollection, getEntry, render } from "astro:content";
 import MainLayout from "../../layouts/MainLayout.astro";
+import { PAGE_DESCRIPTIONS } from "../../utils/seo";
 import { resolveDisplayAlt, resolvePostHeaderDisplayImage } from "../../utils/contentImages";
 import { withBase } from "../../utils/path";
 
@@ -35,7 +36,7 @@ const formattedDate = `${date.toLocaleString("en-US", { month: "short" })} ${dat
 )}, ${date.getFullYear()}`;
 ---
 
-<MainLayout title={entry.data.headline}>
+<MainLayout title={entry.data.headline} description={entry.data.subheading ?? PAGE_DESCRIPTIONS.onTheGround}>
   <section class="upcoming ground-post">
     <div class="container">
       <a href={withBase("/on-the-ground")} class="ground-post__back-link">

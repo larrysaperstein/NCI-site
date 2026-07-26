@@ -1,9 +1,10 @@
 ---
 import EventsGrid from "../components/EventsGrid.astro";
 import MainLayout from "../layouts/MainLayout.astro";
+import { PAGE_DESCRIPTIONS } from "../utils/seo";
 ---
 
-<MainLayout title="Events">
+<MainLayout title="Events" description={PAGE_DESCRIPTIONS.events}>
   <section class="upcoming events-page">
     <div class="container">
       <h1>Events</h1>

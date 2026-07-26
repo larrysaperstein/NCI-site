@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import MainLayout from "../layouts/MainLayout.astro";
+import { PAGE_DESCRIPTIONS } from "../utils/seo";
 import { resolveCardDisplayImage, resolveDisplayAlt } from "../utils/contentImages";
 import { withBase } from "../utils/path";
 
@@ -90,7 +91,7 @@ const mobilePrimaryMonths = monthGroups.slice(0, MOBILE_VISIBLE_MONTHS);
 const mobileOlderMonths = monthGroups.slice(MOBILE_VISIBLE_MONTHS);
 ---
 
-<MainLayout title="On The Ground">
+<MainLayout title="On The Ground" description={PAGE_DESCRIPTIONS.onTheGround}>
   <section class="upcoming ground">
     <div class="container">
       <h1>On The Ground</h1>

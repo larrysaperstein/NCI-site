@@ -31,8 +31,11 @@ const resources = await Promise.all(
 resources.sort((a, b) => a.order - b.order);
 
 const pageTitle = entry.data.heading || entry.data.tabLabel;
+const pageDescription =
+  entry.data.subheading ??
+  `${pageTitle} resources from Nature Coast Indivisible for Marion, Citrus, Levy, and surrounding counties.`;
 ---
 
-<MainLayout title={pageTitle}>
+<MainLayout title={pageTitle} description={pageDescription}>
   <ResourcesSection resources={resources} activeSlug={slug} />
 </MainLayout>

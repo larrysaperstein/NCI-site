@@ -2,16 +2,19 @@
 import Footer from "../components/Footer.astro";
 import Nav from "../components/Nav.astro";
 import StagingGate from "../components/StagingGate.astro";
+import { metaDescription } from "../utils/seo";
 import { withBase } from "../utils/path";
 import "../styles/global.css";
 
 interface Props {
   title?: string;
+  description?: string;
 }
 
 const SITE_NAME = "Nature Coast Indivisible";
-const { title = SITE_NAME } = Astro.props;
+const { title = SITE_NAME, description } = Astro.props;
 const documentTitle = title === SITE_NAME ? SITE_NAME : `${title} - ${SITE_NAME}`;
+const descriptionContent = metaDescription(description);
 
 const homeAboutBackground = withBase("/images/trees-bg.webp");
 ---
@@ -21,6 +24,7 @@ const homeAboutBackground = withBase("/images/trees-bg.webp");
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={descriptionContent} />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" href={withBase("/images/logo-fallback.svg")} type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />

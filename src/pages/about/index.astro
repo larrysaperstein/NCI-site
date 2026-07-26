@@ -1,6 +1,7 @@
 ---
 import { getEntry, render } from "astro:content";
 import MainLayout from "../../layouts/MainLayout.astro";
+import { PAGE_DESCRIPTIONS } from "../../utils/seo";
 
 const entry = await getEntry("aboutPage", "about");
 if (!entry) throw new Error("Missing About Us content entry: src/content/aboutPage/about.md");
@@ -8,7 +9,7 @@ if (!entry) throw new Error("Missing About Us content entry: src/content/aboutPa
 const { Content } = await render(entry);
 ---
 
-<MainLayout title="About Us">
+<MainLayout title="About Us" description={PAGE_DESCRIPTIONS.about}>
   <section class="upcoming about-page">
     <div class="container">
       <h1>About Us</h1>

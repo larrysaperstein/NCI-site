@@ -1,11 +1,12 @@
 ---
 import { getCollection } from "astro:content";
 import MainLayout from "../../layouts/MainLayout.astro";
+import { PAGE_DESCRIPTIONS } from "../../utils/seo";
 
 const leaders = (await getCollection("leadership")).sort((a, b) => a.data.order - b.data.order);
 ---
 
-<MainLayout title="Leadership">
+<MainLayout title="Leadership" description={PAGE_DESCRIPTIONS.leadership}>
   <section class="upcoming leadership-page">
     <div class="container">
       <h1>Leadership</h1>

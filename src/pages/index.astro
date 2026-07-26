@@ -2,6 +2,7 @@
 import { getCollection, getEntry, render } from "astro:content";
 import EventsGrid from "../components/EventsGrid.astro";
 import MainLayout from "../layouts/MainLayout.astro";
+import { PAGE_DESCRIPTIONS } from "../utils/seo";
 import { resolveCardDisplayImage, resolveDisplayAlt } from "../utils/contentImages";
 import { withBase } from "../utils/path";
 
@@ -28,7 +29,7 @@ const actionItems = (await getCollection("immediateAction"))
 
 ---
 
-<MainLayout title="Nature Coast Indivisible">
+<MainLayout title="Nature Coast Indivisible" description={PAGE_DESCRIPTIONS.home}>
   <section class="home-hero" style={`--hero-brightness: ${heroBrightness}`}>
     <img
       src={withBase(homeEntry.data.heroImage)}

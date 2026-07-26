@@ -928,6 +928,22 @@ a {
   text-decoration: underline;
 }
 
+.resources__content,
+.ground-post__content,
+.content-card__body,
+.about-page__content {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.resources__content a:not(.button),
+.ground-post__content a:not(.button),
+.content-card__body a:not(.button),
+.about-page__content a:not(.button) {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
 @media (min-width: 769px) {
   .ground-post__content img,
   .resources__content img {

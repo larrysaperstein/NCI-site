@@ -145,7 +145,10 @@
             newTab: match[0].includes('target="_blank"')
           }),
           toBlock: ({ text, href, style, newTab }) => {
-            const target = newTab ? ' target="_blank" rel="noopener noreferrer"' : "";
+            const isExternal =
+              /^https?:\/\//i.test(href) || (href.startsWith("//") && !href.startsWith("///"));
+            const openNewTab = isExternal || newTab;
+            const target = openNewTab ? ' target="_blank" rel="noopener noreferrer"' : "";
             return `<a class="button ${style}" href="${href}"${target}>${text}</a>`;
           },
           toPreview: ({ text, href, style }) =>
