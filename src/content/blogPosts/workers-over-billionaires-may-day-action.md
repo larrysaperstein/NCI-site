@@ -11,13 +11,8 @@ On May Day, May 1, NCI activists joined actions across the United States to spea
 
 ![](/uploads/1.jpg)
 
-
-
-
 **FOR IMMEDIATE RELEASE
 Date:** April 29, 2026
-
-**Contact:** Nancy Donaldson, Nature Coast Indivisible Spokesperson, 202-365-8355, nadonaldson5430@gmail.com 
 
 ### **People Over Profits: Nature Coast Indivisible Activists Take to OverPass for 12 Hours with Message in Solidarity with National May Day Actions** 
 
