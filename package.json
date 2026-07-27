@@ -7,10 +7,16 @@
     "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
     "start": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
     "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
-    "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
-    "cms": "npx decap-server"
+    "preview": "npm run build && wrangler dev",
+    "cms": "npx decap-server",
+    "deploy": "npm run build && wrangler deploy",
+    "cf-typegen": "wrangler types"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "11",
     "astro": "^4.16.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.114.0"
   }
 }

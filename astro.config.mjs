@@ -5,12 +5,15 @@ import { rehypeInternalLinks } from "./src/integrations/rehypeInternalLinks.ts";
 import { rehypeStripEmptyMedia } from "./src/integrations/rehypeStripEmptyMedia.ts";
 import { remarkStripEmptyMedia } from "./src/integrations/remarkStripEmptyMedia.ts";
 
+import cloudflare from "@astrojs/cloudflare";
+
 const base = "/";
 const site = "https://naturecoastindivisible.org";
 
 export default defineConfig({
   site,
   base,
+
   markdown: {
     remarkRehype: { allowDangerousHtml: true },
     remarkPlugins: [remarkStripEmptyMedia],
@@ -20,5 +23,8 @@ export default defineConfig({
       [rehypeInternalLinks, { base }],
       [rehypeExternalLinks, { site }]
     ]
-  }
+  },
+
+  output: "hybrid",
+  adapter: cloudflare()
 });
