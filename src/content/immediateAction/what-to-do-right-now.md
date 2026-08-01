@@ -1,8 +1,10 @@
 ---
-priority: high
+priority: regular
 order: 1
 headline: What to do Right Now!
 subheading: Election Protection is a Sum of Small Actions
 avatarImage: /uploads/handsoff-large.png
 ---
 This is a test post that will give more information when it is completed.
+
+![](/uploads/handsoff-large.png)
