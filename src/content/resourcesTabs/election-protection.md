@@ -21,19 +21,17 @@ The organizations listed below offer meaningful volunteer actions you can take f
 
 ***VoteRiders***
 
-
 *A nonpartisan, non-profit organization that helps eligible U.S. citizens obtain the proper identification required to vote. They help eliminate barriers to voting by covering associated document fees (such as birth certificates) and providing free transportation to ID-issuing offices.*
 
  *If you or someone you know needs help in any state, they will help you find the state's rules and will help with requests for personal assistance.*
 
-
-<a class="button button--yellow" href="https://voteriders.org/">Learn More</a>
+<a class="button button--yellow" href="https://voteriders.org/" target="_blank" rel="noopener noreferrer">Learn More</a>
 
 [](https://voteriders.org/)**Helpline:** Call or Text 866-432-8683 
 
 **Volunteer Opportunities**: 
 
-<a class="button button--yellow" href="https://voteriders.org/volunteer/">Volunteer</a>
+<a class="button button--yellow" href="https://voteriders.org/volunteer/" target="_blank" rel="noopener noreferrer">Volunteer</a>
 
 [](https://voteriders.org/volunteer/)
 
@@ -44,3 +42,7 @@ The organizations listed below offer meaningful volunteer actions you can take f
 <https://protectdemocracy.org/how-you-can-protect-democracy/#actions>
 
 *Frequently updated calls to action that vary in time commitment required to several minutes to deep dives that take more time.*
+
+
+
+![](https://cmedia.sosha.ai/2adb6785-3d10-411f-8ec3-4a1c4bcb8fdb/png/640w.png)
