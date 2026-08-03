@@ -1,5 +1,5 @@
 ---
-order: 1
+order: 3
 headline: Neighborhood Outreach
 subheading: Build Local Momentum
 avatarImage: https://news.berkeley.edu/wp-content/uploads/2020/06/canvassing_conversation-3.jpg
