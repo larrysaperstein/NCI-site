@@ -5,6 +5,9 @@ headline: What to do Right Now!
 subheading: Election Protection is a Sum of Small Actions
 avatarImage: /uploads/handsoff-large.png
 ---
-This is a test post that will give more information when it is completed.
+
+**Check your registration and keep checking it regularly.** 
+
+
 
 ![](/uploads/handsoff-large.png)
