@@ -1,6 +1,6 @@
 ---
 tabLabel: "Florida: County and State Elections"
-order: 1
+order: 2
 heading: Elections Resources
 subheading: Links by county for information on registering, polling places, and deadlines.
 ---
