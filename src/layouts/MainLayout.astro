@@ -1,5 +1,6 @@
 ---
 import Footer from "../components/Footer.astro";
+import MailingListModal from "../components/MailingListModal.astro";
 import Nav from "../components/Nav.astro";
 import StagingGate from "../components/StagingGate.astro";
 import { metaDescription } from "../utils/seo";
@@ -66,5 +67,6 @@ const homeAboutBackground = withBase("/images/trees-bg.webp");
       <slot />
     </main>
     <Footer />
+    <MailingListModal />
   </body>
 </html>

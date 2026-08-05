@@ -15,7 +15,7 @@ const leaders = (await getCollection("leadership")).sort((a, b) => a.data.order 
       </p>
 
       {
-        leaders.length > 0 ? (
+        leaders.length > 0 && (
           <div class="leadership__cards">
             {
               leaders.map((leader) => (
@@ -28,8 +28,6 @@ const leaders = (await getCollection("leadership")).sort((a, b) => a.data.order 
               ))
             }
           </div>
-        ) : (
-          <p class="leadership-page__empty">Leadership profiles will appear here once they are added in the CMS.</p>
         )
       }
     </div>

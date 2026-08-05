@@ -22,12 +22,14 @@ const footerLinks = [
   <div class="container site-footer__inner">
     <div class="site-footer__actions">
       <ExternalLink href="https://secure.actblue.com/donate/indivisiblenc1435907037" class="button button--yellow">Donate</ExternalLink>
-      <a href={withBase("/get-involved")} class="button button--blue">Join Our Mailing List</a>
+      <button type="button" class="button button--blue" data-mailing-list-open>
+        Join Our Mailing List
+      </button>
     </div>
 
     <div class="site-footer__social">
       <ExternalLink
-        href="https://www.facebook.com"
+        href="https://www.facebook.com/indivisibleguide/"
         class="facebook-link site-footer__facebook"
         aria-label="Visit Nature Coast Indivisible on Facebook"
       >

@@ -1,0 +1,195 @@
+---
+import { MAILING_LIST_CONFIG } from "../config/mailingList";
+---
+
+<dialog class="mailing-modal" data-mailing-list-modal aria-labelledby="mailing-list-title">
+  <div class="mailing-modal__panel">
+    <button type="button" class="mailing-modal__close" data-mailing-list-close aria-label="Close mailing list form">
+      <span aria-hidden="true">&times;</span>
+    </button>
+
+    <div class="mailing-modal__intro" data-mailing-list-intro>
+      <h2 id="mailing-list-title">Join Our Mailing List</h2>
+      <p>
+        Stay connected with Nature Coast Indivisible. Get action alerts, event updates, and ways to
+        protect democracy in Marion, Citrus, and Levy counties.
+      </p>
+
+      <form class="mailing-modal__form" data-mailing-list-form novalidate>
+        <label class="mailing-modal__field">
+          <span>Name</span>
+          <input type="text" name="name" autocomplete="name" required maxlength="120" />
+        </label>
+
+        <label class="mailing-modal__field">
+          <span>Email</span>
+          <input type="email" name="email" autocomplete="email" required maxlength="200" />
+        </label>
+
+        <!-- Honeypot for basic bot filtering; keep hidden from people -->
+        <label class="mailing-modal__honeypot" aria-hidden="true">
+          <span>Company</span>
+          <input type="text" name="company" tabindex="-1" autocomplete="off" />
+        </label>
+
+        <p class="mailing-modal__status" data-mailing-list-status role="status" aria-live="polite" hidden></p>
+
+        <button type="submit" class="button button--yellow mailing-modal__submit" data-mailing-list-submit>
+          Sign Me Up
+        </button>
+      </form>
+    </div>
+
+    <div class="mailing-modal__success" data-mailing-list-success hidden>
+      <h2>You're on the list!</h2>
+      <p>Thanks for joining Nature Coast Indivisible. We'll be in touch with updates and opportunities to take action.</p>
+      <button type="button" class="button button--yellow" data-mailing-list-close>Close</button>
+    </div>
+  </div>
+</dialog>
+
+<script define:vars={{ submitUrl: MAILING_LIST_CONFIG.submitUrl }}>
+  const modal = document.querySelector("[data-mailing-list-modal]");
+  if (!(modal instanceof HTMLDialogElement)) {
+    // no-op
+  } else {
+    const form = modal.querySelector("[data-mailing-list-form]");
+    const status = modal.querySelector("[data-mailing-list-status]");
+    const intro = modal.querySelector("[data-mailing-list-intro]");
+    const success = modal.querySelector("[data-mailing-list-success]");
+    const submitButton = modal.querySelector("[data-mailing-list-submit]");
+
+    const setStatus = (message, isError = false) => {
+      if (!(status instanceof HTMLElement)) return;
+      if (!message) {
+        status.hidden = true;
+        status.textContent = "";
+        status.classList.remove("is-error");
+        return;
+      }
+      status.hidden = false;
+      status.textContent = message;
+      status.classList.toggle("is-error", isError);
+    };
+
+    const resetView = () => {
+      if (form instanceof HTMLFormElement) form.reset();
+      if (intro instanceof HTMLElement) intro.hidden = false;
+      if (success instanceof HTMLElement) success.hidden = true;
+      setStatus("");
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.disabled = false;
+        submitButton.textContent = "Sign Me Up";
+      }
+    };
+
+    const openModal = () => {
+      resetView();
+      if (!modal.open) modal.showModal();
+      const firstField = modal.querySelector('input[name="name"]');
+      if (firstField instanceof HTMLInputElement) firstField.focus();
+    };
+
+    const closeModal = () => {
+      if (modal.open) modal.close();
+    };
+
+    document.addEventListener("click", (event) => {
+      if (!(event.target instanceof Element)) return;
+
+      const openTrigger = event.target.closest("[data-mailing-list-open]");
+      if (openTrigger) {
+        event.preventDefault();
+        openModal();
+        return;
+      }
+
+      const closeTrigger = event.target.closest("[data-mailing-list-close]");
+      if (closeTrigger) {
+        event.preventDefault();
+        closeModal();
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!(event.target instanceof Element)) return;
+      const link = event.target.closest('a[href="#mailing-list"]');
+      if (!link) return;
+      event.preventDefault();
+      openModal();
+    });
+
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) closeModal();
+    });
+
+    modal.addEventListener("close", () => {
+      resetView();
+    });
+
+    if (form instanceof HTMLFormElement) {
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        setStatus("");
+
+        if (!submitUrl) {
+          setStatus(
+            "Mailing list signup is not connected yet. Please email naturecoastindivisible@gmail.com for now.",
+            true
+          );
+          return;
+        }
+
+        const formData = new FormData(form);
+        const name = String(formData.get("name") || "").trim();
+        const email = String(formData.get("email") || "").trim();
+        const company = String(formData.get("company") || "").trim();
+
+        if (company) {
+          // Likely a bot; pretend success without submitting.
+          if (intro instanceof HTMLElement) intro.hidden = true;
+          if (success instanceof HTMLElement) success.hidden = false;
+          return;
+        }
+
+        if (!name || !email) {
+          setStatus("Please enter your name and a valid email address.", true);
+          return;
+        }
+
+        if (submitButton instanceof HTMLButtonElement) {
+          submitButton.disabled = true;
+          submitButton.textContent = "Sending...";
+        }
+
+        try {
+          const response = await fetch(submitUrl, {
+            method: "POST",
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify({ name, email, source: window.location.pathname })
+          });
+
+          let payload = null;
+          try {
+            payload = await response.json();
+          } catch {
+            payload = null;
+          }
+
+          if (!response.ok || (payload && payload.ok === false)) {
+            throw new Error((payload && payload.error) || "Signup failed");
+          }
+
+          if (intro instanceof HTMLElement) intro.hidden = true;
+          if (success instanceof HTMLElement) success.hidden = false;
+        } catch {
+          setStatus("Something went wrong. Please try again, or email naturecoastindivisible@gmail.com.", true);
+          if (submitButton instanceof HTMLButtonElement) {
+            submitButton.disabled = false;
+            submitButton.textContent = "Sign Me Up";
+          }
+        }
+      });
+    }
+  }
+</script>
