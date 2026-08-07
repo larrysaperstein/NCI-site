@@ -3,7 +3,7 @@ priority: regular
 order: 1
 headline: Training to Help FLIC
 subheading: Help for our Immigrant Neighbors
-avatarImage: https://floridaimmigrant.org/wp-content/uploads/FLIC-Logo-Color.svg
+avatarImage: public/uploads/flic-logo-crop.jpg
 ---
 On-going trainings. See full schedule here.[](https://floridaimmigrant.org/events/?pn=6)
 
