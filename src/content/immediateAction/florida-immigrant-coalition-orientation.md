@@ -1,8 +1,7 @@
 ---
 priority: regular
-order: 2
-headline: Florida Immigrant Coalition Orientation
-subheading: Learn More So You Can Help Our Immigrant Neighbors
-avatarImage: https://floridaimmigrant.org/wp-content/uploads/FLIC-Logo-Color.svg
+headline: ACLU Floridians for Immigrant Justice
+subheading: Monthly Zoom Call
+avatarImage: https://mobilizeamerica.imgix.net/uploads/event/IR3_20250801182103333000.png?auto=format&crop=faces&fit=crop&h=353.9267015706806&w=676
 ---
-Florida Immigrant Coalition offers lots of training. Check out their website.
+Learn More.
