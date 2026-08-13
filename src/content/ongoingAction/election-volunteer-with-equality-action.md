@@ -2,6 +2,7 @@
 order: 5
 headline: Election Volunteer with Equality Action
 subheading: Equality Action Seeking Volunteers
+avatarImage: /uploads/vfe-graphic_20260706153027631488.avif
 ---
 <a class="button button--yellow" href="https://www.mobilize.us/mobilize/event/984662/" target="_blank" rel="noopener noreferrer">Volunteer SignUp</a>
 
