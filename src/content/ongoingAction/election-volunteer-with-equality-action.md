@@ -10,4 +10,4 @@ Equality Florida Action PAC is the largest political committee dedicated to elec
 
 [](https://eqfl.org/)
 
-![](/uploads/logo.svg)
+![](/uploads/frame.png)
