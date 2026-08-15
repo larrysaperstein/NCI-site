@@ -1,6 +1,6 @@
 ---
-tabLabel: Candidates for Fifth Judicial Circuit Judge, Group 27
-order: 2
+tabLabel: "Elections: Candidate Overviews, Fifth Judicial Circuit Judge, Group 27"
+order: 3
 heading: What Does a Circuit Court Judge Do?
 subheading: Overview of the Candidates, Fifth Judicial Circuit
 ---
