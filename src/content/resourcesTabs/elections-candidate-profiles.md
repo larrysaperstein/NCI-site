@@ -13,7 +13,7 @@ The County Commission makes decisions that can directly affect our daily lives, 
 
 This is not an endorsement or opposition to any candidate. The goal is to help voters look beyond campaign signs and slogans, understand who the candidates are, what experience they bring, what they say they would do, and what questions may still need answers.
 
-Four candidates, all registered Republicans, are vying for this season. There is no incumbent in the race. The four candidates, profiled on the following pages in alphabetical order, are:
+Four candidates, all registered Republicans, are vying for this seat. There is no incumbent in the race. The four candidates, profiled on the following pages in alphabetical order, are:
 
 * Randall Alvord
 * Jeff Bairstow
