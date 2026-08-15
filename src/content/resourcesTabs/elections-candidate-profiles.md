@@ -1,6 +1,6 @@
 ---
 tabLabel: "Elections: Candidate Overviews - Marion Co. Bd. of Co. Commissioners, Dist. 4"
-order: 1
+order: 2
 heading: Marion County Board of County Commissioners - District 4
 ---
 **Candidate Profiles by Jennifer Solida - Ocala/Marion Citizens for Sustainable Development, Follow on Facebook at https://www.facebook.com/groups/505707795175307/about**
