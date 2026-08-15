@@ -1,5 +1,5 @@
 ---
-tabLabel: "Elections: Candidate Profiles"
+tabLabel: "Elections: Candidate Overviews - Marion Co. Bd. of Co. Commissioners, Dist. 4"
 order: 1
 heading: Marion County Board of County Commissioners - District 4
 ---
