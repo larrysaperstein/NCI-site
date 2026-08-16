@@ -1,7 +1,7 @@
 ---
 tabLabel: "Elections: Candidate Overviews - Marion County Board of County
   Commissioners, District 2"
-order: 4
+order: 3
 ---
 
 **MARION COUNTY BOARD OF COUNTY COMMISSIONERS - DISTRICT 2**
