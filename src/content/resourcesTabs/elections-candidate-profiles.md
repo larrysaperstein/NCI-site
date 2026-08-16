@@ -20,7 +20,7 @@ Four candidates, all registered Republicans, are vying for this seat. There is n
 * Wanda Wimberley Lester
 * Sherri Meadows
 
-Because there is no Democrat, NPA, or candidate of another party, all voters can select a candidate in this race. Voting ends at 7 p.m. on August 18.
+Because there is a write-in candidate, this race is only open to voters who are registered Republicans. The winner of the primary will face the write-in candidate at the mid-term election in November.
 [](https://docs.google.com/document/d/1_mep-_ckoo_7KmjYEgfk5MS0ZEo24OMvNgFIlFEj_ck/edit?tab=t.0)
 
 <a class="button button--blue" href="https://docs.google.com/document/d/1_mep-_ckoo_7KmjYEgfk5MS0ZEo24OMvNgFIlFEj_ck/edit?tab=t.0" target="_blank" rel="noopener noreferrer">Read All Candidate Overviews Here</a>
