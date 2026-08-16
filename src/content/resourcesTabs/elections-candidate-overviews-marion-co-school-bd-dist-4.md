@@ -1,6 +1,6 @@
 ---
 tabLabel: "Elections: Candidate Overviews - Marion Co. School Bd., Dist. 4"
-order: 4
+order: 6
 ---
 
 Candidate Profiles by Jennifer Solida - Ocala/Marion Citizens for Sustainable Development, Follow on Facebook at https://www.facebook.com/groups/505707795175307/about
