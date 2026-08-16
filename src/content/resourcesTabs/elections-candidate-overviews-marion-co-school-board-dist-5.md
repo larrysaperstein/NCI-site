@@ -1,6 +1,6 @@
 ---
 tabLabel: "Elections: Candidate Overviews - Marion Co. School Board, Dist. 5"
-order: 3
+order: 7
 ---
 
 **Marion County School Board, District 5**
