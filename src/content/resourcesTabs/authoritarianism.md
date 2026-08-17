@@ -1,6 +1,6 @@
 ---
 tabLabel: Authoritarianism
-order: 4
+order: 10
 heading: How to Defeat the Rise of Authoritarianism
 ---
 **DHub. <https://dhub.org/>**
