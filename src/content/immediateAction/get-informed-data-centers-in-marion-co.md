@@ -1,5 +1,5 @@
 ---
-priority: regular
+priority: high
 order: 3
 headline: Get Informed - Data Centers in Marion Co.
 subheading: Hosted by Sierra Club & No Data Center Marion
