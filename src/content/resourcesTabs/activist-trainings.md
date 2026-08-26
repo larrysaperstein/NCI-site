@@ -1,0 +1,12 @@
+---
+tabLabel: Activist Trainings
+order: 2
+heading: Specialized trainings in a variety of topics
+---
+This page will be updated frequently with information and links to training in various skills and topics related to building a fair and just democracy including election protection, immigrant justice work, environmental concerns, and more.
+
+1. **[Wednesday, August 26, join Indivisible (national) for the second Hands Off Our Vote election protection training to learn how to defend the vote and take action to block election interference from Trump and his Big Lie cronies](https://act.indivisible.org/go/936312?t=18&akid=126671%2E5852735%2EPX8nKQ)** (8pm ET/5pm PT). (Zoom) In this training, we’ll focus on hands-on tools for rapid response and sustained mobilization. We’ll be joined by Cliff Albright, Co-Founder and Executive Director of Black Voters Matter, and we’ll carve out time to discuss Trump’s threat to send ICE to the polls. *Nearly 6,000 Indivisibles joined last week’s training -- don’t miss out*!
+
+2. **[Thursday, August 27, 3 p.m., What's the Plan with Leah Greeberg and Ezra Levin.](https://www.mobilize.us/indivisible/event/874938/)** (Zoom) (If you can't make it at 3 and want the updates, register anyway, you will receive the show notes and link to a call recording.) The chaos out of the White House is meant to overwhelm us. Our antidote is community. Join Indivisible co-founders Leah Greenberg and Ezra Levin every Thursday to break down the week’s biggest political stories, answer your questions, and map out strategies for taking action.This is people-powered politics in real time. Questions can be submitted via the Q&A function during the live event. Real talk. Real people. Real action. That's the plan.
+
+3. **[Join the FINAL Immigrant Justice Summer training call this Thursday, August 27 to learn how to use Signal for rapid response organizing when ICE surges in your community](https://act.indivisible.org/go/936313?t=19&akid=126671%2E5852735%2EPX8nKQ)** (8pm ET/5pm PT). (Zoom) (You do not need to have attended the previous trainings). We'll explore how to build a nimble communication infrastructure that will enable you to activate on the ground as soon as ICE shows up in our neighborhoods. We’ll discuss what makes Signal the right tool for these moments and examine how organizers used it during Operation Metro Surge in Minneapolis to coordinate in real time.
