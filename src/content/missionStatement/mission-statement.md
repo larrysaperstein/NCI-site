@@ -1,1 +1,1 @@
-Nature Coast Indivisible is dedicated to building a representative, compassionate democracy that promotes science and tolerance, supports environmental protection, and lifts up the most vulnerable in society.
+Nature Coast Indivisible is dedicated to building a representative, compassionate democracy that promotes science and tolerance, supports environmental protection, and lifts up the most vulnerable in society. A core principle behind all Indivisible events is a commitment to nonviolent action.
