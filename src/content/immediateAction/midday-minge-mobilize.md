@@ -4,7 +4,7 @@ order: 1
 headline: Midday Mingle & Mobilize
 subheading: "A lively, action-focused gathering where we will get our facts
   straight, sharpen our activist skills, and make a tangible impact together. "
-avatarImage: /uploads/midday-mingle.jpg
+avatarImage: ""
 ---
 Defeating authoritarianism and the MAGA agenda starts with having the right tools in our hands— and a great community by our side. Join us weekly on Wednesdays for our **Midday Mingle & Mobilize**, a lively, action-focused gathering where we will get our facts straight, sharpen our activist skills, and make a tangible impact together. **When:** Wednesdays at 1:00 p.m. to 3 p.m., 6 weeks, September 9, 16**, 23, 30
 **Where:** Dunnellon Public Library. (**Location for Sept. 16 TBA)
