@@ -13,4 +13,4 @@ Each mingle will include 1) T**he Latest Scoop:** discuss emerging political 
 
 Bring your energy, your questions, and your creativity! RSVP is optional; however, it does help with planning to know how many people to expect. Email: naturecoastindivisible@gmail.com. See you there!!
 
-![](/uploads/midday-mingle-c.jpg)
+![](/uploads/midday-mingle-a.jpg)
