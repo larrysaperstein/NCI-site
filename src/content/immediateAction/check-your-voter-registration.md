@@ -1,5 +1,5 @@
 ---
-priority: high
+priority: regular
 order: 1
 headline: Check Your Voter Registration
 subheading: Election Protection Starts Now
