@@ -11,6 +11,6 @@ Defeating authoritarianism and the MAGA agenda starts with having the right too
 
 Each mingle will include 1) T**he Latest Scoop:** discuss emerging political stories of the week so we have our facts straight 2) **The How-To-Hour:** Learn skills like how to register new voters, use simple digital tools like Sosha, make stress-free voter calls, knock doors for democracy, cure ballots, etc. and 3) **The Ten Minute Mobilizer:** collectively complete a manageable tangible task. 
 
-Bring your energy, your questions, and your creativity! RSVP is optional; however, it does help with planning to know how many people to expect. Email: naturecoastindivisible@gmail.com.See you there!!
+Bring your energy, your questions, and your creativity! RSVP is optional; however, it does help with planning to know how many people to expect. Email: naturecoastindivisible@gmail.com. See you there!!
 
 ![](/uploads/midday-mingle.jpg)
