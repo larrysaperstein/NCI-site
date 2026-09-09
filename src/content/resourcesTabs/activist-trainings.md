@@ -1,6 +1,6 @@
 ---
 tabLabel: Activist Trainings
-order: 2
+order: 3
 heading: Specialized Trainings in a Variety of Topics
 ---
 This page will be updated frequently with information and links to training in various skills and topics related to building a fair and just democracy including election protection, immigrant justice work, environmental concerns, and more.
