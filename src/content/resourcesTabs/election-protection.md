@@ -1,6 +1,6 @@
 ---
 tabLabel: Election Protection
-order: 1
+order: 2
 heading: Election Protection
 subheading: What you can do to fight back against the attempts to restrict our
   right to free and fair elections.
