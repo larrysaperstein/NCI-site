@@ -1,6 +1,6 @@
 ---
 tabLabel: Information On County and State Elections
-order: 8
+order: 4
 heading: Elections Resources
 subheading: Links by county for information on registering, polling places, and deadlines.
 ---
