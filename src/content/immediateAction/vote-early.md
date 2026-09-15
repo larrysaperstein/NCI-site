@@ -3,7 +3,7 @@ priority: regular
 order: 1
 headline: Vote Early!
 subheading: Early Voting Locations Available Across the County
-avatarImage: /uploads/early-vote.png
+avatarImage: /uploads/early-vote-4-x-5.jpg
 ---
 Early Voting Locations for Marion County can be found at this link:
 
