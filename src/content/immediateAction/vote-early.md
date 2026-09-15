@@ -2,7 +2,7 @@
 priority: regular
 order: 1
 headline: Vote Early!
-subheading: Early Voting Locations Available Across the County
+subheading: Early Voting Locations
 avatarImage: /uploads/early-vote-4-x-5.jpg
 ---
 
