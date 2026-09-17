@@ -1,9 +1,9 @@
 ---
 priority: regular
 order: 1
-headline: Vote Early!
-subheading: Early Voting Locations
-avatarImage: /uploads/1.jpg
+headline: Deadline to Register is October 5
+subheading: Know Where to Vote Early
+avatarImage: /uploads/navy-and-red-illustrated-register-to-vote-flyer-800-x-600-px-.png
 ---
 Check the early vote locations and time for early voting and make you plan to vote early!
 
