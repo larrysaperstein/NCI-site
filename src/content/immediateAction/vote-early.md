@@ -3,7 +3,7 @@ priority: regular
 order: 1
 headline: Vote Early!
 subheading: Early Voting Locations
-avatarImage: ""
+avatarImage: /uploads/1.jpg
 ---
 
 
