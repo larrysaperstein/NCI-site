@@ -1,6 +1,6 @@
 ---
 priority: regular
-order: 1
+order: 4
 headline: Check Your Voter Registration
 subheading: Election Protection Starts Now
 avatarImage: /uploads/check.jpg
