@@ -1,6 +1,6 @@
 ---
 priority: regular
-order: 1
+order: 3
 headline: Deadline to Register is October 5
 subheading: Know Where to Vote Early
 avatarImage: /uploads/navy-and-red-illustrated-register-to-vote-flyer-800-x-600-px-.png
