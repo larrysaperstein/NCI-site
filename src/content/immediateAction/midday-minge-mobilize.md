@@ -1,6 +1,6 @@
 ---
 priority: regular
-order: 1
+order: 2
 headline: Midday Mingle & Mobilize
 subheading: "A lively, action-focused gathering where we will get our facts
   straight, sharpen our activist skills, and make a tangible impact together. "
