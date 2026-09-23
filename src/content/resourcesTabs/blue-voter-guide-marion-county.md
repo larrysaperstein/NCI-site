@@ -7,12 +7,14 @@ subheading: Links by county for information on registering, polling places, and 
 *Become familiar with the resources available on the website of the Supervisor of Elections for your county. From their main web pages, you can find links to check your registration status, sign up for a vote-by-mail ballot, find polling locations, find dates for early voting and upcoming elections, see a sample ballot, and more. If you can’t find what you need by searching the website, phone them; typically, staff at these offices are efficient, friendly, and committed to supporting the election process.* 
 
 **Marion County Supervisor of Elections**
+[https://www.votemarion.gov/](<>)
 
-<https://www.votemarion.gov/>
+[](<>)**Phone:** 352-620-3290
 
-**Phone:** 352-620-3290
 
-**Citrus County Supervisor of Elections**
+<a class="button button--dark-blue" href="https://www.votemarion.gov/DocumentCenter/View/271/Sample-Ballot-PDF" target="_blank" rel="noopener noreferrer">Sample Ballot General Election 2026</a>
+
+[](https://www.votemarion.gov/)**Citrus County Supervisor of Elections**
 
 <https://www.votecitrus.gov/>
 
