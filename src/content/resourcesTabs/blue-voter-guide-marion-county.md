@@ -1,6 +1,6 @@
 ---
 tabLabel: Information On County and State Elections
-order: 4
+order: 1
 heading: Elections Resources
 subheading: Links by county for information on registering, polling places, and deadlines.
 ---
@@ -10,7 +10,6 @@ subheading: Links by county for information on registering, polling places, and 
 [https://www.votemarion.gov/](<>)
 
 [](<>)**Phone:** 352-620-3290
-
 
 <a class="button button--dark-blue" href="https://www.votemarion.gov/DocumentCenter/View/271/Sample-Ballot-PDF" target="_blank" rel="noopener noreferrer">Sample Ballot General Election 2026</a>
 
@@ -26,7 +25,9 @@ subheading: Links by county for information on registering, polling places, and 
 
 <https://www.votelevy.gov/>
 
-**Phone:** [(352) 486-5163](https://www.google.com/search?q=levy+county+supervisor+of+elections&sca_esv=2ec4f8cad967503a&rlz=1C1ONGR_enUS1174US1174&sxsrf=APpeQnscjPjmRnj5Zd_EVF5mTvXG4Z39kw%3A1783968565579&ei=NTNVaqD1It6SwbkPs9X7oAE&biw=448&bih=430&gs_ssp=eJwFwVsKgCAQAED6rUsI0bdriZlH6BKhtkYkGb6o2zfTdvSgLDu3GX5BowZ4pUSJu90nGA0X2il4BZ810zAJi9osAtfeY_2IDeXOH0nlwVjPFCIJjqBHm89wpx_IRh1j&oq=levy&gs_lp=Egxnd3Mtd2l6LXNlcnAiBGxldnkqAggAMhMQLhhDGK8BGMcBGIAEGIoFGI4FMhMQLhiABBiKBRhDGMcBGK8BGI4FMhMQLhiABBiKBRhDGMcBGK8BGI4FMhMQLhhDGK8BGMcBGIAEGIoFGI4FMgoQLhhDGIAEGIoFMhMQLhiABBiKBRhDGMcBGK8BGI4FMg4QLhivARjHARiABBiOBTIKEAAYgAQYigUYQzIKEAAYgAQYigUYQzIKEAAYgAQYigUYQ0j3G1CHClimDXABeAGQAQCYAZABoAGpA6oBAzIuMrgBAcgBAPgBAZgCBaACxQOoAgrCAhAQABgDGI8BGOoCGLQC2AEBwgIQEC4YAxiPARjqAhi0AtgBAcICFBAuGK8BGMcBGJECGIAEGIoFGI4FwgIQEC4YgAQYigUYQxjHARivAcICDhAAGIAEGIoFGLEDGIMBwgIOEC4YgAQYigUYsQMYgwHCAgQQABgDwgIOEC4YgAQYsQMYxwEY0QPCAg4QLhiDARixAxiABBiKBcICCxAAGIAEGLEDGIMBmAMF8QVcB3xF2I8cRroGBAgBGAqSBwMzLjKgB4VnsgcDMi4yuAe_A8IHBTAuMS40yAcWgAgB&sclient=gws-wiz-serp#)
+**Phone:** [(352) 486-5163](https://www.google.com/search?q=levy+county+supervisor+of+elections&sca_esv=2ec4f8cad967503a&rlz=1C1ONGR_enUS1174US1174&sxsrf=APpeQnscjPjmRnj5Zd_EVF5mTvXG4Z39kw%3A1783968565579&ei=NTNVaqD1It6SwbkPs9X7oAE&biw=448&bih=430&gs_ssp=eJwFwVsKgCAQAED6rUsI0bdriZlH6BKhtkYkGb6o2zfTdvSgLDu3GX5BowZ4pUSJu90nGA0X2il4BZ810zAJi9osAtfeY_2IDeXOH0nlwVjPFCIJjqBHm89wpx_IRh1j&oq=levy&gs_lp=Egxnd3Mtd2l6LXNlcnAiBGxldnkqAggAMhMQLhhDGK8BGMcBGIAEGIoFGI4FMhMQLhiABBiKBRhDGMcBGK8BGI4FMhMQLhiABBiKBRhDGMcBGK8BGI4FMhMQLhhDGK8BGMcBGIAEGIoFGI4FMgoQLhhDGIAEGIoFMhMQLhiABBiKBRhDGMcBGK8BGI4FMg4QLhivARjHARiABBiOBTIKEAAYgAQYigUYQzIKEAAYgAQYigUYQzIKEAAYgAQYigUYQ0j3G1CHClimDXABeAGQAQCYAZABoAGpA6oBAzIuMrgBAcgBAPgBAZgCBaACxQOoAgrCAhAQABgDGI8BGOoCGLQC2AEBwgIQEC4YAxiPARjqAhi0AtgBAcICFBAuGK8BGMcBGJECGIAEGIoFGI4FwgIQEC4YgAQYigUYQxjHARivAcICDhAAGIAEGIoFGLEDGIMBwgIOEC4YgAQYigUYsQMYgwHCAgQQABgDwgIOEC4YgAQYsQMYxwEY0QPCAg4QLhiDARixAxiABBiKBcICCxAAGIAEGLEDGIMBmAMF8QVcB3xF2I8cRroGBAgBGAqSBwMzLjKgB4VnsgcDMi4yuAe_A8IHBTAuMS40yAcWgAgB&sclient=gws-wiz-serp#)[](https://www.google.com/search?q=levy+county+supervisor+of+elections&sca_esv=2ec4f8cad967503a&rlz=1C1ONGR_enUS1174US1174&sxsrf=APpeQnscjPjmRnj5Zd_EVF5mTvXG4Z39kw%3A1783968565579&ei=NTNVaqD1It6SwbkPs9X7oAE&biw=448&bih=430&gs_ssp=eJwFwVsKgCAQAED6rUsI0bdriZlH6BKhtkYkGb6o2zfTdvSgLDu3GX5BowZ4pUSJu90nGA0X2il4BZ810zAJi9osAtfeY_2IDeXOH0nlwVjPFCIJjqBHm89wpx_IRh1j&oq=levy&gs_lp=Egxnd3Mtd2l6LXNlcnAiBGxldnkqAggAMhMQLhhDGK8BGMcBGIAEGIoFGI4FMhMQLhiABBiKBRhDGMcBGK8BGI4FMhMQLhiABBiKBRhDGMcBGK8BGI4FMhMQLhhDGK8BGMcBGIAEGIoFGI4FMgoQLhhDGIAEGIoFMhMQLhiABBiKBRhDGMcBGK8BGI4FMg4QLhivARjHARiABBiOBTIKEAAYgAQYigUYQzIKEAAYgAQYigUYQzIKEAAYgAQYigUYQ0j3G1CHClimDXABeAGQAQCYAZABoAGpA6oBAzIuMrgBAcgBAPgBAZgCBaACxQOoAgrCAhAQABgDGI8BGOoCGLQC2AEBwgIQEC4YAxiPARjqAhi0AtgBAcICFBAuGK8BGMcBGJECGIAEGIoFGI4FwgIQEC4YgAQYigUYQxjHARivAcICDhAAGIAEGIoFGLEDGIMBwgIOEC4YgAQYigUYsQMYgwHCAgQQABgDwgIOEC4YgAQYsQMYxwEY0QPCAg4QLhiDARixAxiABBiKBcICCxAAGIAEGLEDGIMBmAMF8QVcB3xF2I8cRroGBAgBGAqSBwMzLjKgB4VnsgcDMi4yuAe_A8IHBTAuMS40yAcWgAgB&sclient=gws-wiz-serp#)
+
+<a class="button button--yellow" href="https://levy-soe.s3.amazonaws.com/uploads/2026/08/31130248/2026-General-Election-Sample-Ballot.pdf" target="_blank" rel="noopener noreferrer">Sample Ballot - General Election 2026</a>
 
 **Alachua County Supervisor of Elections**
 
