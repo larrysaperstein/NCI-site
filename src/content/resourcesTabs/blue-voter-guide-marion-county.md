@@ -11,7 +11,7 @@ subheading: Links by county for information on registering, polling places, and 
 
 [](<>)**Phone:** 352-620-3290
 
-<a class="button button--dark-blue" href="https://www.votemarion.gov/DocumentCenter/View/271/Sample-Ballot-PDF" target="_blank" rel="noopener noreferrer">Sample Ballot General Election 2026</a>
+<a class="button button--yellow" href="https://www.votemarion.gov/DocumentCenter/View/271/Sample-Ballot-PDF" target="_blank" rel="noopener noreferrer">Sample Ballot General Election 2026</a>
 
 [](https://www.votemarion.gov/)**Citrus County Supervisor of Elections**
 
@@ -19,7 +19,7 @@ subheading: Links by county for information on registering, polling places, and 
 
 **Phone:** [(352) 564-7120](https://www.google.com/search?q=citrus+county+supervisor+of+elections&rlz=1C1ONGR_enUS1174US1174&oq=citru&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7MgoIARAuGLEDGIAEMgoIAhAuGLEDGIAEMhAIAxAuGK8BGMcBGIAEGI4FMgYIBBBFGDkyBggFEEUYPTIGCAYQRRg9MgYIBxBFGEHSAQgyMDU1ajBqN6gCCLACAfEFTRHuoRQdd3k&sourceid=chrome&source=chrome.ob&ie=UTF-8#) 
 
-<a class="button button--dark-blue" href="https://www.votecitrus.gov/190/Sample-Ballots#docaccess-0c46092795ca2c2680743b4fd092cef3" target="_blank" rel="noopener noreferrer">Sample Ballot - General Election 2026</a>
+<a class="button button--yellow" href="https://www.votecitrus.gov/190/Sample-Ballots#docaccess-0c46092795ca2c2680743b4fd092cef3" target="_blank" rel="noopener noreferrer">Sample Ballot - General Election 2026</a>
 
 **Levy County Supervisor of Elections**
 
