@@ -3,6 +3,7 @@ priority: high
 order: 1
 headline: Urgent Mobilization
 subheading: CoreCivic Proposes ICE Detention in Citrus Co.
+avatarImage: /uploads/blue-grey-texture-illustration-stay-cool-ice-cubes-poster-800-x-600-px-.png
 ---
 <a class="button button--yellow" href="https://www.chronicleonline.com/news/crime_and_courts/county-weighs-housing-ice-detainees-at-jail/article_8d033d97-0d7d-5848-8276-bbb2b63d4e44.html" target="_blank" rel="noopener noreferrer">CoreCivic History and Current Proposal</a>
 
