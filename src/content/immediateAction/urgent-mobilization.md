@@ -24,3 +24,5 @@ Mobilization Protest, Monday, 10/26, 10 a.m. to Noon at Citrus Co. Old Courthous
 Citrus Bd. of Co. Comm. Meeting, 10/26, 1 p.m. at Citrus County Courthouse, 100 N. Apopka Ave., Inverness
 
 Wear Black to show unity at the BOCC Meeting. Note: The courthouse does not allow
+
+![](/uploads/blue-grey-texture-illustration-stay-cool-ice-cubes-poster-800-x-600-px-.png)
