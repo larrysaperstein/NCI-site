@@ -1,5 +1,5 @@
 ---
-priority: high
+priority: regular
 order: 1
 headline: Urgent Mobilization
 subheading: CoreCivic Proposes ICE Detention in Citrus Co.
