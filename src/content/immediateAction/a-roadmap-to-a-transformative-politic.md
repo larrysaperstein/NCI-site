@@ -5,7 +5,7 @@ headline: A RoadMap To Transformative Politics
 subheading: Launch of the 2027 Indivisible Guide
 avatarImage: /uploads/untitled-design.jpg
 ---
-Join this call to learn about the strategy and plans for moving through the next two years on a path to a transformative politic. The American people didn’t reject defeatist Democrats in the primaries and challenge Trump’s billionaire-backed regime in the midterms just to return to business as usual. The people definitively closed the door on an entire political era, and demanded the start of a new one. It is time for Democrats to embrace a fundamentally different approach to political power. And for authoritarians to lose for good.
+Join this call to learn about the strategy and plans for moving through the next two years on a path to a transformative politics. The American people didn’t reject defeatist Democrats in the primaries and challenge Trump’s billionaire-backed regime in the midterms just to return to business as usual. The people definitively closed the door on an entire political era, and demanded the start of a new one. It is time for Democrats to embrace a fundamentally different approach to political power. And for authoritarians to lose for good.
 
 This was an earthquake. We get to decide what the new terrain looks like. And we’re going to do it together.
 
