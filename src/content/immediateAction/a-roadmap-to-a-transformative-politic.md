@@ -1,7 +1,7 @@
 ---
 priority: regular
 order: 1
-headline: A RoadMap To a Transformative Politic
+headline: A RoadMap To Transformative Politics
 subheading: Launch of the 2027 Indivisible Guide
 avatarImage: ""
 ---
