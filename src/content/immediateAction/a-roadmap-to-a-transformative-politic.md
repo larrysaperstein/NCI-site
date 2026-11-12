@@ -1,0 +1,12 @@
+---
+priority: regular
+order: 1
+headline: A RoadMap To a Transformative Politic
+subheading: Launch of the 2027 Indivisible Guide
+avatarImage: /uploads/201103_indivisible20guide20launch_1200x630_20261104175803295734-1000x525.png
+---
+Join this call to learn about the strategy and plans for moving through the next two years on a path to a transformative politic. The American people didn’t reject defeatist Democrats in the primaries and challenge Trump’s billionaire-backed regime in the midterms just to return to business as usual. The people definitively closed the door on an entire political era, and demanded the start of a new one. It is time for Democrats to embrace a fundamentally different approach to political power. And for authoritarians to lose for good.
+
+This was an earthquake. We get to decide what the new terrain looks like. And we’re going to do it together.
+
+Join Indivisible on December 10th at 8pm ET for the launch of our new guide and strategic plan for how we will meet this moment and chart a new path for our country.
