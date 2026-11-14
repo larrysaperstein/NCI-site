@@ -33,10 +33,10 @@ Unitarian Universalist Fellowship, 7533 N. Florida Ave., Citrus Springs
 
 **NoKings Vote Early: Decorate for Democracy Dunnellon**
 
-
-
 ![](/uploads/citrusspgfl_shirt-buttons-making.jpg)
 
 ![](/uploads/citrusspgsfl_cardecor.jpg)
 
 ![](/uploads/citrusspgfl_car-window-decor.jpg)
+
+![](/uploads/citrusspgsfl_hat-making.jpg)
