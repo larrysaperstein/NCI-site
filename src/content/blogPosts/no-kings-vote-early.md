@@ -4,7 +4,7 @@ subheading: Decorate for Democracy
 publishDate: 2026-10-17
 avatarImage: /uploads/nk-early-vote-for-web.png
 ---
-***On October 17, NCI joined thousands around the country by hosting a No Kings Early Vote event. Since our early vote window was scheduled to start several days later and last a week we picked an event to create visual reminders to our local community. We sent the following to our supporters in advance:***
+***On October 17, NCI joined thousands around the country by hosting a No Kings Early Vote event. Since our early vote window was scheduled Oct. 22 - 31, we held an event to create visual reminders of early voting, hats, shirts and buttons to wear and decorated cars to drive. We sent the following to our supporters in advance:***
 
 ***Why is NCI making hats and decorating cars and banners instead of protesting on October 17?***
 
