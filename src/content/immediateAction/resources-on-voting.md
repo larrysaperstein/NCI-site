@@ -3,7 +3,7 @@ priority: regular
 order: 1
 headline: Resources on Critical Topics
 subheading: Be Informed - Check out Resources on Immigration Protection and More
-avatarImage: ""
+avatarImage: /uploads/untitled-800-x-600-px-.jpg
 ---
 On the Resources Pages you will find information on how to help protect our immigrant neighbors, on activist skills, and more
 
