@@ -2,7 +2,7 @@
 priority: regular
 order: 1
 headline: Not A Dime More
-subheading: Tell Your Member of Congress Not a Dime More
+subheading: Tell Your Member of Congress Not a Dime More for the Iran War
 ---
 https://act.indivisible.org/sign/no-iran-war/
 
